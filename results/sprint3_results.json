@@ -1,0 +1,451 @@
+{
+  "metadata": {
+    "script": "sprint3_temporal_doseresponse.py",
+    "timestamp": "2026-02-16 01:44:23",
+    "n_uap_temporal": 41694,
+    "n_uap_coastal": 42008,
+    "n_ctrl": 19977,
+    "n_total": 61985,
+    "runtime_seconds": 5349.594304084778,
+    "pre_registered_specs": {
+      "temporal": {
+        "spatial_radius_km": 50,
+        "temporal_window_days": 7,
+        "canyon_threshold_km": 25,
+        "n_permutations": 1000
+      },
+      "dose_response": {
+        "gradient_feature": "p95_gradient_within_25km",
+        "transform": "log1p",
+        "model": "Model_B_plus_gradient"
+      }
+    }
+  },
+  "part_a_temporal": {
+    "primary": {
+      "observed_diff": 0.04825719566939529,
+      "p_value": 0.0,
+      "n_permutations": 1000,
+      "perm_null_mean": 0.03771627550478027,
+      "perm_null_std": 0.0017053655740362523,
+      "perm_null_95pct": 0.04039071099514859,
+      "near_mean_td": 2.4655018492539216,
+      "far_mean_td": 1.2124774761468702,
+      "near_n": 7841,
+      "far_n": 33853
+    },
+    "sensitivity": {
+      "tw3_sr25_ct10": {
+        "p": 1.0,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw3_sr25_ct25": {
+        "p": 1.0,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw3_sr25_ct50": {
+        "p": 1.0,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw3_sr50_ct10": {
+        "p": 0.965,
+        "observed_diff": 0.04055555555555556,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw3_sr50_ct25": {
+        "p": 0.035,
+        "observed_diff": 0.04055555555555556,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.11454545454545455
+      },
+      "tw3_sr50_ct50": {
+        "p": 0.0,
+        "observed_diff": 0.04055555555555556,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw3_sr100_ct10": {
+        "p": 1.0,
+        "observed_diff": 0.00011111111111111044,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw3_sr100_ct25": {
+        "p": 0.0,
+        "observed_diff": 0.04066666666666667,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw3_sr100_ct50": {
+        "p": 1.0,
+        "observed_diff": 0.04055555555555556,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw7_sr25_ct10": {
+        "p": 0.0,
+        "observed_diff": 0.033424908424908424,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw7_sr25_ct25": {
+        "p": 0.0,
+        "observed_diff": 0.026388085598611912,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw7_sr25_ct50": {
+        "p": 0.0,
+        "observed_diff": 0.02311296859169199,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw7_sr50_ct10": {
+        "p": 1.0,
+        "observed_diff": 0.03476190476190476,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw7_sr50_ct25": {
+        "p": 0.0,
+        "observed_diff": 0.04825719566939529,
+        "is_primary": true,
+        "n_perms": 1000,
+        "fdr_p": 0.0
+      },
+      "tw7_sr50_ct50": {
+        "p": 0.0,
+        "observed_diff": 0.04502837404391809,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw7_sr100_ct10": {
+        "p": 1.0,
+        "observed_diff": 0.0021975916803502957,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw7_sr100_ct25": {
+        "p": 1.0,
+        "observed_diff": 0.004392987964416534,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw7_sr100_ct50": {
+        "p": 1.0,
+        "observed_diff": 0.006237928007023705,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw14_sr25_ct10": {
+        "p": 0.0,
+        "observed_diff": 0.04592300857965018,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw14_sr25_ct25": {
+        "p": 0.0,
+        "observed_diff": 0.04433916423712342,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw14_sr25_ct50": {
+        "p": 0.0,
+        "observed_diff": 0.042392566782810684,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.0
+      },
+      "tw14_sr50_ct10": {
+        "p": 0.575,
+        "observed_diff": 0.008978240302743613,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw14_sr50_ct25": {
+        "p": 0.15,
+        "observed_diff": 0.012017325694146604,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 0.45
+      },
+      "tw14_sr50_ct50": {
+        "p": 0.965,
+        "observed_diff": 0.013436244037601935,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw14_sr100_ct10": {
+        "p": 0.985,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw14_sr100_ct25": {
+        "p": 1.0,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw14_sr100_ct50": {
+        "p": 1.0,
+        "observed_diff": 0.0,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr25_ct10": {
+        "p": 1.0,
+        "observed_diff": 0.009703531523230974,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr25_ct25": {
+        "p": 1.0,
+        "observed_diff": 0.015152286968629199,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr25_ct50": {
+        "p": 1.0,
+        "observed_diff": 0.01781315361375785,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr50_ct10": {
+        "p": 0.535,
+        "observed_diff": 0.002368693961872677,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr50_ct25": {
+        "p": 0.63,
+        "observed_diff": 0.0030623582766439936,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr50_ct50": {
+        "p": 0.815,
+        "observed_diff": 0.0031634985290789758,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr100_ct10": {
+        "p": 0.775,
+        "observed_diff": -0.0001278189260378662,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr100_ct25": {
+        "p": 0.96,
+        "observed_diff": -1.5529939161068596e-05,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      },
+      "tw30_sr100_ct50": {
+        "p": 1.0,
+        "observed_diff": -0.0002554452715743047,
+        "is_primary": false,
+        "n_perms": 200,
+        "fdr_p": 1.0
+      }
+    },
+    "bh_fdr": {
+      "n_significant": 10,
+      "n_same_sign": 27,
+      "n_total": 36
+    },
+    "flap_episodes": [
+      {
+        "id": 1,
+        "n_reports": 5,
+        "lat_mean": 47.56455554,
+        "lon_mean": -122.29872221999999,
+        "time_start": "2002-10-01",
+        "time_end": "2002-10-01",
+        "nearest_canyon_km": 1.5774482461146724
+      },
+      {
+        "id": 2,
+        "n_reports": 6,
+        "lat_mean": 33.70537035,
+        "lon_mean": -117.9460185,
+        "time_start": "2007-10-06",
+        "time_end": "2007-10-12",
+        "nearest_canyon_km": 8.480630231543904
+      },
+      {
+        "id": 3,
+        "n_reports": 3,
+        "lat_mean": 47.54222223333333,
+        "lon_mean": -122.21787036666667,
+        "time_start": "2001-10-15",
+        "time_end": "2001-10-19",
+        "nearest_canyon_km": 8.164534211022824
+      },
+      {
+        "id": 4,
+        "n_reports": 3,
+        "lat_mean": 47.39101853333333,
+        "lon_mean": -122.28537036666667,
+        "time_start": "2000-10-22",
+        "time_end": "2000-10-25",
+        "nearest_canyon_km": 1.8274866739590443
+      },
+      {
+        "id": 5,
+        "n_reports": 4,
+        "lat_mean": 34.070138875,
+        "lon_mean": -118.45562497499999,
+        "time_start": "2010-10-28",
+        "time_end": "2010-11-06",
+        "nearest_canyon_km": 0.9964328046973419
+      }
+    ],
+    "n_flap_clusters": 61,
+    "verdict": "TEMPORAL CLUSTERING CONFIRMED \u2014 near-canyon reports show excess temporal clustering beyond rate difference, p = 0.0000 from time-permutation null"
+  },
+  "part_b_dose_response": {
+    "gradient_stats": {
+      "n_shelf_cells": 1045216,
+      "pct_zero": 43.673469387755105,
+      "uap_mean": 20.466992595828525,
+      "ctrl_mean": 9.329483865635884
+    },
+    "dose_table": [
+      {
+        "bin": "0 (no shelf)",
+        "n_uap": 17060,
+        "n_ctrl": 10011,
+        "uap_frac": 0.6301946732665953,
+        "or_vs_ref": 0.9273713057051384
+      },
+      {
+        "bin": "0-5",
+        "n_uap": 7128,
+        "n_ctrl": 3879,
+        "uap_frac": 0.6475878986099755,
+        "or_vs_ref": 1.0
+      },
+      {
+        "bin": "5-10",
+        "n_uap": 5924,
+        "n_ctrl": 2857,
+        "uap_frac": 0.6746384238697187,
+        "or_vs_ref": 1.1283839444497477
+      },
+      {
+        "bin": "10-20",
+        "n_uap": 2839,
+        "n_ctrl": 1089,
+        "uap_frac": 0.7227596741344195,
+        "or_vs_ref": 1.4186968398400905
+      },
+      {
+        "bin": "20-50",
+        "n_uap": 2470,
+        "n_ctrl": 1143,
+        "uap_frac": 0.683642402435649,
+        "or_vs_ref": 1.1759877868801751
+      },
+      {
+        "bin": "50-100",
+        "n_uap": 3782,
+        "n_ctrl": 516,
+        "uap_frac": 0.8799441600744532,
+        "or_vs_ref": 3.9886314697361205
+      },
+      {
+        "bin": "100+",
+        "n_uap": 2805,
+        "n_ctrl": 482,
+        "uap_frac": 0.8533617280194706,
+        "or_vs_ref": 3.1669260027662514
+      }
+    ],
+    "monotonic_trend": {
+      "rho": 0.9285714285714288,
+      "p": 0.0025194724037946874
+    },
+    "logistic_model": {
+      "gradient_beta": 0.4358925705308132,
+      "gradient_ci": [
+        0.4095399852350146,
+        0.4622451558266118
+      ],
+      "gradient_p": 1.4650400291067416e-230,
+      "lr_test_stat": 1104.7646147587657,
+      "lr_test_p": 0.0
+    },
+    "port_stratified": {
+      "tercile_1": 2.4605162891850076,
+      "tercile_2": 2.534986596623214,
+      "tercile_3": 4.561078207286374
+    },
+    "port_gradient_correlation": {
+      "rho": 0.1220127479343459,
+      "p": 6.837019312689755e-116
+    },
+    "gam": {
+      "aic": 72013.56802785634,
+      "pseudo_r2": NaN
+    },
+    "sensitivity_features": {
+      "max": {
+        "beta": 0.4356635772393161,
+        "lr_p": 0.0,
+        "lr_stat": 1036.7200497271697
+      },
+      "mean_top10": {
+        "beta": 0.42843231794110936,
+        "lr_p": 0.0,
+        "lr_stat": 1062.6541980004258
+      },
+      "count_steep_50": {
+        "beta": 0.49419427653243864,
+        "lr_p": 0.0,
+        "lr_stat": 1604.9763981019933
+      }
+    },
+    "verdict": "DOSE-RESPONSE CONFIRMED \u2014 steeper canyons predict more UAP excess, monotonically (rho=0.929), beyond simple proximity and port infrastructure. LR test p=0.00e+00."
+  },
+  "combined_verdict": "Both confirmed: Two new independent evidence lines. Qualitatively different paper."
+}

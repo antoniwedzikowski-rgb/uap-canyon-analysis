@@ -51,15 +51,10 @@ np.random.seed(42)
 # ============================================================
 # CONFIGURATION
 # ============================================================
-# REPO_DIR = this repo's root (one level up from notebooks/)
-REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# DATA_DIR = raw data files (large, not in repo)
-DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
-# Outputs go into repo
-FIG_DIR = os.path.join(REPO_DIR, "figures")
-RESULTS_DIR = os.path.join(REPO_DIR, "results")
+BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+DATA_DIR = os.path.join(BASE_DIR, "data")
+FIG_DIR = os.path.join(BASE_DIR, "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
-os.makedirs(RESULTS_DIR, exist_ok=True)
 
 R_EARTH = 6371.0
 CANYON_GRADIENT_THRESHOLD = 20.0
@@ -571,10 +566,21 @@ if HAS_PYGAM:
         try:
             gam.summary()
             edf_total = gam.statistics_.get('edof', None)
+            # Per-term EDF: sum edof_per_coef for the first term (canyon spline)
+            edof_per_coef = gam.statistics_.get('edof_per_coef', None)
+            if edof_per_coef is not None:
+                n_coefs_spline = gam.terms[0].n_coefs  # term 0 = s(0)
+                edf_spline = float(sum(edof_per_coef[:n_coefs_spline]))
+            else:
+                edf_spline = None
             gam_results['edf_total'] = float(edf_total) if edf_total is not None else None
-            print(f"  EDF total={edf_total:.1f} (spline complexity intentionally capped at 8 basis functions)")
-        except Exception:
+            gam_results['edf_spline_canyon'] = edf_spline
+            print(f"  EDF: spline(canyon)={edf_spline:.1f}, total={edf_total:.1f}")
+            print(f"  (EDF total includes all terms; canyon spline capped at 8 basis functions)")
+        except Exception as e:
+            print(f"  EDF extraction failed: {e}")
             gam_results['edf_total'] = None
+            gam_results['edf_spline_canyon'] = None
 
         # 4. Generate grid in standardized space, map back to km
         XX = gam.generate_X_grid(term=0, n=200)
@@ -793,6 +799,58 @@ if cv_gam_logloss and cv_linear_logloss:
     print(f"    Verdict: {gam_results['cv_verdict']}")
 else:
     gam_results['cv_verdict'] = 'GAM_UNAVAILABLE'
+
+# --- Spline sensitivity: does shape depend on n_splines? ---
+if HAS_PYGAM and gam is not None:
+    print("\n  Spline shape robustness (n_splines = 6, 8, 10)...")
+    spline_sensitivity = {}
+    for n_sp in [6, 8, 10]:
+        try:
+            X_sens = X_gam[range_mask].copy()
+            canyon_sens = X_sens[:, 0].copy()
+            X_sens[:, 0] = (canyon_sens - gam_canyon_mean) / gam_canyon_std
+
+            terms_sens = (s(0, n_splines=n_sp, spline_order=3) + l_term(1) + l_term(2) +
+                          l_term(3) + l_term(4) + l_term(5) + l_term(6))
+            g_sens = LogisticGAM(terms_sens, max_iter=200)
+            g_sens.gridsearch(X_sens, y_gam_clipped)
+            aic_sens = g_sens.statistics_.get('AIC', np.nan)
+
+            XX_sens = g_sens.generate_X_grid(term=0, n=100)
+            pdep_sens, _ = g_sens.partial_dependence(term=0, X=XX_sens, width=0.95)
+            x_km_sens = XX_sens[:, 0] * gam_canyon_std + gam_canyon_mean
+            valid = (x_km_sens >= 0) & (x_km_sens <= MAX_CANYON_KM)
+
+            pdep_valid = pdep_sens[valid]
+            x_valid = x_km_sens[valid]
+            pdep_range_sens = float(pdep_valid.max() - pdep_valid.min())
+
+            # Monotonicity: fraction of consecutive steps where pdep decreases
+            diffs = np.diff(pdep_valid)
+            frac_decreasing = float(np.mean(diffs < 0))
+
+            edof_pc_sens = g_sens.statistics_.get('edof_per_coef', None)
+            if edof_pc_sens is not None:
+                nc_sens = g_sens.terms[0].n_coefs
+                edf_sens = float(sum(edof_pc_sens[:nc_sens]))
+            else:
+                edf_sens = None
+
+            spline_sensitivity[str(n_sp)] = {
+                'aic': float(aic_sens),
+                'pdep_range': pdep_range_sens,
+                'frac_monotonic_decreasing': frac_decreasing,
+                'edf_spline': edf_sens,
+            }
+            edf_str = f"{edf_sens:.1f}" if edf_sens is not None else "N/A"
+            print(f"    n_splines={n_sp}: AIC={aic_sens:.1f}, "
+                  f"range={pdep_range_sens:.2f}, monotonic={frac_decreasing:.0%}, "
+                  f"EDF={edf_str}")
+        except Exception as e:
+            print(f"    n_splines={n_sp}: FAILED ({e})")
+            spline_sensitivity[str(n_sp)] = {'error': str(e)}
+
+    gam_results['spline_sensitivity'] = spline_sensitivity
 
 print(f"  Task 1 done ({time.time() - t_task1:.1f}s)")
 
@@ -1268,7 +1326,7 @@ results['definition_of_done'] = {
 }
 
 # Write JSON
-with open(os.path.join(RESULTS_DIR, 'sprint2_results.json'), 'w') as f:
+with open(os.path.join(BASE_DIR, 'sprint2_results.json'), 'w') as f:
     json.dump(results, f, indent=2, default=str)
 print("  Saved sprint2_results.json")
 

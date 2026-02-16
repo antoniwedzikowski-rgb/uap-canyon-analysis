@@ -97,15 +97,10 @@ print(PLAN_TEXT.format(timestamp=datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 # ============================================================
 # CONFIGURATION
 # ============================================================
-# REPO_DIR = this repo's root (one level up from notebooks/)
-REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# DATA_DIR = raw data files (large, not in repo)
-DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
-# Outputs go into repo
-FIG_DIR = os.path.join(REPO_DIR, "figures")
-RESULTS_DIR = os.path.join(REPO_DIR, "results")
+BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+DATA_DIR = os.path.join(BASE_DIR, "data")
+FIG_DIR = os.path.join(BASE_DIR, "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
-os.makedirs(RESULTS_DIR, exist_ok=True)
 
 R_EARTH = 6371.0
 CANYON_GRADIENT_THRESHOLD = 20.0
@@ -221,6 +216,39 @@ def compute_excess_near_minus_far(temporal_density, n_spatial, near_mask, far_ma
         return np.nan
 
     return np.nanmedian(excess_near) - np.nanmedian(excess_far)
+
+
+def compute_excess_trimmed_mean(temporal_density, n_spatial, near_mask, far_mask,
+                                 temporal_window, days_in_year, trim_pct=5):
+    """
+    Like compute_excess_near_minus_far but uses trimmed mean (5-95%) instead of median.
+    More sensitive to heavy-tail structure (flaps).
+    """
+    expected = n_spatial * (2 * temporal_window / days_in_year)
+    valid = expected > 0
+    excess = np.full(len(temporal_density), np.nan)
+    excess[valid] = temporal_density[valid] / expected[valid]
+
+    excess_near = excess[near_mask & valid]
+    excess_far = excess[far_mask & valid]
+
+    if len(excess_near) < 10 or len(excess_far) < 10:
+        return np.nan
+
+    from scipy.stats import trim_mean
+    return trim_mean(excess_near[~np.isnan(excess_near)], trim_pct / 100.0) - \
+           trim_mean(excess_far[~np.isnan(excess_far)], trim_pct / 100.0)
+
+
+def compute_excess_heavy_tail(temporal_density, n_spatial, near_mask, far_mask,
+                               threshold=3):
+    """
+    Alternative metric: proportion of points with temporal_density >= threshold.
+    Tests whether near-canyon has more "heavy tail" clustering.
+    """
+    frac_near = np.mean(temporal_density[near_mask] >= threshold)
+    frac_far = np.mean(temporal_density[far_mask] >= threshold)
+    return frac_near - frac_far
 
 
 def get_p95_gradient_gridded(points, gradient_by_cell, grid_res=0.1, radius_km=25):
@@ -708,13 +736,149 @@ for p in range(N_PERM_PRIMARY):
         print(f"    Permutation {p+1}/{N_PERM_PRIMARY} "
               f"({elapsed:.0f}s elapsed, ~{remaining:.0f}s remaining)")
 
-p_value_perm = np.mean(perm_diffs >= observed_diff)
+# Corrected p-value: (k+1)/(N+1) to avoid p=0 artifact
+k_exceeded = np.sum(perm_diffs >= observed_diff)
+p_value_perm = (k_exceeded + 1) / (N_PERM_PRIMARY + 1)
+z_score_perm = (observed_diff - perm_diffs.mean()) / perm_diffs.std() if perm_diffs.std() > 0 else np.nan
+
 print(f"\n  Permutation test: observed = {observed_diff:.4f}, "
-      f"p = {p_value_perm:.4f} ({N_PERM_PRIMARY} permutations)")
+      f"p = {p_value_perm:.4f} ({N_PERM_PRIMARY} permutations, "
+      f"k={k_exceeded} exceeded)")
 print(f"  Permutation null: mean = {perm_diffs.mean():.4f}, "
       f"std = {perm_diffs.std():.4f}, "
       f"95th pct = {np.percentile(perm_diffs, 95):.4f}")
+print(f"  Z-score: {z_score_perm:.1f} (observed vs null)")
 print(f"  Primary permutation done ({time.time() - t_perm:.1f}s)")
+
+
+# ============================================================
+# SECTION 8b: ROBUSTNESS — ALTERNATIVE METRICS + WITHIN-MONTH NULL
+# ============================================================
+print("\n[SECTION 8b] Robustness checks...")
+t_robust = time.time()
+
+# --- Robustness 1: Trimmed mean (5-95%) metric ---
+print("  Robustness 1: Trimmed mean (5-95%) metric...")
+
+observed_diff_trimmed = compute_excess_trimmed_mean(
+    observed_td, n_actual_primary.astype(float), near_mask_primary, far_mask_primary,
+    TEMPORAL_WINDOW_PRIMARY, days_in_year, trim_pct=5
+)
+
+perm_diffs_trimmed = np.empty(N_PERM_SENSITIVITY)
+for p in range(N_PERM_SENSITIVITY):
+    perm_days = uap_days.copy()
+    for yr, indices in year_groups.items():
+        perm_days[indices] = np.random.permutation(perm_days[indices])
+    td_perm = vectorized_temporal_density(perm_days, neighbor_matrix_primary,
+                                           TEMPORAL_WINDOW_PRIMARY)
+    perm_diffs_trimmed[p] = compute_excess_trimmed_mean(
+        td_perm, n_actual_primary.astype(float), near_mask_primary, far_mask_primary,
+        TEMPORAL_WINDOW_PRIMARY, days_in_year, trim_pct=5
+    )
+
+k_trimmed = np.sum(perm_diffs_trimmed >= observed_diff_trimmed)
+p_trimmed = (k_trimmed + 1) / (N_PERM_SENSITIVITY + 1)
+z_trimmed = ((observed_diff_trimmed - perm_diffs_trimmed.mean()) / perm_diffs_trimmed.std()
+             if perm_diffs_trimmed.std() > 0 else np.nan)
+print(f"    Observed (trimmed mean): {observed_diff_trimmed:.4f}, "
+      f"p = {p_trimmed:.4f} ({N_PERM_SENSITIVITY} perms), z = {z_trimmed:.1f}")
+
+# --- Robustness 1b: Heavy tail metric (frac with td >= 3) ---
+print("  Robustness 1b: Heavy tail metric (frac with td >= 3)...")
+
+observed_diff_tail = compute_excess_heavy_tail(
+    observed_td, n_actual_primary.astype(float), near_mask_primary, far_mask_primary,
+    threshold=3
+)
+
+perm_diffs_tail = np.empty(N_PERM_SENSITIVITY)
+for p in range(N_PERM_SENSITIVITY):
+    perm_days = uap_days.copy()
+    for yr, indices in year_groups.items():
+        perm_days[indices] = np.random.permutation(perm_days[indices])
+    td_perm = vectorized_temporal_density(perm_days, neighbor_matrix_primary,
+                                           TEMPORAL_WINDOW_PRIMARY)
+    perm_diffs_tail[p] = compute_excess_heavy_tail(
+        td_perm, n_actual_primary.astype(float), near_mask_primary, far_mask_primary,
+        threshold=3
+    )
+
+k_tail = np.sum(perm_diffs_tail >= observed_diff_tail)
+p_tail = (k_tail + 1) / (N_PERM_SENSITIVITY + 1)
+z_tail = ((observed_diff_tail - perm_diffs_tail.mean()) / perm_diffs_tail.std()
+          if perm_diffs_tail.std() > 0 else np.nan)
+print(f"    Observed (heavy tail frac): {observed_diff_tail:.4f}, "
+      f"p = {p_tail:.4f} ({N_PERM_SENSITIVITY} perms), z = {z_tail:.1f}")
+
+# --- Robustness 2: Within-month permutation null ---
+print("  Robustness 2: Within-month permutation null (preserves seasonality)...")
+
+# Build month groups
+uap_months = df_temporal['datetime_parsed'].dt.month.values
+month_year_groups = {}
+for yr in np.unique(uap_years):
+    for mo in range(1, 13):
+        indices = np.where((uap_years == yr) & (uap_months == mo))[0]
+        if len(indices) > 1:
+            month_year_groups[(yr, mo)] = indices
+
+perm_diffs_monthly = np.empty(N_PERM_SENSITIVITY)
+for p in range(N_PERM_SENSITIVITY):
+    perm_days = uap_days.copy()
+    for (yr, mo), indices in month_year_groups.items():
+        perm_days[indices] = np.random.permutation(perm_days[indices])
+
+    td_perm = vectorized_temporal_density(perm_days, neighbor_matrix_primary,
+                                           TEMPORAL_WINDOW_PRIMARY)
+    perm_diffs_monthly[p] = compute_excess_near_minus_far(
+        td_perm, n_actual_primary.astype(float), near_mask_primary, far_mask_primary,
+        TEMPORAL_WINDOW_PRIMARY, days_in_year
+    )
+
+k_monthly = np.sum(perm_diffs_monthly >= observed_diff)
+p_monthly = (k_monthly + 1) / (N_PERM_SENSITIVITY + 1)
+z_monthly = ((observed_diff - perm_diffs_monthly.mean()) / perm_diffs_monthly.std()
+             if perm_diffs_monthly.std() > 0 else np.nan)
+print(f"    Within-month null: observed = {observed_diff:.4f}, "
+      f"p = {p_monthly:.4f} ({N_PERM_SENSITIVITY} perms), z = {z_monthly:.1f}")
+print(f"    Monthly null: mean = {perm_diffs_monthly.mean():.4f}, "
+      f"std = {perm_diffs_monthly.std():.4f}")
+
+# Store robustness results
+robustness_results = {
+    'trimmed_mean_5_95': {
+        'observed': float(observed_diff_trimmed),
+        'p': float(p_trimmed),
+        'z': float(z_trimmed) if not np.isnan(z_trimmed) else None,
+        'null_mean': float(perm_diffs_trimmed.mean()),
+        'null_std': float(perm_diffs_trimmed.std()),
+        'n_perms': N_PERM_SENSITIVITY,
+    },
+    'heavy_tail_frac_ge3': {
+        'observed': float(observed_diff_tail),
+        'p': float(p_tail),
+        'z': float(z_tail) if not np.isnan(z_tail) else None,
+        'null_mean': float(perm_diffs_tail.mean()),
+        'null_std': float(perm_diffs_tail.std()),
+        'n_perms': N_PERM_SENSITIVITY,
+    },
+    'within_month_null': {
+        'observed': float(observed_diff),
+        'p': float(p_monthly),
+        'z': float(z_monthly) if not np.isnan(z_monthly) else None,
+        'null_mean': float(perm_diffs_monthly.mean()),
+        'null_std': float(perm_diffs_monthly.std()),
+        'n_perms': N_PERM_SENSITIVITY,
+    },
+}
+
+print(f"\n  Robustness summary:")
+print(f"    Primary (median, within-year): p = {p_value_perm:.4f}, z = {z_score_perm:.1f}")
+print(f"    Trimmed mean (5-95%):          p = {p_trimmed:.4f}, z = {z_trimmed:.1f}")
+print(f"    Heavy tail (frac td>=3):       p = {p_tail:.4f}, z = {z_tail:.1f}")
+print(f"    Within-month null:             p = {p_monthly:.4f}, z = {z_monthly:.1f}")
+print(f"  Robustness done ({time.time() - t_robust:.1f}s)")
 
 
 # ============================================================
@@ -794,7 +958,8 @@ for tw in TEMPORAL_WINDOWS:
                     td_p_s, na.astype(float), near_s, far_s, tw, days_in_year
                 )
 
-            p_val_s = np.mean(perm_d_s >= obs_diff_s)
+            k_s = np.sum(perm_d_s >= obs_diff_s)
+            p_val_s = (k_s + 1) / (N_PERM_SENSITIVITY + 1)
             sensitivity_results[(tw, sr, ct)] = {
                 'p': float(p_val_s),
                 'observed_diff': float(obs_diff_s),
@@ -1424,7 +1589,9 @@ results = {
             'far_mean_td': float(observed_td[far_mask_primary].mean()),
             'near_n': int(near_mask_primary.sum()),
             'far_n': int(far_mask_primary.sum()),
+            'z_score': float(z_score_perm) if not np.isnan(z_score_perm) else None,
         },
+        'robustness': robustness_results,
         'sensitivity': sens_serialized,
         'bh_fdr': {
             'n_significant': int(n_significant_fdr),
@@ -1481,7 +1648,7 @@ else:
 results['combined_verdict'] = combined
 
 # Save JSON
-results_file = os.path.join(RESULTS_DIR, "sprint3_results.json")
+results_file = os.path.join(BASE_DIR, "sprint3_results.json")
 with open(results_file, 'w') as f:
     json.dump(results, f, indent=2)
 print(f"\n  Saved {results_file}")
@@ -1506,15 +1673,21 @@ PART A: TEMPORAL CLUSTERING
 
 2. Time-permutation test (PRIMARY):
    Observed excess_near - excess_far = {observed_diff:.4f}
-   Permutation p-value = {p_value_perm:.4f} ({N_PERM_PRIMARY} permutations within year)
+   Permutation p = {p_value_perm:.4f} (k={k_exceeded}/{N_PERM_PRIMARY}, corrected (k+1)/(N+1))
+   Z-score vs null: {z_score_perm:.1f}
    Permutation null: mean = {perm_diffs.mean():.4f}, std = {perm_diffs.std():.4f}
 
-3. VERDICT:
+3. Robustness:
+   Trimmed mean (5-95%):    p = {p_trimmed:.4f}, z = {z_trimmed:.1f}
+   Heavy tail (frac td>=3): p = {p_tail:.4f}, z = {z_tail:.1f}
+   Within-month null:       p = {p_monthly:.4f}, z = {z_monthly:.1f}
+
+4. VERDICT:
    {temporal_verdict}
 
-4. Sensitivity: {n_same_sign}/{len(sensitivity_results)} parameter combinations same sign, {n_significant_fdr}/{len(sensitivity_results)} significant after BH-FDR
+5. Sensitivity: {n_same_sign}/{len(sensitivity_results)} parameter combinations same sign, {n_significant_fdr}/{len(sensitivity_results)} significant after BH-FDR
 
-5. Illustrative flap episodes (DESCRIPTIVE, not statistical evidence):""")
+6. Illustrative flap episodes (DESCRIPTIVE, not statistical evidence):""")
 
 for ep in flap_episodes[:5]:
     print(f"   Episode #{ep['id']}: {ep['n_reports']} reports, "

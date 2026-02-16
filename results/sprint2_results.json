@@ -25,9 +25,11 @@
     "reference_mean_dist_diff": -14.268936711525669,
     "canyon_mean_km": 123.81609475384448,
     "canyon_std_km": 100.66431988487233,
-    "runtime_seconds": 748.7947409152985
+    "runtime_seconds": 581.6803200244904
   },
   "task1_gam": {
+    "edf_total": 13.986397010024053,
+    "edf_spline_canyon": 7.986727024640911,
     "method": "pyGAM",
     "best_lambda": "gridsearch",
     "aic": 68612.38979418355,
@@ -891,7 +893,27 @@
         ]
       }
     },
-    "cv_verdict": "GAM_BETTER"
+    "cv_verdict": "GAM_BETTER",
+    "spline_sensitivity": {
+      "6": {
+        "aic": 68774.44654870122,
+        "pdep_range": 2.0648906992604497,
+        "frac_monotonic_decreasing": 0.797979797979798,
+        "edf_spline": 5.967175490957568
+      },
+      "8": {
+        "aic": 68612.38979418355,
+        "pdep_range": 2.7659062890293855,
+        "frac_monotonic_decreasing": 0.6161616161616161,
+        "edf_spline": 7.986727024640911
+      },
+      "10": {
+        "aic": 68441.18797874307,
+        "pdep_range": 2.23192650226419,
+        "frac_monotonic_decreasing": 0.5757575757575758,
+        "edf_spline": 9.239167979553208
+      }
+    }
   },
   "task2_bootstrap": {
     "n_boot": 2000,
