@@ -4,7 +4,7 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 
 ## NUFORC Reports
 - **File**: `nuforc_reports.csv` (13 MB, included)
-- **Source**: National UFO Reporting Center
+- **Source**: National UFO Reporting Center, via [planetsig/ufo-reports](https://github.com/planetsig/ufo-reports) (public geocoded scrape)
 - **URL**: https://nuforc.org/webreports/
 - **Records**: 80,332 total reports (scraped snapshot ending May 2014; NUFORC has since added ~60K newer reports not included here)
 - **Filtering applied in scripts**: Bounding box (20°N–55°N, 135°W–55°W), years 1990–2014, valid lat/lon → 42,008 coastal reports used in analysis
