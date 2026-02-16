@@ -87,7 +87,7 @@ Importance-weighted odds ratios by bathymetric gradient bin, correcting for 60x 
 
 Raw data files are not included in this repository due to size. See `data/sources.md` for download links and instructions.
 
-- **NUFORC**: National UFO Reporting Center sighting reports (41,628 coastal)
+- **NUFORC**: National UFO Reporting Center sighting reports (42,008 coastal)
 - **ETOPO1**: NOAA bathymetry data for canyon identification
 - **Census**: US county population data for density controls
 - **OSM**: Port and marina locations via Overpass API
