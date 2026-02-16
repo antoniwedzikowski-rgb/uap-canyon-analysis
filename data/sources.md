@@ -7,7 +7,7 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 - **Source**: National UFO Reporting Center
 - **URL**: https://nuforc.org/webreports/
 - **Records**: 80,332 total reports
-- **Filtering applied in scripts**: CONUS bounding box (24°N–50°N, 125°W–66°W), years 1990–2014, valid lat/lon → 42,008 coastal reports used in analysis
+- **Filtering applied in scripts**: Bounding box (20°N–55°N, 135°W–55°W), years 1990–2014, valid lat/lon → 42,008 coastal reports used in analysis
 - **Format**: Headerless CSV
 - **Columns**: datetime_str, city, state, country, shape, duration_seconds, duration_text, description, date_posted, lat, lon
 - **Note**: lat/lon columns contain mixed types; scripts use `pd.to_numeric(errors='coerce')`
@@ -20,6 +20,14 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 - **Resolution**: 1 arc-minute (~1.8 km)
 - **Subset**: US coastal waters, used to compute bathymetric gradient (m/km) per grid cell
 - **Canyon proxy**: cells with gradient >60 m/km (85% overlap with mapped submarine canyons within 25 km)
+- **How to create the subset**: Download the global ETOPO1 file, then subset to the analysis bounding box (20°N–55°N, 135°W–55°W):
+  ```python
+  import xarray as xr
+  ds = xr.open_dataset("ETOPO1_Bed_g_gmt4.grd")
+  subset = ds.sel(lat=slice(20, 55), lon=slice(-135, -55))
+  subset.to_netcdf("etopo_subset.nc")
+  ```
+  The resulting file should contain variable `z` (elevation in meters) with dimensions `lat` and `lon`.
 
 ## US Census Population
 - **File**: `census_county_pop.json` (164 KB, included)

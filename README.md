@@ -39,7 +39,8 @@ uap-canyon-analysis/
 │   ├── 02_sprint2_continuous_model.py
 │   ├── 03_sprint3_temporal_doseresponse.py
 │   ├── 04_sprint3_dose_robustness.py
-│   └── 05_weighted_or_for_post.py
+│   ├── 05_weighted_or_for_post.py
+│   └── 06_generate_figures.py
 ├── prompts/
 │   ├── sprint1_prompt.md
 │   ├── sprint2_prompt.md
@@ -58,10 +59,10 @@ uap-canyon-analysis/
 ## Sprint Overview
 
 ### Sprint 1: Observer Controls
-Logistic regression with population-matched controls. Tests whether canyon proximity effect survives addition of port/marina covariates, military base distance, and population density. Includes multiple imputation, stratified odds ratios, and sensitivity analysis.
+Logistic regression with population-matched controls. Tests whether canyon proximity effect survives addition of port/marina covariates, military base distance, population density, and coastline complexity. Includes stratified odds ratios and sensitivity analysis. Note: Sprint 1 uses an additional `coast_complexity` feature that increases NaN-dropping, resulting in a smaller effective sample (n ≈ 23K) compared to Sprint 2+ (n ≈ 42K).
 
 ### Sprint 2: Continuous Model & Uncertainty
-GAM partial dependence, cluster bootstrap (2,000 resamples), and geocoding jitter test (100 iterations at +/-5 km). Confirms the canyon effect is not an artifact of binary discretization or spatial autocorrelation.
+GAM partial dependence, cluster bootstrap (2,000 resamples), and geocoding jitter test (50 iterations per sigma level at 2/5/10/15/20 km). Confirms the canyon effect is not an artifact of binary discretization or spatial autocorrelation.
 
 ### Sprint 3: Temporal Clustering & Dose-Response
 Spatial permutation testing (1,000 shuffles) for temporal clustering near canyons. Primary metric exceeds all permutations (p < 0.001). Within-month null controls for seasonality (p = 0.015). Robustness tests: trimmed mean, heavy-tail excess, ECDF quantile comparison.
@@ -78,7 +79,7 @@ Importance-weighted odds ratios by bathymetric gradient bin, correcting for 60x 
 | Trimmed mean (5-95%) | p = 1.0, z = -5.3 (episodic, not diffuse) |
 | Heavy-tail excess (ratio >= 2) | p = 1.0, z = -5.3 (confirms episodic) |
 | Cluster bootstrap (2,000) | median beta = -0.17, CI [-0.26, -0.07] |
-| Geocoding jitter (+/-5 km) | effect stable across 100 iterations |
+| Geocoding jitter (2–20 km) | effect stable across 50 iterations per sigma |
 | GAM (7 covariates) | continuous distance decay confirmed |
 | Importance-weighted OR | 3.90 [1.42, 10.83] at >60 m/km only |
 
@@ -92,12 +93,13 @@ Importance-weighted odds ratios by bathymetric gradient bin, correcting for 60x 
 
 ## Data Sources
 
-Raw data files are not included in this repository due to size. See `data/sources.md` for download links and instructions.
+All data files are included in this repository except ETOPO1 bathymetry (52 MB netCDF). See `data/sources.md` for full provenance and ETOPO1 download instructions.
 
-- **NUFORC**: National UFO Reporting Center sighting reports (42,008 coastal)
-- **ETOPO1**: NOAA bathymetry data for canyon identification
-- **Census**: US county population data for density controls
-- **OSM**: Port and marina locations via Overpass API
+- **NUFORC**: 80,332 sighting reports (42,008 after coastal CONUS filter) — `data/nuforc_reports.csv`
+- **ETOPO1**: NOAA 1-arc-minute bathymetry — download separately, see `data/sources.md`
+- **Census**: 2010 decennial county population — `data/census_county_pop.json`
+- **Military**: 171 DoD installations — `data/military_bases_us.csv`
+- **Ports**: 7,747 OSM port/marina locations — `data/port_coords_cache.npz`
 
 ## Requirements
 
