@@ -97,9 +97,10 @@ print(PLAN_TEXT.format(timestamp=datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 # ============================================================
 # CONFIGURATION
 # ============================================================
-BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
-DATA_DIR = os.path.join(BASE_DIR, "data")
-FIG_DIR = os.path.join(BASE_DIR, "figures")
+REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DATA_DIR = os.path.join(REPO_DIR, "data")
+FIG_DIR = os.path.join(REPO_DIR, "figures")
+RESULTS_DIR = os.path.join(REPO_DIR, "results")
 os.makedirs(FIG_DIR, exist_ok=True)
 
 R_EARTH = 6371.0
@@ -1648,7 +1649,7 @@ else:
 results['combined_verdict'] = combined
 
 # Save JSON
-results_file = os.path.join(BASE_DIR, "sprint3_results.json")
+results_file = os.path.join(RESULTS_DIR, "sprint3_results.json")
 with open(results_file, 'w') as f:
     json.dump(results, f, indent=2)
 print(f"\n  Saved {results_file}")

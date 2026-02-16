@@ -34,7 +34,7 @@ t_start = time.time()
 # PATHS (same as script 04)
 # ============================================================
 REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
+DATA_DIR = os.path.join(REPO_DIR, "data")
 RESULTS_DIR = os.path.join(REPO_DIR, "results")
 
 R_EARTH = 6371.0

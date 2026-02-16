@@ -49,8 +49,8 @@ np.random.seed(42)
 # ============================================================
 # REPO_DIR = this repo's root (one level up from notebooks/)
 REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-# DATA_DIR = raw data files (large, not in repo)
-DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
+# DATA_DIR = raw data files (included in repo under data/)
+DATA_DIR = os.path.join(REPO_DIR, "data")
 # Outputs go into repo
 FIG_DIR = os.path.join(REPO_DIR, "figures")
 RESULTS_DIR = os.path.join(REPO_DIR, "results")

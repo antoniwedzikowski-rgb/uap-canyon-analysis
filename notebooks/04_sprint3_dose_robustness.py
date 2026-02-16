@@ -49,7 +49,7 @@ np.random.seed(42)
 # CONFIGURATION
 # ============================================================
 REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
+DATA_DIR = os.path.join(REPO_DIR, "data")
 FIG_DIR = os.path.join(REPO_DIR, "figures")
 RESULTS_DIR = os.path.join(REPO_DIR, "results")
 os.makedirs(FIG_DIR, exist_ok=True)
