@@ -283,24 +283,23 @@ print(f"  Panel C: Binary OR (raw + weighted, 60+ uncapped OR = {wtd_ors[3]:.2f}
 print(f"  Panel D: Bootstrap (median = {boot_median:.3f}, CI = [{boot_ci[0]:.2f}, {boot_ci[1]:.2f}])")
 
 # ============================================================
-# FIGURE 1 — Flap Map (West Coast)
+# FIGURE 1 — Clean Reference Map (CONUS study area)
 # ============================================================
-print("\nGenerating Figure 1 (flap map)...")
+print("\nGenerating Figure 1 (reference map)...")
 
 import ssl
 import certifi
 os.environ['SSL_CERT_FILE'] = certifi.where()
-# Also fix for urllib directly
 ssl._create_default_https_context = ssl._create_unverified_context
 
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import netCDF4 as nc
+from matplotlib.colors import LinearSegmentedColormap
 
 # Load ETOPO bathymetry
 DATA_DIR = os.path.join(os.path.dirname(REPO), "UAP research", "data")
 if not os.path.exists(DATA_DIR):
-    # Try alternate path
     DATA_DIR = os.path.join(REPO, "..", "UAP research", "data")
 
 etopo_path = os.path.join(DATA_DIR, "etopo_subset.nc")
@@ -314,9 +313,9 @@ else:
 elevation = ds.variables['z'][:]
 ds.close()
 
-# West Coast zoom (top 5 clusters happen to be here)
-lat_min, lat_max = 32, 49
-lon_min, lon_max = -130, -116
+# Full CONUS
+lat_min, lat_max = 24, 50
+lon_min, lon_max = -130, -64
 
 # Subset ETOPO
 lat_mask = (elev_lats >= lat_min - 1) & (elev_lats <= lat_max + 1)
@@ -325,95 +324,73 @@ sub_lats = elev_lats[lat_mask]
 sub_lons = elev_lons[lon_mask]
 sub_elev = elevation[np.ix_(lat_mask, lon_mask)]
 
-# Compute gradient magnitude for canyon features
+# Compute gradient magnitude
 dy = np.gradient(sub_elev, axis=0)
 dx = np.gradient(sub_elev, axis=1)
-# Convert to m/km: grid spacing ~1.85 km at 45° lat
 lat_spacing_km = 111.0 * (sub_lats[1] - sub_lats[0]) if len(sub_lats) > 1 else 1.85
-lon_spacing_km = 111.0 * np.cos(np.radians(41)) * (sub_lons[1] - sub_lons[0]) if len(sub_lons) > 1 else 1.4
+lon_spacing_km = 111.0 * np.cos(np.radians(37)) * (sub_lons[1] - sub_lons[0]) if len(sub_lons) > 1 else 1.4
 grad_mag = np.sqrt((dy / lat_spacing_km)**2 + (dx / lon_spacing_km)**2)
 
-# Mask land (only show ocean gradient)
-ocean_mask = sub_elev < 0
-grad_ocean = np.where(ocean_mask, grad_mag, np.nan)
+# Mask: only ocean, only shelf (depth > -3000m to avoid mid-ocean ridges)
+ocean_shelf_mask = (sub_elev < 0) & (sub_elev > -3000)
+grad_ocean = np.where(ocean_shelf_mask, grad_mag, np.nan)
 
-# Flap episodes
-episodes = s3['part_a_temporal']['flap_episodes']
+# Binary: steep (>60 m/km) vs not
+steep_mask = (grad_ocean >= 60).astype(float)
+steep_mask = np.where(ocean_shelf_mask, steep_mask, np.nan)
 
-# Color per episode
-ep_colors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00']
+lon_grid, lat_grid = np.meshgrid(sub_lons, sub_lats)
 
-fig1 = plt.figure(figsize=(10, 12))
+# --- Plot ---
+fig1 = plt.figure(figsize=(14, 8))
 ax_map = fig1.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
 ax_map.set_extent([lon_min, lon_max, lat_min, lat_max], crs=ccrs.PlateCarree())
 
-# Basemap features
-ax_map.add_feature(cfeature.LAND, facecolor='#f0f0f0', edgecolor='none')
-ax_map.add_feature(cfeature.OCEAN, facecolor='#e6f2ff')
-ax_map.add_feature(cfeature.COASTLINE, linewidth=0.8, edgecolor='#404040')
-ax_map.add_feature(cfeature.STATES, linewidth=0.3, edgecolor='#999999')
+# Basemap
+ax_map.add_feature(cfeature.LAND, facecolor='#f5f5f5', edgecolor='none')
+ax_map.add_feature(cfeature.OCEAN, facecolor='#eaf4fc')
+ax_map.add_feature(cfeature.COASTLINE, linewidth=0.6, edgecolor='#404040')
+ax_map.add_feature(cfeature.STATES, linewidth=0.2, edgecolor='#bbbbbb')
 
-# Show canyon features as contour (gradient > 60 m/km)
-lon_grid, lat_grid = np.meshgrid(sub_lons, sub_lats)
-# Show steep gradients (canyon walls) as blue contours
-canyon_levels = [60, 100, 200]
-cs = ax_map.contour(lon_grid, lat_grid, grad_ocean,
-                     levels=canyon_levels, colors=['#2166ac', '#1a4480', '#0d2240'],
-                     linewidths=[0.4, 0.6, 0.8], alpha=0.5,
-                     transform=ccrs.PlateCarree())
+# Gradient >60 m/km as filled contour (red-orange = steep canyon walls)
+canyon_cmap = LinearSegmentedColormap.from_list(
+    'canyon', ['#fee8c8', '#e34a33', '#b30000'], N=256)
+steep_plot = ax_map.contourf(lon_grid, lat_grid, grad_ocean,
+                              levels=[60, 100, 200, 500],
+                              cmap=canyon_cmap, alpha=0.7,
+                              transform=ccrs.PlateCarree(),
+                              extend='max')
 
-# Also show shelf edge as light contour
+# Shelf edge contour (subtle)
 shelf_cs = ax_map.contour(lon_grid, lat_grid, sub_elev,
                            levels=[-2000, -1000, -500, -200],
-                           colors='#8c96c6', linewidths=0.3, alpha=0.4,
-                           transform=ccrs.PlateCarree())
+                           colors='#8c96c6', linewidths=[0.2, 0.2, 0.3, 0.4],
+                           alpha=0.3, transform=ccrs.PlateCarree())
 
-# Plot flap episodes with manual label offsets to avoid overlap
-# (lat_offset, lon_offset) for each episode
-label_offsets = {
-    1: (1.5, 3.5),    # Seattle ep 1 — push right and up
-    2: (-2.0, -3.0),  # SoCal ep 2 — push left and down
-    3: (-1.5, 3.5),   # Seattle ep 3 — push right
-    4: (-3.0, 2.0),   # Seattle ep 4 — push right and down
-    5: (1.5, -3.0),   # SoCal ep 5 — push left and up
-}
-
-for i, ep in enumerate(episodes):
-    c = ep_colors[i % len(ep_colors)]
-    ax_map.scatter(ep['lon_mean'], ep['lat_mean'],
-                   s=ep['n_reports'] * 40, c=c, alpha=0.6,
-                   edgecolors=c, linewidth=1.5, zorder=5,
-                   transform=ccrs.PlateCarree())
-    # Label
-    label = (f"Ep. {ep['id']}: {ep['n_reports']} rpts, "
-             f"{ep['time_start']}, "
-             f"{ep['nearest_canyon_km']:.1f} km")
-    lat_off, lon_off = label_offsets.get(ep['id'], (0.5, 1.0))
-    ax_map.annotate(label,
-                    xy=(ep['lon_mean'], ep['lat_mean']),
-                    xytext=(ep['lon_mean'] + lon_off, ep['lat_mean'] + lat_off),
-                    fontsize=7, color=c, fontweight='bold',
-                    arrowprops=dict(arrowstyle='->', color=c, lw=1),
-                    transform=ccrs.PlateCarree(),
-                    bbox=dict(boxstyle='round,pad=0.2', facecolor='white',
-                              edgecolor=c, alpha=0.85))
+# Colorbar
+cbar = fig1.colorbar(steep_plot, ax=ax_map, orientation='horizontal',
+                      fraction=0.04, pad=0.08, aspect=40)
+cbar.set_label('Bathymetric gradient (m/km)', fontsize=9)
+cbar.ax.tick_params(labelsize=8)
 
 # Gridlines
-gl = ax_map.gridlines(draw_labels=True, linewidth=0.3, alpha=0.5,
+gl = ax_map.gridlines(draw_labels=True, linewidth=0.2, alpha=0.4,
                        linestyle='--', color='gray')
 gl.top_labels = False
 gl.right_labels = False
+gl.xlabel_style = {'size': 8}
+gl.ylabel_style = {'size': 8}
 
-ax_map.set_title('Example Temporal Clusters Near Submarine Canyons (West Coast)',
-                  fontsize=12, fontweight='bold', pad=15)
+ax_map.set_title('Study Area: CONUS Coastline and Steep Bathymetric Gradients (>60 m/km)',
+                  fontsize=12, fontweight='bold', pad=12)
 
-# Caption — closes cherry-picking, episode selection, and East Coast questions
+# Minimal caption
 fig1.text(0.5, 0.02,
-          'Shown: 5 largest of 61 detected clusters (all West Coast). Analysis uses full CONUS coastline (N = 41,628).\n'
-          'Full cluster list on GitHub. Blue contours: bathymetric gradient >60 m/km.',
+          'Colored regions: ocean-floor gradient >60 m/km (85% overlap with mapped submarine canyons within 25 km).\n'
+          'Gray contours: isobaths at 200, 500, 1000, 2000 m depth. N = 41,628 coastal UAP reports analyzed.',
           ha='center', fontsize=8, style='italic', color=C_GRAY)
 
-out_fig1 = os.path.join(FIG_DIR, "figure1_flap_map.png")
+out_fig1 = os.path.join(FIG_DIR, "figure1_study_area.png")
 plt.savefig(out_fig1, dpi=300, bbox_inches='tight', facecolor='white')
 plt.close()
 print(f"  Figure 1 saved: {out_fig1}")
