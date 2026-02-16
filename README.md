@@ -44,6 +44,8 @@ uap-canyon-analysis/
 │   ├── sprint1_prompt.md
 │   ├── sprint2_prompt.md
 │   └── sprint3_prompt.md
+├── media/
+│   └── UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a
 └── data/
     └── sources.md
 ```
@@ -109,6 +111,12 @@ Python 3.9+
 5. Temporal permutation testing with within-month null (Sprint 3)
 6. Importance-weighted binned OR with bootstrap CI (Scripts 04-05)
 7. Gradient-canyon overlap validation (binary signal confirmation)
+
+## Audio walkthrough (optional)
+
+A non-technical overview generated with NotebookLM:
+
+🎧 [`media/UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a`](media/UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a)
 
 ## License
 
