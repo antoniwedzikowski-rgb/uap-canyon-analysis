@@ -1,12 +1,12 @@
 {
   "metadata": {
     "script": "sprint3_temporal_doseresponse.py",
-    "timestamp": "2026-02-16 02:47:21",
+    "timestamp": "2026-02-16 03:49:55",
     "n_uap_temporal": 41694,
     "n_uap_coastal": 42008,
     "n_ctrl": 19977,
     "n_total": 61985,
-    "runtime_seconds": 3632.082551240921,
+    "runtime_seconds": 3671.1267161369324,
     "pre_registered_specs": {
       "temporal": {
         "spatial_radius_km": 50,
@@ -44,7 +44,8 @@
         "null_std": 0.000915496743651921,
         "n_perms": 200
       },
-      "heavy_tail_frac_ge3": {
+      "heavy_tail_raw_ge3": {
+        "metric": "P(temporal_density >= 3) \u2014 raw count",
         "observed": 0.19874412720130105,
         "p": 0.19402985074626866,
         "z": 0.8509511035939525,
@@ -52,15 +53,57 @@
         "null_std": 0.005202410609114798,
         "n_perms": 200
       },
+      "heavy_tail_excess_ge2": {
+        "metric": "P(excess_ratio >= 2) \u2014 controls for local density",
+        "observed": -0.0020725094760611516,
+        "p": 1.0,
+        "z": -5.347301047169566,
+        "null_mean": -0.00044391096373077574,
+        "null_std": 0.0003045645827613214,
+        "n_perms": 200
+      },
       "within_month_null": {
         "observed": 0.04825719566939529,
-        "p": 0.004975124378109453,
-        "z": 3.8335164467266027,
-        "null_mean": 0.0438417033506336,
-        "null_std": 0.0011518125408153735,
+        "p": 0.014925373134328358,
+        "z": 4.045215316278084,
+        "null_mean": 0.04397012994943097,
+        "null_std": 0.0010597867813644,
         "n_perms": 200
       }
     },
+    "quantile_comparison": [
+      {
+        "quantile": 50,
+        "near": 0.0483,
+        "far": 0.0,
+        "diff": 0.0483
+      },
+      {
+        "quantile": 75,
+        "near": 0.0962,
+        "far": 0.1082,
+        "diff": -0.0119
+      },
+      {
+        "quantile": 90,
+        "near": 0.1743,
+        "far": 0.2532,
+        "diff": -0.0789
+      },
+      {
+        "quantile": 95,
+        "near": 0.2596,
+        "far": 0.4074,
+        "diff": -0.1477
+      },
+      {
+        "quantile": 99,
+        "near": 0.6536,
+        "far": 1.0671,
+        "diff": -0.4135
+      }
+    ],
+    "interpretation_note": "If trimmed_mean z<0 but primary z>0, the temporal clustering signal is episodic (flaps in right tail) rather than a diffuse upward shift. The ECDF and quantile table show where near vs far distributions diverge.",
     "sensitivity": {
       "tw3_sr25_ct10": {
         "p": 1.0,
@@ -84,18 +127,18 @@
         "fdr_p": 1.0
       },
       "tw3_sr50_ct10": {
-        "p": 0.9552238805970149,
+        "p": 0.9502487562189055,
         "observed_diff": 0.04055555555555556,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw3_sr50_ct25": {
-        "p": 0.009950248756218905,
+        "p": 0.01990049751243781,
         "observed_diff": 0.04055555555555556,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.032564450474898234
+        "fdr_p": 0.06512890094979647
       },
       "tw3_sr50_ct50": {
         "p": 0.004975124378109453,
@@ -106,7 +149,7 @@
       },
       "tw3_sr100_ct10": {
         "p": 1.0,
-        "observed_diff": 0.00011111111111111044,
+        "observed_diff": 0.0,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
@@ -169,21 +212,21 @@
       },
       "tw7_sr100_ct10": {
         "p": 1.0,
-        "observed_diff": 0.0022930893198579577,
+        "observed_diff": 0.0021975916803502957,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw7_sr100_ct25": {
         "p": 1.0,
-        "observed_diff": 0.004953584321815363,
+        "observed_diff": 0.004826289862587499,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw7_sr100_ct50": {
         "p": 1.0,
-        "observed_diff": 0.006403508771929821,
+        "observed_diff": 0.0062781954887217925,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
@@ -210,18 +253,18 @@
         "fdr_p": 0.017910447761194027
       },
       "tw14_sr50_ct10": {
-        "p": 0.527363184079602,
+        "p": 0.6517412935323383,
         "observed_diff": 0.008978240302743613,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw14_sr50_ct25": {
-        "p": 0.18407960199004975,
+        "p": 0.23383084577114427,
         "observed_diff": 0.012017325694146604,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.5522388059701493
+        "fdr_p": 0.7014925373134329
       },
       "tw14_sr50_ct50": {
         "p": 0.9850746268656716,
@@ -231,7 +274,7 @@
         "fdr_p": 1.0
       },
       "tw14_sr100_ct10": {
-        "p": 0.9850746268656716,
+        "p": 0.9950248756218906,
         "observed_diff": 0.0,
         "is_primary": false,
         "n_perms": 200,
@@ -273,42 +316,42 @@
         "fdr_p": 1.0
       },
       "tw30_sr50_ct10": {
-        "p": 0.43781094527363185,
+        "p": 0.46766169154228854,
         "observed_diff": 0.002368693961872677,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr50_ct25": {
-        "p": 0.5870646766169154,
+        "p": 0.6616915422885572,
         "observed_diff": 0.0030623582766439936,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr50_ct50": {
-        "p": 0.7761194029850746,
+        "p": 0.746268656716418,
         "observed_diff": 0.0031634985290789758,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct10": {
-        "p": 0.8059701492537313,
-        "observed_diff": -1.5529939161068596e-05,
+        "p": 0.6965174129353234,
+        "observed_diff": -0.00014444444444444704,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct25": {
-        "p": 0.9800995024875622,
-        "observed_diff": 0.0,
+        "p": 0.9502487562189055,
+        "observed_diff": -0.00014444444444444704,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct50": {
-        "p": 1.0,
+        "p": 0.9850746268656716,
         "observed_diff": -0.0004073265405143134,
         "is_primary": false,
         "n_perms": 200,
@@ -316,8 +359,8 @@
       }
     },
     "bh_fdr": {
-      "n_significant": 11,
-      "n_same_sign": 27,
+      "n_significant": 10,
+      "n_same_sign": 26,
       "n_total": 36
     },
     "flap_episodes": [
