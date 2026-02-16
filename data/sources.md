@@ -6,7 +6,7 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 - **File**: `nuforc_reports.csv` (13 MB, included)
 - **Source**: National UFO Reporting Center
 - **URL**: https://nuforc.org/webreports/
-- **Records**: 80,332 total reports
+- **Records**: 80,332 total reports (scraped snapshot ending May 2014; NUFORC has since added ~60K newer reports not included here)
 - **Filtering applied in scripts**: Bounding box (20°N–55°N, 135°W–55°W), years 1990–2014, valid lat/lon → 42,008 coastal reports used in analysis
 - **Format**: Headerless CSV
 - **Columns**: datetime_str, city, state, country, shape, duration_seconds, duration_text, description, date_posted, lat, lon
@@ -31,7 +31,7 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 
 ## US Census Population
 - **File**: `census_county_pop.json` (164 KB, included)
-- **Source**: US Census Bureau, 2010 Decennial Census
+- **Source**: US Census Bureau, 2020 Decennial Census (P1_001N total population)
 - **URL**: https://data.census.gov/
 - **Description**: County-level population counts used for control point generation and population density covariates
 

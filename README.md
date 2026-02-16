@@ -97,7 +97,7 @@ All data files are included in this repository except ETOPO1 bathymetry (52 MB n
 
 - **NUFORC**: 80,332 sighting reports (42,008 after coastal CONUS filter) — `data/nuforc_reports.csv`
 - **ETOPO1**: NOAA 1-arc-minute bathymetry — download separately, see `data/sources.md`
-- **Census**: 2010 decennial county population — `data/census_county_pop.json`
+- **Census**: 2020 decennial county population — `data/census_county_pop.json`
 - **Military**: 171 DoD installations — `data/military_bases_us.csv`
 - **Ports**: 7,747 OSM port/marina locations — `data/port_coords_cache.npz`
 
