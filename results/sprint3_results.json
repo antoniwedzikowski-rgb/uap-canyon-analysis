@@ -1,12 +1,12 @@
 {
   "metadata": {
     "script": "sprint3_temporal_doseresponse.py",
-    "timestamp": "2026-02-16 01:44:23",
+    "timestamp": "2026-02-16 02:47:21",
     "n_uap_temporal": 41694,
     "n_uap_coastal": 42008,
     "n_ctrl": 19977,
     "n_total": 61985,
-    "runtime_seconds": 5349.594304084778,
+    "runtime_seconds": 3632.082551240921,
     "pre_registered_specs": {
       "temporal": {
         "spatial_radius_km": 50,
@@ -24,7 +24,7 @@
   "part_a_temporal": {
     "primary": {
       "observed_diff": 0.04825719566939529,
-      "p_value": 0.0,
+      "p_value": 0.000999000999000999,
       "n_permutations": 1000,
       "perm_null_mean": 0.03771627550478027,
       "perm_null_std": 0.0017053655740362523,
@@ -32,7 +32,34 @@
       "near_mean_td": 2.4655018492539216,
       "far_mean_td": 1.2124774761468702,
       "near_n": 7841,
-      "far_n": 33853
+      "far_n": 33853,
+      "z_score": 6.181032574538736
+    },
+    "robustness": {
+      "trimmed_mean_5_95": {
+        "observed": -0.002094358888421799,
+        "p": 1.0,
+        "z": -5.318259235451139,
+        "null_mean": 0.0027744901235304737,
+        "null_std": 0.000915496743651921,
+        "n_perms": 200
+      },
+      "heavy_tail_frac_ge3": {
+        "observed": 0.19874412720130105,
+        "p": 0.19402985074626866,
+        "z": 0.8509511035939525,
+        "null_mean": 0.19431713015212593,
+        "null_std": 0.005202410609114798,
+        "n_perms": 200
+      },
+      "within_month_null": {
+        "observed": 0.04825719566939529,
+        "p": 0.004975124378109453,
+        "z": 3.8335164467266027,
+        "null_mean": 0.0438417033506336,
+        "null_std": 0.0011518125408153735,
+        "n_perms": 200
+      }
     },
     "sensitivity": {
       "tw3_sr25_ct10": {
@@ -57,25 +84,25 @@
         "fdr_p": 1.0
       },
       "tw3_sr50_ct10": {
-        "p": 0.965,
+        "p": 0.9552238805970149,
         "observed_diff": 0.04055555555555556,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw3_sr50_ct25": {
-        "p": 0.035,
+        "p": 0.009950248756218905,
         "observed_diff": 0.04055555555555556,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.11454545454545455
+        "fdr_p": 0.032564450474898234
       },
       "tw3_sr50_ct50": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.04055555555555556,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw3_sr100_ct10": {
         "p": 1.0,
@@ -85,11 +112,11 @@
         "fdr_p": 1.0
       },
       "tw3_sr100_ct25": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.04066666666666667,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw3_sr100_ct50": {
         "p": 1.0,
@@ -99,25 +126,25 @@
         "fdr_p": 1.0
       },
       "tw7_sr25_ct10": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.033424908424908424,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw7_sr25_ct25": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.026388085598611912,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw7_sr25_ct50": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.02311296859169199,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw7_sr50_ct10": {
         "p": 1.0,
@@ -127,84 +154,84 @@
         "fdr_p": 1.0
       },
       "tw7_sr50_ct25": {
-        "p": 0.0,
+        "p": 0.000999000999000999,
         "observed_diff": 0.04825719566939529,
         "is_primary": true,
         "n_perms": 1000,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw7_sr50_ct50": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.04502837404391809,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw7_sr100_ct10": {
         "p": 1.0,
-        "observed_diff": 0.0021975916803502957,
+        "observed_diff": 0.0022930893198579577,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw7_sr100_ct25": {
         "p": 1.0,
-        "observed_diff": 0.004392987964416534,
+        "observed_diff": 0.004953584321815363,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw7_sr100_ct50": {
         "p": 1.0,
-        "observed_diff": 0.006237928007023705,
+        "observed_diff": 0.006403508771929821,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw14_sr25_ct10": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.04592300857965018,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw14_sr25_ct25": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.04433916423712342,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw14_sr25_ct50": {
-        "p": 0.0,
+        "p": 0.004975124378109453,
         "observed_diff": 0.042392566782810684,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.0
+        "fdr_p": 0.017910447761194027
       },
       "tw14_sr50_ct10": {
-        "p": 0.575,
+        "p": 0.527363184079602,
         "observed_diff": 0.008978240302743613,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw14_sr50_ct25": {
-        "p": 0.15,
+        "p": 0.18407960199004975,
         "observed_diff": 0.012017325694146604,
         "is_primary": false,
         "n_perms": 200,
-        "fdr_p": 0.45
+        "fdr_p": 0.5522388059701493
       },
       "tw14_sr50_ct50": {
-        "p": 0.965,
+        "p": 0.9850746268656716,
         "observed_diff": 0.013436244037601935,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw14_sr100_ct10": {
-        "p": 0.985,
+        "p": 0.9850746268656716,
         "observed_diff": 0.0,
         "is_primary": false,
         "n_perms": 200,
@@ -246,50 +273,50 @@
         "fdr_p": 1.0
       },
       "tw30_sr50_ct10": {
-        "p": 0.535,
+        "p": 0.43781094527363185,
         "observed_diff": 0.002368693961872677,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr50_ct25": {
-        "p": 0.63,
+        "p": 0.5870646766169154,
         "observed_diff": 0.0030623582766439936,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr50_ct50": {
-        "p": 0.815,
+        "p": 0.7761194029850746,
         "observed_diff": 0.0031634985290789758,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct10": {
-        "p": 0.775,
-        "observed_diff": -0.0001278189260378662,
+        "p": 0.8059701492537313,
+        "observed_diff": -1.5529939161068596e-05,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct25": {
-        "p": 0.96,
-        "observed_diff": -1.5529939161068596e-05,
+        "p": 0.9800995024875622,
+        "observed_diff": 0.0,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       },
       "tw30_sr100_ct50": {
         "p": 1.0,
-        "observed_diff": -0.0002554452715743047,
+        "observed_diff": -0.0004073265405143134,
         "is_primary": false,
         "n_perms": 200,
         "fdr_p": 1.0
       }
     },
     "bh_fdr": {
-      "n_significant": 10,
+      "n_significant": 11,
       "n_same_sign": 27,
       "n_total": 36
     },
@@ -341,7 +368,7 @@
       }
     ],
     "n_flap_clusters": 61,
-    "verdict": "TEMPORAL CLUSTERING CONFIRMED \u2014 near-canyon reports show excess temporal clustering beyond rate difference, p = 0.0000 from time-permutation null"
+    "verdict": "TEMPORAL CLUSTERING CONFIRMED \u2014 near-canyon reports show excess temporal clustering beyond rate difference, p = 0.0010 from time-permutation null"
   },
   "part_b_dose_response": {
     "gradient_stats": {
