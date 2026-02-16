@@ -66,8 +66,8 @@ print("  All loaded.")
 print("\nGenerating Figure 2 (2×2 panel)...")
 
 fig, axes = plt.subplots(2, 2, figsize=(10, 8))
-fig.subplots_adjust(hspace=0.42, wspace=0.35,
-                    left=0.09, right=0.96, top=0.94, bottom=0.08)
+fig.subplots_adjust(hspace=0.48, wspace=0.35,
+                    left=0.09, right=0.96, top=0.94, bottom=0.12)
 
 # ------ Panel A: Permutation Null Distribution ------
 ax_a = axes[0, 0]
@@ -118,12 +118,11 @@ logodds = np.array(s2['task1_gam']['pdep_logodds'])
 ci_lo = np.array(s2['task1_gam']['pdep_ci_lo'])
 ci_hi = np.array(s2['task1_gam']['pdep_ci_hi'])
 
-# Truncate at 200 km (brief: most action in first 50km, 200 keeps it readable)
-mask200 = distances <= 200
-d = distances[mask200]
-lo = logodds[mask200]
-cl = ci_lo[mask200]
-ch = ci_hi[mask200]
+# Full 0–300 km range (pdep_range = 2.77, consistent with post text)
+d = distances
+lo = logodds
+cl = ci_lo
+ch = ci_hi
 
 ax_b.fill_between(d, cl, ch, alpha=0.15, color=GRAY_MED, linewidth=0)
 ax_b.plot(d, lo, color=ACCENT, linewidth=2)
@@ -131,14 +130,14 @@ ax_b.axhline(0, color='black', linewidth=0.4, linestyle=':')
 
 # Rug plot on x-axis (tick marks showing data density)
 rug_y_base = lo.min() - 0.08  # just below the curve minimum
-rug_x = d[::2]  # every 2nd point
+rug_x = d[::3]  # every 3rd point for clarity at 300km
 for rx in rug_x:
     ax_b.plot([rx, rx], [rug_y_base, rug_y_base + 0.06],
               color=GRAY_LIGHT, linewidth=0.3, clip_on=False)
 
 # Range annotation (arrow spanning the y-axis effect range)
 lo_range = lo.max() - lo.min()
-x_arrow = 180  # km position for the range arrow
+x_arrow = 280  # km position for the range arrow
 ax_b.annotate('', xy=(x_arrow, lo.min()), xytext=(x_arrow, lo.max()),
               arrowprops=dict(arrowstyle='<->', color=GRAY_MED, lw=1))
 ax_b.text(x_arrow - 5, (lo.max() + lo.min()) / 2,
@@ -154,7 +153,7 @@ ax_b.text(0.97, 0.97, f'β = {beta:.4f}, p < 10⁻⁵⁶',
 
 ax_b.set_xlabel('Distance to Nearest Canyon (km)')
 ax_b.set_ylabel('Partial Log-Odds (UAP)')
-ax_b.set_xlim(0, 200)
+ax_b.set_xlim(0, 300)
 ax_b.text(-0.12, 1.08, 'B', transform=ax_b.transAxes, fontsize=12,
           fontweight='bold', va='top')
 
@@ -204,14 +203,14 @@ ax_c.set_xlabel('Bathymetric Gradient (m/km)')
 ax_c.set_ylabel('Odds Ratio (log scale)')
 
 # Annotations per brief
-ax_c.text(0.5, -0.18, 'Importance-weighted, 2,000 bootstrap iterations',
+ax_c.text(0.5, -0.20, 'Importance-weighted, 2,000 bootstrap iterations',
           transform=ax_c.transAxes, fontsize=7.5, ha='center', color=GRAY_MED)
-ax_c.text(0.5, -0.24,
+ax_c.text(0.5, -0.27,
           '85% of >60 m/km locations are within 25 km of a mapped submarine canyon',
           transform=ax_c.transAxes, fontsize=7, ha='center', color=GRAY_MED,
           style='italic')
-ax_c.text(0.02, 0.02, 'Reference: flat shelf (0–10 m/km)',
-          transform=ax_c.transAxes, fontsize=7, color=GRAY_MED)
+ax_c.text(0.5, 0.04, 'Ref: flat shelf (0\u201310 m/km)',
+          transform=ax_c.transAxes, fontsize=7, ha='center', color=GRAY_MED)
 
 ax_c.text(-0.12, 1.08, 'C', transform=ax_c.transAxes, fontsize=12,
           fontweight='bold', va='top')
