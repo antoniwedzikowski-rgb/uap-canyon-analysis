@@ -300,16 +300,16 @@ print("\nGenerating Figure 1 (study area map)...")
 import ssl
 import certifi
 os.environ['SSL_CERT_FILE'] = certifi.where()
+# Workaround for macOS Python missing root certificates (common with brew/pyenv installs).
+# Only affects cartopy tile downloads for the study area basemap.
 ssl._create_default_https_context = ssl._create_unverified_context
 
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import netCDF4 as nc
 
-# Load ETOPO
-DATA_DIR = os.path.join(os.path.dirname(REPO), "UAP research", "data")
-if not os.path.exists(DATA_DIR):
-    DATA_DIR = os.path.join(REPO, "..", "UAP research", "data")
+# Load ETOPO (from repo data/ directory — download separately, see data/sources.md)
+DATA_DIR = os.path.join(REPO, "data")
 etopo_path = os.path.join(DATA_DIR, "etopo_subset.nc")
 
 print(f"  Loading ETOPO from: {etopo_path}")

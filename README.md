@@ -22,12 +22,23 @@ uap-canyon-analysis/
 ├── requirements.txt
 ├── .gitignore
 ├── figures/
+│   ├── figure1_study_area.png
+│   ├── figure2_main_panel.png
+│   ├── figure3_flap_episodes.png
 │   ├── sprint1_model_comparison.png
 │   ├── sprint1_sensitivity.png
 │   ├── sprint1_stratified_or.png
 │   ├── sprint2_gam_partial_dependence.png
 │   ├── sprint2_bootstrap_distributions.png
-│   └── sprint2_jitter_stability.png
+│   ├── sprint2_jitter_stability.png
+│   ├── sprint3_dose_response_bins.png
+│   ├── sprint3_dose_response_gam.png
+│   ├── sprint3_dose_response_stratified.png
+│   ├── sprint3_dose_robustness_coastal_trend.png
+│   ├── sprint3_dose_robustness_weighted_or.png
+│   ├── sprint3_flap_map.png
+│   ├── sprint3_temporal_permutation.png
+│   └── sprint3_temporal_sensitivity.png
 ├── results/
 │   ├── sprint1_results.json
 │   ├── sprint2_results.json
@@ -50,7 +61,7 @@ uap-canyon-analysis/
 └── data/
     ├── sources.md
     ├── nuforc_reports.csv          (80,332 reports, 13 MB)
-    ├── census_county_pop.json      (2010 county population)
+    ├── census_county_pop.json      (2020 county population)
     ├── county_centroids_pop.csv    (county centroids + pop)
     ├── military_bases_us.csv       (171 DoD installations)
     └── port_coords_cache.npz       (7,747 ports/marinas)

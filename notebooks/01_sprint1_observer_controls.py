@@ -33,6 +33,8 @@ import ssl
 import certifi
 
 os.environ['SSL_CERT_FILE'] = certifi.where()
+# Workaround for macOS Python missing root certificates (common with brew/pyenv installs).
+# Only affects OSM port data download, which is cached after first run.
 ssl._create_default_https_context = ssl._create_unverified_context
 
 import matplotlib
