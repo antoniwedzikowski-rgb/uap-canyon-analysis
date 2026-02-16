@@ -51,10 +51,15 @@ np.random.seed(42)
 # ============================================================
 # CONFIGURATION
 # ============================================================
-BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
-DATA_DIR = os.path.join(BASE_DIR, "data")
-FIG_DIR = os.path.join(BASE_DIR, "figures")
+# REPO_DIR = this repo's root (one level up from notebooks/)
+REPO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# DATA_DIR = raw data files (large, not in repo)
+DATA_DIR = "/Users/antoniwedzikowski/Desktop/UAP research/data"
+# Outputs go into repo
+FIG_DIR = os.path.join(REPO_DIR, "figures")
+RESULTS_DIR = os.path.join(REPO_DIR, "results")
 os.makedirs(FIG_DIR, exist_ok=True)
+os.makedirs(RESULTS_DIR, exist_ok=True)
 
 R_EARTH = 6371.0
 CANYON_GRADIENT_THRESHOLD = 20.0
@@ -1263,7 +1268,7 @@ results['definition_of_done'] = {
 }
 
 # Write JSON
-with open(os.path.join(BASE_DIR, 'sprint2_results.json'), 'w') as f:
+with open(os.path.join(RESULTS_DIR, 'sprint2_results.json'), 'w') as f:
     json.dump(results, f, indent=2, default=str)
 print("  Saved sprint2_results.json")
 
