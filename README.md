@@ -47,7 +47,12 @@ uap-canyon-analysis/
 ├── media/
 │   └── UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a
 └── data/
-    └── sources.md
+    ├── sources.md
+    ├── nuforc_reports.csv          (80,332 reports, 13 MB)
+    ├── census_county_pop.json      (2010 county population)
+    ├── county_centroids_pop.csv    (county centroids + pop)
+    ├── military_bases_us.csv       (171 DoD installations)
+    └── port_coords_cache.npz       (7,747 ports/marinas)
 ```
 
 ## Sprint Overview

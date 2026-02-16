@@ -17,13 +17,17 @@ env/
 .ipynb_checkpoints/
 
 # Large data files (download via data/sources.md)
-data/*.csv
 data/*.nc
-data/*.npz
 data/*.geojson
 data/*.txt
-data/*.json
+
+# Include data files needed for reproduction
 !data/sources.md
+!data/nuforc_reports.csv
+!data/census_county_pop.json
+!data/county_centroids_pop.csv
+!data/military_bases_us.csv
+!data/port_coords_cache.npz
 
 # IDE
 .idea/
