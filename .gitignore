@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large data files (download via data/sources.md)
+data/*.csv
+data/*.nc
+data/*.npz
+data/*.geojson
+data/*.txt
+data/*.json
+!data/sources.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

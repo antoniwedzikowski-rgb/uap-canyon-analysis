@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "script": "sprint1_observer_controls.py",
+    "n_uap_coastal": 23009,
+    "n_control": 8294,
+    "port_source": "overpass_osm",
+    "n_ports": 7747,
+    "n_military_bases": 171,
+    "canyon_gradient_threshold": 20.0,
+    "n_canyon_cells": 133622,
+    "runtime_seconds": 320.7
+  },
+  "original_model": {
+    "features": [
+      "depth_nearest_ocean",
+      "dist_to_coast_km",
+      "dist_to_canyon_km",
+      "pop_density_proxy",
+      "dist_to_military_km"
+    ],
+    "canyon_coef": -0.21799476095280493,
+    "canyon_ci": [
+      -0.24351460088569446,
+      -0.1924749210199154
+    ],
+    "canyon_p": 6.44039263629457e-63,
+    "pseudo_r2": 0.0420655667179215,
+    "aic": 34686.8582195148,
+    "log_likelihood": -17337.4291097574,
+    "all_coefs": {
+      "depth_nearest_ocean": -0.02035365233181366,
+      "dist_to_coast_km": -0.3656062558095903,
+      "dist_to_canyon_km": -0.21799476095280493,
+      "pop_density_proxy": -0.09559210949066148,
+      "dist_to_military_km": 0.21206122714161577
+    },
+    "all_pvalues": {
+      "depth_nearest_ocean": 0.1917217155442804,
+      "dist_to_coast_km": 4.062225800128337e-182,
+      "dist_to_canyon_km": 6.44039263629457e-63,
+      "pop_density_proxy": 7.618019017769596e-13,
+      "dist_to_military_km": 4.5477587204652075e-32
+    }
+  },
+  "full_model": {
+    "features": [
+      "dist_to_canyon_km",
+      "dist_to_coast_km",
+      "dist_to_military_km",
+      "pop_density_proxy",
+      "depth_nearest_ocean",
+      "dist_to_nearest_port",
+      "log_port_count_25km",
+      "coast_complexity"
+    ],
+    "canyon_coef": -0.2844032984894238,
+    "canyon_ci": [
+      -0.3110577788337806,
+      -0.257748818145067
+    ],
+    "canyon_p": 4.093526410956169e-97,
+    "pseudo_r2": 0.0672169826932586,
+    "aic": 33782.43914210802,
+    "log_likelihood": -16882.21957105401,
+    "all_coefs": {
+      "dist_to_canyon_km": -0.2844032984894238,
+      "dist_to_coast_km": -0.35473975415972553,
+      "dist_to_military_km": 0.24191067997293658,
+      "pop_density_proxy": -0.10130309018874777,
+      "depth_nearest_ocean": -0.03991509886475686,
+      "dist_to_nearest_port": -0.4688544360882411,
+      "log_port_count_25km": -0.10302780131593559,
+      "coast_complexity": -0.1296344761476768
+    },
+    "all_pvalues": {
+      "dist_to_canyon_km": 4.093526410956169e-97,
+      "dist_to_coast_km": 8.315241703869956e-59,
+      "dist_to_military_km": 8.837116097255137e-38,
+      "pop_density_proxy": 1.4594109402983457e-13,
+      "depth_nearest_ocean": 0.014112964824532358,
+      "dist_to_nearest_port": 2.4345467740486826e-127,
+      "log_port_count_25km": 1.4565495649210756e-08,
+      "coast_complexity": 3.815566975276054e-09
+    }
+  },
+  "nested_lr_test": {
+    "lr_stat": 432.08974291358027,
+    "df": 1,
+    "p": 5.7024070288031e-96
+  },
+  "attenuation_pct": -30.463364003044124,
+  "verdict": "SURVIVES \u2014 canyon effect robust to observer controls",
+  "verdict_short": "SURVIVES",
+  "vif": {
+    "dist_to_canyon_km": 1.113732313677799,
+    "dist_to_coast_km": 2.75244222111668,
+    "dist_to_military_km": 1.0869891769982247,
+    "pop_density_proxy": 1.0160571546010306,
+    "depth_nearest_ocean": 1.0710802232169239,
+    "dist_to_nearest_port": 1.5303266018156814,
+    "log_port_count_25km": 1.7501621059977004,
+    "coast_complexity": 2.562062530628454
+  },
+  "dropped_features_vif": [],
+  "stratified_or": [
+    {
+      "tercile": "Low ports (0-1)",
+      "OR_10": 2.413633516598232,
+      "OR_25": 1.576295747341675,
+      "uap_n": 14747,
+      "ctrl_n": 10388,
+      "or_details_10": {
+        "threshold": 10,
+        "OR": 2.413633516598232,
+        "p": 7.466832763830998e-17,
+        "uap_n": 378,
+        "ctrl_n": 112
+      },
+      "or_details_25": {
+        "threshold": 25,
+        "OR": 1.576295747341675,
+        "p": 2.4341898637739613e-15,
+        "uap_n": 1008,
+        "ctrl_n": 462
+      }
+    },
+    {
+      "tercile": "Medium ports (1-11)",
+      "OR_10": 3.919857280967413,
+      "OR_25": 2.5240031990066467,
+      "uap_n": 11746,
+      "ctrl_n": 5091,
+      "or_details_10": {
+        "threshold": 10,
+        "OR": 3.919857280967413,
+        "p": 1.4244434049515515e-36,
+        "uap_n": 733,
+        "ctrl_n": 85
+      },
+      "or_details_25": {
+        "threshold": 25,
+        "OR": 2.5240031990066467,
+        "p": 1.136416469227927e-59,
+        "uap_n": 2015,
+        "ctrl_n": 386
+      }
+    },
+    {
+      "tercile": "High ports (11+)",
+      "OR_10": 5.494054801407742,
+      "OR_25": 3.365346052980317,
+      "uap_n": 15515,
+      "ctrl_n": 4498,
+      "or_details_10": {
+        "threshold": 10,
+        "OR": 5.494054801407742,
+        "p": 1.8910886928423656e-109,
+        "uap_n": 2515,
+        "ctrl_n": 153
+      },
+      "or_details_25": {
+        "threshold": 25,
+        "OR": 3.365346052980317,
+        "p": 5.302590816336716e-147,
+        "uap_n": 4875,
+        "ctrl_n": 539
+      }
+    }
+  ],
+  "sensitivity": [
+    {
+      "gradient_threshold": 15.0,
+      "depth_range": "-500 to 0",
+      "n_canyon_cells": 171390,
+      "canyon_coef": -0.28278050783112285,
+      "canyon_ci_lo": -0.30923612378080984,
+      "canyon_ci_hi": -0.25632489188143587,
+      "canyon_p": 1.884585778601728e-97
+    },
+    {
+      "gradient_threshold": 15.0,
+      "depth_range": "-200 to 0",
+      "n_canyon_cells": 82435,
+      "canyon_coef": -0.28252450600576967,
+      "canyon_ci_lo": -0.3089677226807416,
+      "canyon_ci_hi": -0.25608128933079777,
+      "canyon_p": 2.2837545022144897e-97
+    },
+    {
+      "gradient_threshold": 20.0,
+      "depth_range": "-500 to 0",
+      "n_canyon_cells": 133622,
+      "canyon_coef": -0.2844032984897845,
+      "canyon_ci_lo": -0.3110577788341751,
+      "canyon_ci_hi": -0.2577488181453939,
+      "canyon_p": 4.093526410956867e-97
+    },
+    {
+      "gradient_threshold": 20.0,
+      "depth_range": "-200 to 0",
+      "n_canyon_cells": 58612,
+      "canyon_coef": -0.2826175951722952,
+      "canyon_ci_lo": -0.3091593175104388,
+      "canyon_ci_hi": -0.25607587283415156,
+      "canyon_p": 1.0076461768649225e-96
+    },
+    {
+      "gradient_threshold": 30.0,
+      "depth_range": "-500 to 0",
+      "n_canyon_cells": 92712,
+      "canyon_coef": -0.3962160860628766,
+      "canyon_ci_lo": -0.4252544724438024,
+      "canyon_ci_hi": -0.36717769968195085,
+      "canyon_p": 1.4953357891583032e-157
+    },
+    {
+      "gradient_threshold": 30.0,
+      "depth_range": "-200 to 0",
+      "n_canyon_cells": 34330,
+      "canyon_coef": -0.39136150034822076,
+      "canyon_ci_lo": -0.420251702032793,
+      "canyon_ci_hi": -0.3624712986636485,
+      "canyon_p": 2.5223096508098493e-155
+    }
+  ]
+}
