@@ -314,9 +314,9 @@ else:
 elevation = ds.variables['z'][:]
 ds.close()
 
-# Full CONUS coastal extent
-lat_min, lat_max = 24, 50
-lon_min, lon_max = -130, -64
+# West Coast zoom (top 5 clusters happen to be here)
+lat_min, lat_max = 32, 49
+lon_min, lon_max = -130, -116
 
 # Subset ETOPO
 lat_mask = (elev_lats >= lat_min - 1) & (elev_lats <= lat_max + 1)
@@ -343,7 +343,7 @@ episodes = s3['part_a_temporal']['flap_episodes']
 # Color per episode
 ep_colors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00']
 
-fig1 = plt.figure(figsize=(16, 10))
+fig1 = plt.figure(figsize=(10, 12))
 ax_map = fig1.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
 ax_map.set_extent([lon_min, lon_max, lat_min, lat_max], crs=ccrs.PlateCarree())
 
@@ -371,11 +371,11 @@ shelf_cs = ax_map.contour(lon_grid, lat_grid, sub_elev,
 # Plot flap episodes with manual label offsets to avoid overlap
 # (lat_offset, lon_offset) for each episode
 label_offsets = {
-    1: (2.0, 5.0),    # Seattle ep 1 — push right and up
-    2: (-3.0, -6.0),  # SoCal ep 2 — push left and down
-    3: (0.0, 7.0),    # Seattle ep 3 — push far right
-    4: (-2.0, 5.0),   # Seattle ep 4 — push right and down
-    5: (2.0, -6.0),   # SoCal ep 5 — push left and up
+    1: (1.5, 3.5),    # Seattle ep 1 — push right and up
+    2: (-2.0, -3.0),  # SoCal ep 2 — push left and down
+    3: (-1.5, 3.5),   # Seattle ep 3 — push right
+    4: (-3.0, 2.0),   # Seattle ep 4 — push right and down
+    5: (1.5, -3.0),   # SoCal ep 5 — push left and up
 }
 
 for i, ep in enumerate(episodes):
@@ -404,13 +404,13 @@ gl = ax_map.gridlines(draw_labels=True, linewidth=0.3, alpha=0.5,
 gl.top_labels = False
 gl.right_labels = False
 
-ax_map.set_title('Example Temporal Clusters Near Submarine Canyons (CONUS Coastline)',
+ax_map.set_title('Example Temporal Clusters Near Submarine Canyons (West Coast)',
                   fontsize=12, fontweight='bold', pad=15)
 
-# Caption
+# Caption — closes cherry-picking, episode selection, and East Coast questions
 fig1.text(0.5, 0.02,
-          'Example episodes ("flaps") are illustrative only; statistics come from permutation tests.\n'
-          'Blue contours: bathymetric gradient >60 m/km. Full CONUS coastline shown (N = 41,628).',
+          'Shown: 5 largest of 61 detected clusters (all West Coast). Analysis uses full CONUS coastline (N = 41,628).\n'
+          'Full cluster list on GitHub. Blue contours: bathymetric gradient >60 m/km.',
           ha='center', fontsize=8, style='italic', color=C_GRAY)
 
 out_fig1 = os.path.join(FIG_DIR, "figure1_flap_map.png")
