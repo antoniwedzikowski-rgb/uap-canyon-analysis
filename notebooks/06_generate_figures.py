@@ -88,11 +88,11 @@ ax_a.hist(null_samples, bins=35, color=GRAY_VLIGHT, edgecolor=GRAY_LIGHT,
 ax_a.axvline(observed, color=ACCENT, linewidth=2.5, zorder=3,
              label=f'Observed = {observed:.4f}')
 
-# Annotation: z and p next to the observed line
-ax_a.annotate(f'z = {z_score:.2f}, p < 0.001',
-              xy=(observed, ax_a.get_ylim()[1] * 0.55 if ax_a.get_ylim()[1] > 0 else 30),
-              xytext=(observed + perm_std * 1.5, 55),
-              fontsize=9, color=ACCENT, fontweight='bold',
+# Annotation: z and p — place LEFT of observed line to avoid clipping
+ax_a.annotate(f'z = {z_score:.1f}\np < 0.001',
+              xy=(observed, 45),
+              xytext=(observed - perm_std * 4, 65),
+              fontsize=8, color=ACCENT, fontweight='bold',
               arrowprops=dict(arrowstyle='->', color=ACCENT, lw=1.2))
 
 # Text box: 0/1000 + within-month
@@ -209,8 +209,8 @@ ax_c.text(0.5, -0.27,
           '85% of >60 m/km locations are within 25 km of a mapped submarine canyon',
           transform=ax_c.transAxes, fontsize=7, ha='center', color=GRAY_MED,
           style='italic')
-ax_c.text(0.5, 0.04, 'Ref: flat shelf (0\u201310 m/km)',
-          transform=ax_c.transAxes, fontsize=7, ha='center', color=GRAY_MED)
+ax_c.text(0.97, 0.97, 'Ref: flat shelf (0\u201310 m/km)',
+          transform=ax_c.transAxes, fontsize=7, ha='right', va='top', color=GRAY_MED)
 
 ax_c.text(-0.12, 1.08, 'C', transform=ax_c.transAxes, fontsize=12,
           fontweight='bold', va='top')
