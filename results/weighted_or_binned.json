@@ -1,0 +1,114 @@
+{
+  "capped": {
+    "gradient_categories": [
+      {
+        "bin": "0-10 (flat)",
+        "gradient_range": "0-10",
+        "n_uap": 29659,
+        "n_ctrl": 16901,
+        "weighted_or": 1.0,
+        "ci_lo": 1.0,
+        "ci_hi": 1.0,
+        "raw_or": 1.0
+      },
+      {
+        "bin": "10-30 (moderate)",
+        "gradient_range": "10-30",
+        "n_uap": 4046,
+        "n_ctrl": 1762,
+        "weighted_or": 2.47122000516829,
+        "ci_lo": 2.1978298230011646,
+        "ci_hi": 2.7982838207130682,
+        "raw_or": 1.308506463115996
+      },
+      {
+        "bin": "30-60 (steep)",
+        "gradient_range": "30-60",
+        "n_uap": 2017,
+        "n_ctrl": 468,
+        "weighted_or": 2.7127444353217314,
+        "ci_lo": 2.2640884114049236,
+        "ci_hi": 3.4002959705957676,
+        "raw_or": 2.455929766349875
+      },
+      {
+        "bin": "60+ (very steep)",
+        "gradient_range": "60-500",
+        "n_uap": 5906,
+        "n_ctrl": 841,
+        "weighted_or": 5.7452610500490415,
+        "ci_lo": 4.938769353791526,
+        "ci_hi": 6.818051941901209,
+        "raw_or": 4.001781245636339
+      }
+    ],
+    "winsorize_pct": 95,
+    "cap_value": 0.0013152770503677786
+  },
+  "uncapped": {
+    "gradient_categories": [
+      {
+        "bin": "0-10 (flat)",
+        "gradient_range": "0-10",
+        "n_uap": 29659,
+        "n_ctrl": 16901,
+        "weighted_or": 1.0,
+        "ci_lo": 1.0,
+        "ci_hi": 1.0,
+        "raw_or": 1.0
+      },
+      {
+        "bin": "10-30 (moderate)",
+        "gradient_range": "10-30",
+        "n_uap": 4046,
+        "n_ctrl": 1762,
+        "weighted_or": 0.8517271475743255,
+        "ci_lo": 0.26271855877176714,
+        "ci_hi": 4.98591920734137,
+        "raw_or": 1.308506463115996
+      },
+      {
+        "bin": "30-60 (steep)",
+        "gradient_range": "30-60",
+        "n_uap": 2017,
+        "n_ctrl": 468,
+        "weighted_or": 1.73204735017518,
+        "ci_lo": 0.6759538337920963,
+        "ci_hi": 6.282105641612749,
+        "raw_or": 2.455929766349875
+      },
+      {
+        "bin": "60+ (very steep)",
+        "gradient_range": "60-500",
+        "n_uap": 5906,
+        "n_ctrl": 841,
+        "weighted_or": 3.897923912044313,
+        "ci_lo": 1.4173397765765723,
+        "ci_hi": 10.833905399454274,
+        "raw_or": 4.001781245636339
+      }
+    ]
+  },
+  "reference_bin": "0-10 (flat)",
+  "n_bootstrap": 2000,
+  "note": "Weighted OR uses importance weights (1/sampling_score) to correct for 60x land_weight asymmetry. Capped = weights winsorized at p95.",
+  "for_reddit_post": {
+    "very_steep_capped": {
+      "or": 5.7452610500490415,
+      "ci_lo": 4.938769353791526,
+      "ci_hi": 6.818051941901209,
+      "label": "gradient > 60 m/km (winsorized weights)"
+    },
+    "steep_capped": {
+      "or": 2.7127444353217314,
+      "ci_lo": 2.2640884114049236,
+      "ci_hi": 3.4002959705957676,
+      "label": "gradient 30-60 m/km (winsorized weights)"
+    }
+  },
+  "metadata": {
+    "script": "05_weighted_or_for_post.py",
+    "timestamp": "2026-02-16 15:03:44",
+    "runtime_seconds": 183.48272800445557
+  }
+}
