@@ -1,0 +1,51 @@
+{
+  "test": "NOAA ESI shoreline classification (California only)",
+  "n_cells": 18,
+  "n_esi_segments": 10951,
+  "rocky_codes": [
+    "1A",
+    "1B",
+    "1C",
+    "2A",
+    "2B",
+    "8A"
+  ],
+  "S_rocky_correlation": {
+    "spearman_rho": 0.1697,
+    "spearman_p": 0.5008,
+    "pearson_r": 0.1401
+  },
+  "rocky_logR_spearman": 0.3407,
+  "S_logR_spearman": 0.0705,
+  "models": {
+    "A_S_only": {
+      "beta_S": 0.2155,
+      "R2": 0.0191
+    },
+    "B_rocky_only": {
+      "beta_rocky": 1.8155,
+      "R2": 0.0558
+    },
+    "C_both": {
+      "beta_S": 0.1671,
+      "beta_rocky": 1.7002,
+      "R2": 0.067
+    }
+  },
+  "F_tests": {
+    "S_given_rocky": {
+      "F": 0.181,
+      "p": 0.6768
+    },
+    "rocky_given_S": {
+      "F": 0.771,
+      "p": 0.3938
+    }
+  },
+  "interaction": {
+    "beta_SxR": -2.7823,
+    "R2": 0.1027,
+    "F": 0.557,
+    "p": 0.4677
+  }
+}
