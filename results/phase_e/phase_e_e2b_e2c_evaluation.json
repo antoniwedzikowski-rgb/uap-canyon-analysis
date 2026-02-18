@@ -1,0 +1,1429 @@
+{
+  "metadata": {
+    "script": "phase_e_evaluate_e2b.py",
+    "timestamp": "2026-02-18T17:43:58.244847",
+    "frozen_commit_tag": "phase-e-frozen",
+    "design_fix": "E2b_note.md \u2014 CONUS footprint mask",
+    "conus_bbox": {
+      "lat_min": 24.5,
+      "lat_max": 49.0,
+      "lon_min": -125.0,
+      "lon_max": -66.0
+    },
+    "coastal_band_km": 200,
+    "measurability_min_reports": 10,
+    "min_reports_for_or": 20,
+    "scoring_unchanged": "phase-e-frozen commit 09de8d8"
+  },
+  "e2b": {
+    "label": "E2b (CONUS bbox, no N filter)",
+    "hot_evaluation": {
+      "n_predictions": 20,
+      "n_evaluable": 2,
+      "n_hits": 1,
+      "n_misses": 1,
+      "n_insufficient_data": 18,
+      "precision": 0.5,
+      "details": [
+        {
+          "rank": 1,
+          "lat": 25.25,
+          "lon": -75.75,
+          "S": 2.8374,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 2,
+          "lat": 28.75,
+          "lon": -118.25,
+          "S": 2.573,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 3,
+          "lat": 27.25,
+          "lon": -77.25,
+          "S": 2.5613,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 4,
+          "lat": 25.25,
+          "lon": -77.75,
+          "S": 2.5177,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 5,
+          "lat": 28.75,
+          "lon": -113.75,
+          "S": 2.5128,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 2,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 6,
+          "lat": 47.25,
+          "lon": -122.25,
+          "S": 2.4263,
+          "or": 12.494,
+          "ci_lo": 11.032,
+          "ci_hi": 14.136,
+          "n_uap": "600",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 7,
+          "lat": 48.75,
+          "lon": -70.25,
+          "S": 2.3358,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 8,
+          "lat": 26.75,
+          "lon": -112.25,
+          "S": 2.3194,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 9,
+          "lat": 25.25,
+          "lon": -110.25,
+          "S": 2.3111,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 10,
+          "lat": 31.75,
+          "lon": -116.25,
+          "S": 2.2896,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 11,
+          "lat": 35.75,
+          "lon": -116.75,
+          "S": 2.2626,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 12,
+          "lat": 25.25,
+          "lon": -115.75,
+          "S": 2.2479,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 13,
+          "lat": 36.25,
+          "lon": -121.25,
+          "S": 2.1951,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 4,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 14,
+          "lat": 47.25,
+          "lon": -85.75,
+          "S": 2.1161,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 15,
+          "lat": 33.25,
+          "lon": -118.75,
+          "S": 2.1131,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 16,
+          "lat": 40.25,
+          "lon": -123.75,
+          "S": 2.0657,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 6,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 17,
+          "lat": 48.75,
+          "lon": -123.75,
+          "S": 2.0388,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 13,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 18,
+          "lat": 28.25,
+          "lon": -110.75,
+          "S": 1.9626,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 19,
+          "lat": 25.25,
+          "lon": -107.75,
+          "S": 1.9309,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 20,
+          "lat": 44.75,
+          "lon": -68.75,
+          "S": 1.9117,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "48",
+          "verdict": "MISS"
+        }
+      ]
+    },
+    "cold_evaluation": {
+      "n_predictions": 20,
+      "n_evaluable": 11,
+      "n_hits": 11,
+      "n_misses": 0,
+      "n_insufficient_data": 9,
+      "precision": 1.0,
+      "details": [
+        {
+          "rank": 1,
+          "lat": 47.25,
+          "lon": -124.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 2,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 2,
+          "lat": 46.75,
+          "lon": -71.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 15,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 3,
+          "lat": 42.25,
+          "lon": -70.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "65",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 4,
+          "lat": 39.25,
+          "lon": -76.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "35",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 5,
+          "lat": 38.25,
+          "lon": -121.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "98",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 6,
+          "lat": 34.25,
+          "lon": -77.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "89",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 7,
+          "lat": 32.75,
+          "lon": -115.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "25",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 8,
+          "lat": 31.75,
+          "lon": -81.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 9,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 9,
+          "lat": 31.25,
+          "lon": -113.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 1,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 10,
+          "lat": 30.25,
+          "lon": -85.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "44",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 11,
+          "lat": 30.25,
+          "lon": -93.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "41",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 12,
+          "lat": 29.75,
+          "lon": -91.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 9,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 13,
+          "lat": 29.75,
+          "lon": -81.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "69",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 14,
+          "lat": 28.75,
+          "lon": -95.75,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 7,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 15,
+          "lat": 28.25,
+          "lon": -82.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "107",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 16,
+          "lat": 26.75,
+          "lon": -80.75,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 4,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 17,
+          "lat": 36.25,
+          "lon": -75.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "24",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 18,
+          "lat": 26.25,
+          "lon": -97.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 12,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 19,
+          "lat": 45.25,
+          "lon": -82.75,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 20,
+          "lat": 40.75,
+          "lon": -72.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "76",
+          "verdict": "HIT"
+        }
+      ]
+    },
+    "global_metrics": {
+      "spearman_rho": 0.3788,
+      "spearman_p": 0.0746,
+      "spearman_n": 23,
+      "auc_hot_vs_rest": 0.8636
+    },
+    "verdict": "INCONCLUSIVE"
+  },
+  "e2c": {
+    "label": "E2c (CONUS + N>=10)",
+    "hot_evaluation": {
+      "n_predictions": 19,
+      "n_evaluable": 8,
+      "n_hits": 1,
+      "n_misses": 7,
+      "n_insufficient_data": 11,
+      "precision": 0.125,
+      "details": [
+        {
+          "rank": 1,
+          "lat": 47.25,
+          "lon": -122.25,
+          "S": 2.4263,
+          "or": 12.494,
+          "ci_lo": 11.032,
+          "ci_hi": 14.136,
+          "n_uap": "600",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 2,
+          "lat": 36.75,
+          "lon": -121.75,
+          "S": 2.1379,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": "119",
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 3,
+          "lat": 33.25,
+          "lon": -118.25,
+          "S": 2.0715,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 10,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 4,
+          "lat": 48.75,
+          "lon": -123.75,
+          "S": 2.0388,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 13,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 5,
+          "lat": 44.75,
+          "lon": -68.75,
+          "S": 1.9117,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "48",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 6,
+          "lat": 48.25,
+          "lon": -89.25,
+          "S": 1.7724,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 7,
+          "lat": 40.75,
+          "lon": -73.75,
+          "S": 1.6256,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "281",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 8,
+          "lat": 45.25,
+          "lon": -123.75,
+          "S": 1.6109,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 9,
+          "lat": 38.75,
+          "lon": -123.25,
+          "S": 1.5944,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 13,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 10,
+          "lat": 45.25,
+          "lon": -66.25,
+          "S": 1.555,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 14,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 11,
+          "lat": 43.25,
+          "lon": -76.25,
+          "S": 1.5143,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "83",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 12,
+          "lat": 34.75,
+          "lon": -120.25,
+          "S": 1.51,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "43",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 13,
+          "lat": 43.75,
+          "lon": -78.75,
+          "S": 1.4282,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "46",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 14,
+          "lat": 40.75,
+          "lon": -124.25,
+          "S": 1.3431,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": "63",
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 15,
+          "lat": 26.25,
+          "lon": -80.25,
+          "S": 1.336,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "368",
+          "verdict": "MISS"
+        },
+        {
+          "rank": 16,
+          "lat": 24.75,
+          "lon": -81.75,
+          "S": 1.2349,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 16,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 17,
+          "lat": 43.25,
+          "lon": -124.25,
+          "S": 0.8961,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 0,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 18,
+          "lat": 42.25,
+          "lon": -70.25,
+          "S": 0.5767,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 10,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 19,
+          "lat": 30.25,
+          "lon": -86.75,
+          "S": 0.434,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "44",
+          "verdict": "MISS"
+        }
+      ]
+    },
+    "cold_evaluation": {
+      "n_predictions": 20,
+      "n_evaluable": 16,
+      "n_hits": 16,
+      "n_misses": 0,
+      "n_insufficient_data": 4,
+      "precision": 1.0,
+      "details": [
+        {
+          "rank": 1,
+          "lat": 46.75,
+          "lon": -71.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 15,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 2,
+          "lat": 42.25,
+          "lon": -70.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "65",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 3,
+          "lat": 39.25,
+          "lon": -76.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "35",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 4,
+          "lat": 38.25,
+          "lon": -121.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "98",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 5,
+          "lat": 34.25,
+          "lon": -77.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "89",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 6,
+          "lat": 32.75,
+          "lon": -115.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "25",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 7,
+          "lat": 31.25,
+          "lon": -81.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 10,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 8,
+          "lat": 30.25,
+          "lon": -85.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "44",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 9,
+          "lat": 30.25,
+          "lon": -93.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "41",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 10,
+          "lat": 29.75,
+          "lon": -90.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "79",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 11,
+          "lat": 28.75,
+          "lon": -80.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "40",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 12,
+          "lat": 28.25,
+          "lon": -82.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "107",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 13,
+          "lat": 36.25,
+          "lon": -75.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "24",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 14,
+          "lat": 26.25,
+          "lon": -97.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 12,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 15,
+          "lat": 40.75,
+          "lon": -72.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "76",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 16,
+          "lat": 32.75,
+          "lon": -79.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "104",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 17,
+          "lat": 43.25,
+          "lon": -79.25,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "104",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 18,
+          "lat": 26.25,
+          "lon": -81.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "78",
+          "verdict": "HIT"
+        },
+        {
+          "rank": 19,
+          "lat": 30.25,
+          "lon": -88.25,
+          "S": 0.0,
+          "or": null,
+          "ci_lo": null,
+          "ci_hi": null,
+          "n_uap": 13,
+          "verdict": "INSUFFICIENT_DATA"
+        },
+        {
+          "rank": 20,
+          "lat": 46.75,
+          "lon": -123.75,
+          "S": 0.0,
+          "or": 0.0,
+          "ci_lo": 0.0,
+          "ci_hi": 0.0,
+          "n_uap": "28",
+          "verdict": "HIT"
+        }
+      ]
+    },
+    "global_metrics": {
+      "spearman_rho": 0.3788,
+      "spearman_p": 0.0746,
+      "spearman_n": 23,
+      "auc_hot_vs_rest": 0.5667
+    },
+    "verdict": "MIXED"
+  },
+  "e2b_hot_locations": [
+    {
+      "rank": 1,
+      "lat": 25.25,
+      "lon": -75.75,
+      "S": 2.8374
+    },
+    {
+      "rank": 2,
+      "lat": 28.75,
+      "lon": -118.25,
+      "S": 2.573
+    },
+    {
+      "rank": 3,
+      "lat": 27.25,
+      "lon": -77.25,
+      "S": 2.5613
+    },
+    {
+      "rank": 4,
+      "lat": 25.25,
+      "lon": -77.75,
+      "S": 2.5177
+    },
+    {
+      "rank": 5,
+      "lat": 28.75,
+      "lon": -113.75,
+      "S": 2.5128
+    },
+    {
+      "rank": 6,
+      "lat": 47.25,
+      "lon": -122.25,
+      "S": 2.4263
+    },
+    {
+      "rank": 7,
+      "lat": 48.75,
+      "lon": -70.25,
+      "S": 2.3358
+    },
+    {
+      "rank": 8,
+      "lat": 26.75,
+      "lon": -112.25,
+      "S": 2.3194
+    },
+    {
+      "rank": 9,
+      "lat": 25.25,
+      "lon": -110.25,
+      "S": 2.3111
+    },
+    {
+      "rank": 10,
+      "lat": 31.75,
+      "lon": -116.25,
+      "S": 2.2896
+    },
+    {
+      "rank": 11,
+      "lat": 35.75,
+      "lon": -116.75,
+      "S": 2.2626
+    },
+    {
+      "rank": 12,
+      "lat": 25.25,
+      "lon": -115.75,
+      "S": 2.2479
+    },
+    {
+      "rank": 13,
+      "lat": 36.25,
+      "lon": -121.25,
+      "S": 2.1951
+    },
+    {
+      "rank": 14,
+      "lat": 47.25,
+      "lon": -85.75,
+      "S": 2.1161
+    },
+    {
+      "rank": 15,
+      "lat": 33.25,
+      "lon": -118.75,
+      "S": 2.1131
+    },
+    {
+      "rank": 16,
+      "lat": 40.25,
+      "lon": -123.75,
+      "S": 2.0657
+    },
+    {
+      "rank": 17,
+      "lat": 48.75,
+      "lon": -123.75,
+      "S": 2.0388
+    },
+    {
+      "rank": 18,
+      "lat": 28.25,
+      "lon": -110.75,
+      "S": 1.9626
+    },
+    {
+      "rank": 19,
+      "lat": 25.25,
+      "lon": -107.75,
+      "S": 1.9309
+    },
+    {
+      "rank": 20,
+      "lat": 44.75,
+      "lon": -68.75,
+      "S": 1.9117
+    }
+  ],
+  "e2b_cold_locations": [
+    {
+      "rank": 1,
+      "lat": 47.25,
+      "lon": -124.25,
+      "S": 0.0
+    },
+    {
+      "rank": 2,
+      "lat": 46.75,
+      "lon": -71.25,
+      "S": 0.0
+    },
+    {
+      "rank": 3,
+      "lat": 42.25,
+      "lon": -70.75,
+      "S": 0.0
+    },
+    {
+      "rank": 4,
+      "lat": 39.25,
+      "lon": -76.25,
+      "S": 0.0
+    },
+    {
+      "rank": 5,
+      "lat": 38.25,
+      "lon": -121.75,
+      "S": 0.0
+    },
+    {
+      "rank": 6,
+      "lat": 34.25,
+      "lon": -77.75,
+      "S": 0.0
+    },
+    {
+      "rank": 7,
+      "lat": 32.75,
+      "lon": -115.75,
+      "S": 0.0
+    },
+    {
+      "rank": 8,
+      "lat": 31.75,
+      "lon": -81.25,
+      "S": 0.0
+    },
+    {
+      "rank": 9,
+      "lat": 31.25,
+      "lon": -113.25,
+      "S": 0.0
+    },
+    {
+      "rank": 10,
+      "lat": 30.25,
+      "lon": -85.75,
+      "S": 0.0
+    },
+    {
+      "rank": 11,
+      "lat": 30.25,
+      "lon": -93.25,
+      "S": 0.0
+    },
+    {
+      "rank": 12,
+      "lat": 29.75,
+      "lon": -91.25,
+      "S": 0.0
+    },
+    {
+      "rank": 13,
+      "lat": 29.75,
+      "lon": -81.25,
+      "S": 0.0
+    },
+    {
+      "rank": 14,
+      "lat": 28.75,
+      "lon": -95.75,
+      "S": 0.0
+    },
+    {
+      "rank": 15,
+      "lat": 28.25,
+      "lon": -82.75,
+      "S": 0.0
+    },
+    {
+      "rank": 16,
+      "lat": 26.75,
+      "lon": -80.75,
+      "S": 0.0
+    },
+    {
+      "rank": 17,
+      "lat": 36.25,
+      "lon": -75.75,
+      "S": 0.0
+    },
+    {
+      "rank": 18,
+      "lat": 26.25,
+      "lon": -97.25,
+      "S": 0.0
+    },
+    {
+      "rank": 19,
+      "lat": 45.25,
+      "lon": -82.75,
+      "S": 0.0
+    },
+    {
+      "rank": 20,
+      "lat": 40.75,
+      "lon": -72.75,
+      "S": 0.0
+    }
+  ],
+  "e2c_hot_locations": [
+    {
+      "rank": 1,
+      "lat": 47.25,
+      "lon": -122.25,
+      "S": 2.4263
+    },
+    {
+      "rank": 2,
+      "lat": 36.75,
+      "lon": -121.75,
+      "S": 2.1379
+    },
+    {
+      "rank": 3,
+      "lat": 33.25,
+      "lon": -118.25,
+      "S": 2.0715
+    },
+    {
+      "rank": 4,
+      "lat": 48.75,
+      "lon": -123.75,
+      "S": 2.0388
+    },
+    {
+      "rank": 5,
+      "lat": 44.75,
+      "lon": -68.75,
+      "S": 1.9117
+    },
+    {
+      "rank": 6,
+      "lat": 48.25,
+      "lon": -89.25,
+      "S": 1.7724
+    },
+    {
+      "rank": 7,
+      "lat": 40.75,
+      "lon": -73.75,
+      "S": 1.6256
+    },
+    {
+      "rank": 8,
+      "lat": 45.25,
+      "lon": -123.75,
+      "S": 1.6109
+    },
+    {
+      "rank": 9,
+      "lat": 38.75,
+      "lon": -123.25,
+      "S": 1.5944
+    },
+    {
+      "rank": 10,
+      "lat": 45.25,
+      "lon": -66.25,
+      "S": 1.555
+    },
+    {
+      "rank": 11,
+      "lat": 43.25,
+      "lon": -76.25,
+      "S": 1.5143
+    },
+    {
+      "rank": 12,
+      "lat": 34.75,
+      "lon": -120.25,
+      "S": 1.51
+    },
+    {
+      "rank": 13,
+      "lat": 43.75,
+      "lon": -78.75,
+      "S": 1.4282
+    },
+    {
+      "rank": 14,
+      "lat": 40.75,
+      "lon": -124.25,
+      "S": 1.3431
+    },
+    {
+      "rank": 15,
+      "lat": 26.25,
+      "lon": -80.25,
+      "S": 1.336
+    },
+    {
+      "rank": 16,
+      "lat": 24.75,
+      "lon": -81.75,
+      "S": 1.2349
+    },
+    {
+      "rank": 17,
+      "lat": 43.25,
+      "lon": -124.25,
+      "S": 0.8961
+    },
+    {
+      "rank": 18,
+      "lat": 42.25,
+      "lon": -70.25,
+      "S": 0.5767
+    },
+    {
+      "rank": 19,
+      "lat": 30.25,
+      "lon": -86.75,
+      "S": 0.434
+    }
+  ],
+  "e2c_cold_locations": [
+    {
+      "rank": 1,
+      "lat": 46.75,
+      "lon": -71.25,
+      "S": 0.0
+    },
+    {
+      "rank": 2,
+      "lat": 42.25,
+      "lon": -70.75,
+      "S": 0.0
+    },
+    {
+      "rank": 3,
+      "lat": 39.25,
+      "lon": -76.25,
+      "S": 0.0
+    },
+    {
+      "rank": 4,
+      "lat": 38.25,
+      "lon": -121.75,
+      "S": 0.0
+    },
+    {
+      "rank": 5,
+      "lat": 34.25,
+      "lon": -77.75,
+      "S": 0.0
+    },
+    {
+      "rank": 6,
+      "lat": 32.75,
+      "lon": -115.75,
+      "S": 0.0
+    },
+    {
+      "rank": 7,
+      "lat": 31.25,
+      "lon": -81.25,
+      "S": 0.0
+    },
+    {
+      "rank": 8,
+      "lat": 30.25,
+      "lon": -85.75,
+      "S": 0.0
+    },
+    {
+      "rank": 9,
+      "lat": 30.25,
+      "lon": -93.25,
+      "S": 0.0
+    },
+    {
+      "rank": 10,
+      "lat": 29.75,
+      "lon": -90.25,
+      "S": 0.0
+    },
+    {
+      "rank": 11,
+      "lat": 28.75,
+      "lon": -80.75,
+      "S": 0.0
+    },
+    {
+      "rank": 12,
+      "lat": 28.25,
+      "lon": -82.75,
+      "S": 0.0
+    },
+    {
+      "rank": 13,
+      "lat": 36.25,
+      "lon": -75.75,
+      "S": 0.0
+    },
+    {
+      "rank": 14,
+      "lat": 26.25,
+      "lon": -97.25,
+      "S": 0.0
+    },
+    {
+      "rank": 15,
+      "lat": 40.75,
+      "lon": -72.75,
+      "S": 0.0
+    },
+    {
+      "rank": 16,
+      "lat": 32.75,
+      "lon": -79.75,
+      "S": 0.0
+    },
+    {
+      "rank": 17,
+      "lat": 43.25,
+      "lon": -79.25,
+      "S": 0.0
+    },
+    {
+      "rank": 18,
+      "lat": 26.25,
+      "lon": -81.75,
+      "S": 0.0
+    },
+    {
+      "rank": 19,
+      "lat": 30.25,
+      "lon": -88.25,
+      "S": 0.0
+    },
+    {
+      "rank": 20,
+      "lat": 46.75,
+      "lon": -123.75,
+      "S": 0.0
+    }
+  ]
+}
