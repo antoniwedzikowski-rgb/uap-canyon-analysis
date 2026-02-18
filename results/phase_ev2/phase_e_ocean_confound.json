@@ -1,0 +1,79 @@
+{
+  "test": "Oceanographic confound (depth metrics vs S)",
+  "n_cells": 102,
+  "correlations": {
+    "mean_depth": {
+      "rho_logR": -0.4388,
+      "p_logR": 0.0,
+      "rho_S": -0.7329,
+      "p_S": 0.0
+    },
+    "min_depth": {
+      "rho_logR": -0.4451,
+      "p_logR": 0.0,
+      "rho_S": -0.7275,
+      "p_S": 0.0
+    },
+    "depth_std": {
+      "rho_logR": 0.4474,
+      "p_logR": 0.0,
+      "rho_S": 0.7355,
+      "p_S": 0.0
+    },
+    "depth_range": {
+      "rho_logR": 0.4449,
+      "p_logR": 0.0,
+      "rho_S": 0.7276,
+      "p_S": 0.0
+    },
+    "shelf_frac": {
+      "rho_logR": 0.3029,
+      "p_logR": 0.002,
+      "rho_S": 0.4746,
+      "p_S": 0.0
+    },
+    "deep_frac": {
+      "rho_logR": 0.2283,
+      "p_logR": 0.021,
+      "rho_S": 0.4994,
+      "p_S": 0.0
+    }
+  },
+  "S_logR": {
+    "rho": 0.3742,
+    "p": 0.0001
+  },
+  "best_depth_predictor": "shelf_frac",
+  "models": {
+    "A_S_only": {
+      "R2": 0.1627
+    },
+    "B_depth_only": {
+      "predictor": "shelf_frac",
+      "R2": 0.0986
+    },
+    "C_combined": {
+      "R2": 0.1838
+    },
+    "KS_all_depth": {
+      "R2": 0.1222
+    },
+    "KS_S_plus_depth": {
+      "R2": 0.1897
+    }
+  },
+  "F_tests": {
+    "S_given_best_depth": {
+      "F": 10.335,
+      "p": 0.0018
+    },
+    "depth_given_S": {
+      "F": 2.561,
+      "p": 0.1127
+    },
+    "S_given_all_depth": {
+      "F": 8.086,
+      "p": 0.0054
+    }
+  }
+}
