@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "script": "phase_ev2_scoring.py",
+    "timestamp": "2026-02-18T18:06:46.184247",
+    "description": "Phase E v2 (re-specification): geometric predictions with 60 m/km threshold aligned to Phase C/D estimand. NO UAP data used.",
+    "label": "refined hypothesis test \u2014 threshold from prior Phase C/D analysis on same NUFORC dataset",
+    "vs_v1": "v1 used 20 m/km (canyon detection threshold); v2 uses 60 m/km (Phase C/D effect threshold). All other parameters identical.",
+    "parameters": {
+      "canyon_gradient_threshold_mkm": 60.0,
+      "shelf_depth_range_m": [
+        -500,
+        0
+      ],
+      "min_component_size": 3,
+      "coastal_band_km": 200,
+      "gradient_radius_km": 25,
+      "proximity_efold_km": 50.0,
+      "coast_count_radius_km": 25,
+      "aggregation_radius_km": 50,
+      "grid_deg": 0.5,
+      "dedup_radius_km": 200,
+      "conus_bbox": {
+        "lat_min": 24.5,
+        "lat_max": 49.0,
+        "lon_min": -125.0,
+        "lon_max": -66.0
+      },
+      "ranking": "global across all CONUS shelf cells with gradient > 60 m/km"
+    },
+    "n_steep_cells_total": 42128,
+    "n_canyon_components": 2004,
+    "n_coastal_grid_cells": 2275,
+    "n_with_steep": 347
+  },
+  "hot": [
+    {
+      "rank": 1,
+      "lat": 25.25,
+      "lon": -75.75,
+      "S": 2.7684
+    },
+    {
+      "rank": 2,
+      "lat": 28.75,
+      "lon": -118.25,
+      "S": 2.4297
+    },
+    {
+      "rank": 3,
+      "lat": 24.75,
+      "lon": -78.25,
+      "S": 2.2805
+    },
+    {
+      "rank": 4,
+      "lat": 49.25,
+      "lon": -123.25,
+      "S": 2.2364
+    },
+    {
+      "rank": 5,
+      "lat": 28.75,
+      "lon": -113.75,
+      "S": 2.2214
+    },
+    {
+      "rank": 6,
+      "lat": 26.75,
+      "lon": -77.25,
+      "S": 2.1748
+    },
+    {
+      "rank": 7,
+      "lat": 25.25,
+      "lon": -110.25,
+      "S": 2.0367
+    },
+    {
+      "rank": 8,
+      "lat": 47.25,
+      "lon": -122.25,
+      "S": 2.0115
+    },
+    {
+      "rank": 9,
+      "lat": 25.25,
+      "lon": -115.75,
+      "S": 1.982
+    },
+    {
+      "rank": 10,
+      "lat": 35.75,
+      "lon": -116.75,
+      "S": 1.9651
+    },
+    {
+      "rank": 11,
+      "lat": 48.75,
+      "lon": -70.25,
+      "S": 1.9449
+    },
+    {
+      "rank": 12,
+      "lat": 47.25,
+      "lon": -85.75,
+      "S": 1.9087
+    },
+    {
+      "rank": 13,
+      "lat": 33.25,
+      "lon": -118.25,
+      "S": 1.7994
+    },
+    {
+      "rank": 14,
+      "lat": 27.25,
+      "lon": -112.25,
+      "S": 1.7504
+    },
+    {
+      "rank": 15,
+      "lat": 36.25,
+      "lon": -121.25,
+      "S": 1.7183
+    },
+    {
+      "rank": 16,
+      "lat": 40.25,
+      "lon": -123.75,
+      "S": 1.6007
+    },
+    {
+      "rank": 17,
+      "lat": 30.75,
+      "lon": -114.75,
+      "S": 1.4015
+    },
+    {
+      "rank": 18,
+      "lat": 27.75,
+      "lon": -115.75,
+      "S": 1.3572
+    },
+    {
+      "rank": 19,
+      "lat": 31.75,
+      "lon": -116.75,
+      "S": 1.3194
+    },
+    {
+      "rank": 20,
+      "lat": 49.25,
+      "lon": -66.25,
+      "S": 1.2804
+    }
+  ],
+  "cold": [
+    {
+      "rank": 1,
+      "lat": 48.25,
+      "lon": -89.25,
+      "S": 0.0
+    },
+    {
+      "rank": 2,
+      "lat": 47.25,
+      "lon": -85.25,
+      "S": 0.0
+    },
+    {
+      "rank": 3,
+      "lat": 47.25,
+      "lon": -124.25,
+      "S": 0.0
+    },
+    {
+      "rank": 4,
+      "lat": 47.25,
+      "lon": -70.25,
+      "S": 0.0
+    },
+    {
+      "rank": 5,
+      "lat": 45.25,
+      "lon": -65.75,
+      "S": 0.0
+    },
+    {
+      "rank": 6,
+      "lat": 44.25,
+      "lon": -68.25,
+      "S": 0.0
+    },
+    {
+      "rank": 7,
+      "lat": 44.25,
+      "lon": -86.75,
+      "S": 0.0
+    },
+    {
+      "rank": 8,
+      "lat": 43.75,
+      "lon": -78.75,
+      "S": 0.0
+    },
+    {
+      "rank": 9,
+      "lat": 42.25,
+      "lon": -70.75,
+      "S": 0.0
+    },
+    {
+      "rank": 10,
+      "lat": 39.25,
+      "lon": -76.25,
+      "S": 0.0
+    },
+    {
+      "rank": 11,
+      "lat": 38.25,
+      "lon": -121.75,
+      "S": 0.0
+    },
+    {
+      "rank": 12,
+      "lat": 34.25,
+      "lon": -77.75,
+      "S": 0.0
+    },
+    {
+      "rank": 13,
+      "lat": 32.75,
+      "lon": -115.75,
+      "S": 0.0
+    },
+    {
+      "rank": 14,
+      "lat": 31.75,
+      "lon": -81.25,
+      "S": 0.0
+    },
+    {
+      "rank": 15,
+      "lat": 31.25,
+      "lon": -113.25,
+      "S": 0.0
+    },
+    {
+      "rank": 16,
+      "lat": 30.25,
+      "lon": -85.75,
+      "S": 0.0
+    },
+    {
+      "rank": 17,
+      "lat": 30.25,
+      "lon": -93.25,
+      "S": 0.0
+    },
+    {
+      "rank": 18,
+      "lat": 29.75,
+      "lon": -91.25,
+      "S": 0.0
+    },
+    {
+      "rank": 19,
+      "lat": 29.75,
+      "lon": -81.25,
+      "S": 0.0
+    },
+    {
+      "rank": 20,
+      "lat": 29.25,
+      "lon": -89.25,
+      "S": 0.0
+    }
+  ]
+}
