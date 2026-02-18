@@ -1,0 +1,63 @@
+{
+  "test": "Magnetic anomaly confound (EMAG2v3)",
+  "data_source": "EMAG2v3 via NOAA NCEI ArcGIS ImageServer (float32 GeoTIFF, 2 arc-min)",
+  "n_cells": 94,
+  "correlations": {
+    "mag_abs_mean": {
+      "rho_logR": -0.2313,
+      "p_logR": 0.0249,
+      "rho_S": -0.2064,
+      "p_S": 0.0459
+    },
+    "mag_std": {
+      "rho_logR": -0.2291,
+      "p_logR": 0.0263,
+      "rho_S": -0.3408,
+      "p_S": 0.0008
+    },
+    "mag_range": {
+      "rho_logR": -0.1702,
+      "p_logR": 0.1011,
+      "rho_S": -0.3455,
+      "p_S": 0.0006
+    }
+  },
+  "S_vs_logR": {
+    "rho": 0.3593,
+    "p": 0.0004
+  },
+  "models": {
+    "A_S_only": {
+      "R2": 0.1509
+    },
+    "B_mag_only": {
+      "predictor": "mag_std",
+      "R2": 0.0621
+    },
+    "C_combined": {
+      "R2": 0.1722
+    },
+    "full_all_confounds": {
+      "R2": 0.1208
+    },
+    "full_with_S": {
+      "R2": 0.1842
+    }
+  },
+  "F_tests": {
+    "S_given_mag": {
+      "F": 12.104,
+      "p": 0.0008
+    },
+    "mag_given_S": {
+      "F": 2.344,
+      "p": 0.1292
+    },
+    "S_given_all": {
+      "F": 6.909,
+      "p": 0.0101
+    }
+  },
+  "interpretation": "S_DOMINANT",
+  "final_verdict": "S_SURVIVES_ALL"
+}
