@@ -1,0 +1,139 @@
+{
+  "test": "Coastal band sensitivity sweep",
+  "bands_km": [
+    10,
+    25,
+    50,
+    100,
+    200
+  ],
+  "west_coast": [
+    {
+      "band_km": 10,
+      "n_testable": 39,
+      "n_hot": 23,
+      "n_cold": 16,
+      "rho": 0.1493,
+      "p": 0.3645,
+      "ci_lo": -0.2022,
+      "ci_hi": 0.4687,
+      "beta_S": 0.2738,
+      "exp_beta": 1.315,
+      "canyon_uplift": 1.9304
+    },
+    {
+      "band_km": 25,
+      "n_testable": 50,
+      "n_hot": 25,
+      "n_cold": 25,
+      "rho": 0.3482,
+      "p": 0.0132,
+      "ci_lo": 0.0539,
+      "ci_hi": 0.6095,
+      "beta_S": 0.4767,
+      "exp_beta": 1.6108,
+      "canyon_uplift": 2.1049
+    },
+    {
+      "band_km": 50,
+      "n_testable": 62,
+      "n_hot": 26,
+      "n_cold": 36,
+      "rho": 0.4298,
+      "p": 0.0005,
+      "ci_lo": 0.1932,
+      "ci_hi": 0.6191,
+      "beta_S": 0.657,
+      "exp_beta": 1.929,
+      "canyon_uplift": 3.1573
+    },
+    {
+      "band_km": 100,
+      "n_testable": 81,
+      "n_hot": 26,
+      "n_cold": 55,
+      "rho": 0.372,
+      "p": 0.0006,
+      "ci_lo": 0.1704,
+      "ci_hi": 0.5501,
+      "beta_S": 0.6483,
+      "exp_beta": 1.9122,
+      "canyon_uplift": 2.7701
+    },
+    {
+      "band_km": 200,
+      "n_testable": 102,
+      "n_hot": 26,
+      "n_cold": 76,
+      "rho": 0.3742,
+      "p": 0.0001,
+      "ci_lo": 0.1902,
+      "ci_hi": 0.5309,
+      "beta_S": 0.6562,
+      "exp_beta": 1.9274,
+      "canyon_uplift": 2.6315
+    }
+  ],
+  "east_coast": [
+    {
+      "band_km": 10,
+      "n_testable": 68,
+      "n_hot": 1,
+      "n_cold": 67,
+      "rho": null,
+      "p": null
+    },
+    {
+      "band_km": 25,
+      "n_testable": 87,
+      "n_hot": 2,
+      "n_cold": 85,
+      "rho": 0.006,
+      "p": 0.9563,
+      "ci_lo": -0.0558,
+      "ci_hi": 0.0686,
+      "beta_S": -0.8986,
+      "exp_beta": 0.4071,
+      "canyon_uplift": 1.3973
+    },
+    {
+      "band_km": 50,
+      "n_testable": 111,
+      "n_hot": 2,
+      "n_cold": 109,
+      "rho": 0.0316,
+      "p": 0.7419,
+      "ci_lo": -0.0128,
+      "ci_hi": 0.0884,
+      "beta_S": -0.4153,
+      "exp_beta": 0.6601,
+      "canyon_uplift": 1.4951
+    },
+    {
+      "band_km": 100,
+      "n_testable": 141,
+      "n_hot": 2,
+      "n_cold": 139,
+      "rho": 0.0515,
+      "p": 0.544,
+      "ci_lo": 0.0164,
+      "ci_hi": 0.1049,
+      "beta_S": -0.2376,
+      "exp_beta": 0.7885,
+      "canyon_uplift": 1.5218
+    },
+    {
+      "band_km": 200,
+      "n_testable": 185,
+      "n_hot": 2,
+      "n_cold": 183,
+      "rho": 0.0548,
+      "p": 0.459,
+      "ci_lo": 0.0235,
+      "ci_hi": 0.1013,
+      "beta_S": -0.0277,
+      "exp_beta": 0.9727,
+      "canyon_uplift": 1.5075
+    }
+  ]
+}

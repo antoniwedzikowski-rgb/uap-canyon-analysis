@@ -1,0 +1,11 @@
+{
+  "test": "East Coast E-RED check",
+  "region": "lon >= -82.0, lat 25.0-45.0",
+  "coastal_band_km": 200,
+  "n_testable": 185,
+  "n_hot": 2,
+  "n_cold": 183,
+  "spearman_rho": 0.0548,
+  "spearman_p": 0.459,
+  "beta_S": -0.0277
+}
