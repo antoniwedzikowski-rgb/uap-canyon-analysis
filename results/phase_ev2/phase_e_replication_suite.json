@@ -1,0 +1,248 @@
+{
+  "test": "Replication suite (Reviewer Point 6)",
+  "temporal_splits": [
+    {
+      "split": "1990-2002 (train) \u2192 2003-2014 (test)",
+      "n_train": 4255,
+      "n_test": 10525,
+      "n_test_cells": 94,
+      "rho_train": 0.2029,
+      "p_train": 0.0945,
+      "rho_test": 0.2863,
+      "p_test": 0.0051
+    },
+    {
+      "split": "2003-2014 (train) \u2192 1990-2002 (test)",
+      "n_train": 10525,
+      "n_test": 4255,
+      "n_test_cells": 69,
+      "rho_train": 0.2863,
+      "p_train": 0.0051,
+      "rho_test": 0.2029,
+      "p_test": 0.0945
+    },
+    {
+      "split": "1990-2006 (train) \u2192 2007-2014 (test)",
+      "n_train": 7530,
+      "n_test": 7250,
+      "n_test_cells": 87,
+      "rho_train": 0.2899,
+      "p_train": 0.0051,
+      "rho_test": 0.2202,
+      "p_test": 0.0405
+    },
+    {
+      "split": "Even years \u2192 Odd years",
+      "n_train": 7213,
+      "n_test": 7567,
+      "n_test_cells": 92,
+      "rho_train": 0.2386,
+      "p_train": 0.0252,
+      "rho_test": 0.257,
+      "p_test": 0.0134
+    }
+  ],
+  "spatial_forward_prediction": [
+    {
+      "region": "Puget",
+      "n_held_out": 15,
+      "n_training": 79,
+      "beta": [
+        0.42,
+        0.6629
+      ],
+      "R2_oos": 0.2148,
+      "rho_oos": 0.6365,
+      "p_oos": 0.0107,
+      "MAE": 1.1378,
+      "direction": "correct"
+    },
+    {
+      "region": "SoCal",
+      "n_held_out": 12,
+      "n_training": 82,
+      "beta": [
+        0.362,
+        0.6665
+      ],
+      "R2_oos": 0.0228,
+      "rho_oos": 0.2598,
+      "p_oos": 0.4148,
+      "MAE": 0.6589,
+      "direction": "WRONG"
+    }
+  ],
+  "leave_one_region_out": [
+    {
+      "holdout": "WA_north",
+      "n_test": 13,
+      "rho": 0.6473,
+      "p": 0.0168,
+      "R2_oos": 0.022
+    },
+    {
+      "holdout": "WA_south_OR_north",
+      "n_test": 20,
+      "rho": -0.0807,
+      "p": 0.7353,
+      "R2_oos": -0.2731
+    },
+    {
+      "holdout": "OR_south_NorCal",
+      "n_test": 8,
+      "rho": 0.6547,
+      "p": 0.0781,
+      "R2_oos": -0.7934
+    },
+    {
+      "holdout": "CenCal",
+      "n_test": 38,
+      "rho": 0.2775,
+      "p": 0.0917,
+      "R2_oos": -0.2679
+    },
+    {
+      "holdout": "SoCal",
+      "n_test": 15,
+      "rho": 0.4002,
+      "p": 0.1394,
+      "R2_oos": -0.0129
+    }
+  ],
+  "temporal_stability_5yr": [
+    {
+      "window": "1990-1994",
+      "n_cells": 13,
+      "rho": 0.1891,
+      "p": 0.536
+    },
+    {
+      "window": "1991-1995",
+      "n_cells": 23,
+      "rho": 0.3312,
+      "p": 0.1227
+    },
+    {
+      "window": "1992-1996",
+      "n_cells": 32,
+      "rho": 0.1891,
+      "p": 0.3
+    },
+    {
+      "window": "1993-1997",
+      "n_cells": 36,
+      "rho": 0.0144,
+      "p": 0.9336
+    },
+    {
+      "window": "1994-1998",
+      "n_cells": 50,
+      "rho": 0.2995,
+      "p": 0.0346
+    },
+    {
+      "window": "1995-1999",
+      "n_cells": 65,
+      "rho": 0.3117,
+      "p": 0.0115
+    },
+    {
+      "window": "1996-2000",
+      "n_cells": 72,
+      "rho": 0.2641,
+      "p": 0.025
+    },
+    {
+      "window": "1997-2001",
+      "n_cells": 78,
+      "rho": 0.2138,
+      "p": 0.0601
+    },
+    {
+      "window": "1998-2002",
+      "n_cells": 82,
+      "rho": 0.2896,
+      "p": 0.0083
+    },
+    {
+      "window": "1999-2003",
+      "n_cells": 83,
+      "rho": 0.2956,
+      "p": 0.0067
+    },
+    {
+      "window": "2000-2004",
+      "n_cells": 89,
+      "rho": 0.3049,
+      "p": 0.0037
+    },
+    {
+      "window": "2001-2005",
+      "n_cells": 87,
+      "rho": 0.2972,
+      "p": 0.0052
+    },
+    {
+      "window": "2002-2006",
+      "n_cells": 88,
+      "rho": 0.3213,
+      "p": 0.0023
+    },
+    {
+      "window": "2003-2007",
+      "n_cells": 91,
+      "rho": 0.3082,
+      "p": 0.003
+    },
+    {
+      "window": "2004-2008",
+      "n_cells": 88,
+      "rho": 0.2244,
+      "p": 0.0355
+    },
+    {
+      "window": "2005-2009",
+      "n_cells": 88,
+      "rho": 0.2241,
+      "p": 0.0358
+    },
+    {
+      "window": "2006-2010",
+      "n_cells": 89,
+      "rho": 0.2627,
+      "p": 0.0129
+    },
+    {
+      "window": "2007-2011",
+      "n_cells": 91,
+      "rho": 0.2625,
+      "p": 0.012
+    },
+    {
+      "window": "2008-2012",
+      "n_cells": 87,
+      "rho": 0.2139,
+      "p": 0.0466
+    },
+    {
+      "window": "2009-2013",
+      "n_cells": 88,
+      "rho": 0.2187,
+      "p": 0.0407
+    },
+    {
+      "window": "2010-2014",
+      "n_cells": 87,
+      "rho": 0.2304,
+      "p": 0.0318
+    }
+  ],
+  "post_2014_replication": {
+    "n_reports": 5245,
+    "n_cells": 88,
+    "rho": 0.2832,
+    "p": 0.0075,
+    "verdict": "REPLICATES",
+    "data_source": "HuggingFace kcimc/NUFORC, geocoded via NUFORC city/state lookup"
+  }
+}
