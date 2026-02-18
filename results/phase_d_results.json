@@ -1,0 +1,1058 @@
+{
+  "metadata": {
+    "script": "phase_d_robustness.py",
+    "timestamp": "2026-02-18T14:54:31.336739",
+    "n_bootstrap": 1000,
+    "seed": 42
+  },
+  "baseline": {
+    "label": "baseline",
+    "n_uap": 38256,
+    "n_ctrl": 19972,
+    "bins": [
+      {
+        "bin": "0-10 (flat)",
+        "n_uap": 27209,
+        "n_ctrl": 16801,
+        "weighted_or": 1.0,
+        "ci_lo": 1.0,
+        "ci_hi": 1.0
+      },
+      {
+        "bin": "10-30 (moderate)",
+        "n_uap": 3677,
+        "n_ctrl": 1788,
+        "weighted_or": 2.345,
+        "ci_lo": 2.105,
+        "ci_hi": 2.661
+      },
+      {
+        "bin": "30-60 (steep)",
+        "n_uap": 1856,
+        "n_ctrl": 531,
+        "weighted_or": 2.013,
+        "ci_lo": 1.698,
+        "ci_hi": 2.42
+      },
+      {
+        "bin": "60+ (very steep)",
+        "n_uap": 5514,
+        "n_ctrl": 852,
+        "weighted_or": 5.177,
+        "ci_lo": 4.478,
+        "ci_hi": 6.033
+      }
+    ]
+  },
+  "D1_controls": {
+    "D1a_land_only_county": {
+      "label": "D1a: land-only, county centroids",
+      "n_uap": 38256,
+      "n_ctrl": 19051,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27209,
+          "n_ctrl": 16107,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3677,
+          "n_ctrl": 1682,
+          "weighted_or": 2.564,
+          "ci_lo": 2.274,
+          "ci_hi": 2.927
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1856,
+          "n_ctrl": 469,
+          "weighted_or": 2.704,
+          "ci_lo": 2.247,
+          "ci_hi": 3.305
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5514,
+          "n_ctrl": 793,
+          "weighted_or": 6.661,
+          "ci_lo": 5.739,
+          "ci_hi": 7.79
+        }
+      ]
+    },
+    "D1b_equal": {
+      "label": "D1b: land/ocean equal (1.0/1.0)",
+      "n_uap": 38256,
+      "n_ctrl": 19979,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27209,
+          "n_ctrl": 16063,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3677,
+          "n_ctrl": 1957,
+          "weighted_or": 1.22,
+          "ci_lo": 1.085,
+          "ci_hi": 1.372
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1856,
+          "n_ctrl": 619,
+          "weighted_or": 1.07,
+          "ci_lo": 0.927,
+          "ci_hi": 1.25
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5514,
+          "n_ctrl": 1340,
+          "weighted_or": 1.681,
+          "ci_lo": 1.528,
+          "ci_hi": 1.871
+        }
+      ]
+    },
+    "D1b_mild": {
+      "label": "D1b: land/ocean mild (2.0/0.2)",
+      "n_uap": 38256,
+      "n_ctrl": 19977,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27209,
+          "n_ctrl": 16755,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3677,
+          "n_ctrl": 1782,
+          "weighted_or": 2.106,
+          "ci_lo": 1.867,
+          "ci_hi": 2.398
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1856,
+          "n_ctrl": 468,
+          "weighted_or": 2.037,
+          "ci_lo": 1.721,
+          "ci_hi": 2.493
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5514,
+          "n_ctrl": 972,
+          "weighted_or": 3.086,
+          "ci_lo": 2.731,
+          "ci_hi": 3.531
+        }
+      ]
+    },
+    "D1b_extreme": {
+      "label": "D1b: land/ocean extreme (10.0/0.01)",
+      "n_uap": 38256,
+      "n_ctrl": 19983,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27209,
+          "n_ctrl": 16835,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3677,
+          "n_ctrl": 1791,
+          "weighted_or": 2.287,
+          "ci_lo": 2.013,
+          "ci_hi": 2.568
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1856,
+          "n_ctrl": 488,
+          "weighted_or": 2.563,
+          "ci_lo": 2.14,
+          "ci_hi": 3.123
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5514,
+          "n_ctrl": 869,
+          "weighted_or": 5.777,
+          "ci_lo": 5.015,
+          "ci_hi": 6.789
+        }
+      ]
+    },
+    "D1c_seed_variance": {
+      "or_60plus_values": [
+        5.212,
+        5.3,
+        5.492,
+        5.641,
+        5.868
+      ],
+      "mean": 5.503,
+      "std": 0.236
+    }
+  },
+  "D2_pileups": {
+    "top_50_coords": [
+      {
+        "lat": 47.6063889,
+        "lon": -122.3308333,
+        "count": 540,
+        "city_sample": "seattle (west)"
+      },
+      {
+        "lat": 40.7141667,
+        "lon": -74.0063889,
+        "count": 442,
+        "city_sample": "new york city (bronx)"
+      },
+      {
+        "lat": 33.4483333,
+        "lon": -112.0733333,
+        "count": 435,
+        "city_sample": "phoenix (north part)"
+      },
+      {
+        "lat": 36.175,
+        "lon": -115.1363889,
+        "count": 370,
+        "city_sample": "las vegas"
+      },
+      {
+        "lat": 34.0522222,
+        "lon": -118.2427778,
+        "count": 352,
+        "city_sample": "los angeles"
+      },
+      {
+        "lat": 32.7152778,
+        "lon": -117.1563889,
+        "count": 328,
+        "city_sample": "san diego"
+      },
+      {
+        "lat": 45.5236111,
+        "lon": -122.675,
+        "count": 324,
+        "city_sample": "portland"
+      },
+      {
+        "lat": 29.7630556,
+        "lon": -95.3630556,
+        "count": 267,
+        "city_sample": "houston"
+      },
+      {
+        "lat": 41.85,
+        "lon": -87.65,
+        "count": 252,
+        "city_sample": "chicago"
+      },
+      {
+        "lat": 32.2216667,
+        "lon": -110.9258333,
+        "count": 220,
+        "city_sample": "tucson"
+      },
+      {
+        "lat": 25.7738889,
+        "lon": -80.1938889,
+        "count": 208,
+        "city_sample": "miami"
+      },
+      {
+        "lat": 28.5380556,
+        "lon": -81.3794444,
+        "count": 207,
+        "city_sample": "orlando"
+      },
+      {
+        "lat": 30.2669444,
+        "lon": -97.7427778,
+        "count": 203,
+        "city_sample": "austin"
+      },
+      {
+        "lat": 35.0844444,
+        "lon": -106.6505556,
+        "count": 200,
+        "city_sample": "albuquerque"
+      },
+      {
+        "lat": 38.5816667,
+        "lon": -121.4933333,
+        "count": 200,
+        "city_sample": "sacramento"
+      },
+      {
+        "lat": 37.775,
+        "lon": -122.4183333,
+        "count": 175,
+        "city_sample": "san francisco"
+      },
+      {
+        "lat": 37.3394444,
+        "lon": -121.8938889,
+        "count": 175,
+        "city_sample": "san jose"
+      },
+      {
+        "lat": 39.7391667,
+        "lon": -104.9841667,
+        "count": 169,
+        "city_sample": "denver"
+      },
+      {
+        "lat": 43.666667,
+        "lon": -79.416667,
+        "count": 159,
+        "city_sample": "toronto (greater toronto area) (canada)"
+      },
+      {
+        "lat": 29.4238889,
+        "lon": -98.4933333,
+        "count": 156,
+        "city_sample": "san antonio"
+      },
+      {
+        "lat": 33.6888889,
+        "lon": -78.8869444,
+        "count": 152,
+        "city_sample": "myrtle beach"
+      },
+      {
+        "lat": 39.9611111,
+        "lon": -82.9988889,
+        "count": 141,
+        "city_sample": "columbus"
+      },
+      {
+        "lat": 38.6272222,
+        "lon": -90.1977778,
+        "count": 140,
+        "city_sample": "st. louis county"
+      },
+      {
+        "lat": 35.2269444,
+        "lon": -80.8433333,
+        "count": 137,
+        "city_sample": "charlotte"
+      },
+      {
+        "lat": 33.4222222,
+        "lon": -111.8219444,
+        "count": 136,
+        "city_sample": "mesa"
+      },
+      {
+        "lat": 45.6388889,
+        "lon": -122.6602778,
+        "count": 130,
+        "city_sample": "vancouver (north of)"
+      },
+      {
+        "lat": 32.7833333,
+        "lon": -96.8,
+        "count": 127,
+        "city_sample": "dallas"
+      },
+      {
+        "lat": 39.7683333,
+        "lon": -86.1580556,
+        "count": 125,
+        "city_sample": "indianapolis"
+      },
+      {
+        "lat": 30.3319444,
+        "lon": -81.6558333,
+        "count": 124,
+        "city_sample": "jacksonville"
+      },
+      {
+        "lat": 38.8338889,
+        "lon": -104.8208333,
+        "count": 124,
+        "city_sample": "colorado springs"
+      },
+      {
+        "lat": 47.2530556,
+        "lon": -122.4430556,
+        "count": 124,
+        "city_sample": "tacoma"
+      },
+      {
+        "lat": 47.6588889,
+        "lon": -117.425,
+        "count": 123,
+        "city_sample": "spokane (about 30 miles sw of&#44i-90&#44 maybe mm 254)"
+      },
+      {
+        "lat": 40.7608333,
+        "lon": -111.8902778,
+        "count": 117,
+        "city_sample": "salt lake city"
+      },
+      {
+        "lat": 27.9472222,
+        "lon": -82.4586111,
+        "count": 116,
+        "city_sample": "tampa"
+      },
+      {
+        "lat": 38.2541667,
+        "lon": -85.7594444,
+        "count": 111,
+        "city_sample": "louisville"
+      },
+      {
+        "lat": 36.7477778,
+        "lon": -119.7713889,
+        "count": 109,
+        "city_sample": "fresno"
+      },
+      {
+        "lat": 41.2586111,
+        "lon": -95.9375,
+        "count": 109,
+        "city_sample": "omaha"
+      },
+      {
+        "lat": 43.6136111,
+        "lon": -116.2025,
+        "count": 108,
+        "city_sample": "boise"
+      },
+      {
+        "lat": 33.5091667,
+        "lon": -111.8983333,
+        "count": 105,
+        "city_sample": "scottsdale"
+      },
+      {
+        "lat": 39.5297222,
+        "lon": -119.8127778,
+        "count": 104,
+        "city_sample": "reno"
+      },
+      {
+        "lat": 40.4405556,
+        "lon": -79.9961111,
+        "count": 99,
+        "city_sample": "pittsburgh"
+      },
+      {
+        "lat": 36.1658333,
+        "lon": -86.7844444,
+        "count": 98,
+        "city_sample": "nashville"
+      },
+      {
+        "lat": 49.25,
+        "lon": -123.133333,
+        "count": 97,
+        "city_sample": "vancouver (canada)"
+      },
+      {
+        "lat": 39.9522222,
+        "lon": -75.1641667,
+        "count": 97,
+        "city_sample": "philadelphia"
+      },
+      {
+        "lat": 47.9791667,
+        "lon": -122.2008333,
+        "count": 96,
+        "city_sample": "everett"
+      },
+      {
+        "lat": 44.9430556,
+        "lon": -123.0338889,
+        "count": 94,
+        "city_sample": "salem"
+      },
+      {
+        "lat": 44.0522222,
+        "lon": -123.0855556,
+        "count": 93,
+        "city_sample": "eugene"
+      },
+      {
+        "lat": 39.1619444,
+        "lon": -84.4569444,
+        "count": 90,
+        "city_sample": "cincinnati"
+      },
+      {
+        "lat": 36.1538889,
+        "lon": -95.9925,
+        "count": 89,
+        "city_sample": "tulsa"
+      },
+      {
+        "lat": 33.7488889,
+        "lon": -84.3880556,
+        "count": 89,
+        "city_sample": "atlanta (north of)"
+      }
+    ],
+    "pileup_distribution": {
+      "p50": 11,
+      "p75": 36,
+      "p90": 124,
+      "p95": 220,
+      "p99": 442,
+      "n_unique_coords": 16279,
+      "n_total": 66678,
+      "pct_at_unique_coord": 52.7,
+      "pct_reports_at_pileup_5plus": 68.1
+    },
+    "collapse_stats": {
+      "before": 66678,
+      "after": 65011,
+      "pct_retained": 97.5
+    },
+    "collapsed_or": {
+      "label": "D2c: collapsed unique events",
+      "n_uap": 37316,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 26605,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3597,
+          "n_ctrl": 1788,
+          "weighted_or": 2.346,
+          "ci_lo": 2.077,
+          "ci_hi": 2.644
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1805,
+          "n_ctrl": 531,
+          "weighted_or": 2.002,
+          "ci_lo": 1.677,
+          "ci_hi": 2.44
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5309,
+          "n_ctrl": 852,
+          "weighted_or": 5.097,
+          "ci_lo": 4.414,
+          "ci_hi": 5.935
+        }
+      ]
+    }
+  },
+  "D3_dedupe": {
+    "original": {
+      "label": "baseline",
+      "n_uap": 38256,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27209,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3677,
+          "n_ctrl": 1788,
+          "weighted_or": 2.345,
+          "ci_lo": 2.105,
+          "ci_hi": 2.661
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1856,
+          "n_ctrl": 531,
+          "weighted_or": 2.013,
+          "ci_lo": 1.698,
+          "ci_hi": 2.42
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5514,
+          "n_ctrl": 852,
+          "weighted_or": 5.177,
+          "ci_lo": 4.478,
+          "ci_hi": 6.033
+        }
+      ]
+    },
+    "strict": {
+      "label": "D3b: strict (coords+day)",
+      "n_uap": 37332,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 26616,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3600,
+          "n_ctrl": 1788,
+          "weighted_or": 2.347,
+          "ci_lo": 2.086,
+          "ci_hi": 2.661
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1805,
+          "n_ctrl": 531,
+          "weighted_or": 2.001,
+          "ci_lo": 1.71,
+          "ci_hi": 2.366
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5311,
+          "n_ctrl": 852,
+          "weighted_or": 5.097,
+          "ci_lo": 4.451,
+          "ci_hi": 5.969
+        }
+      ]
+    },
+    "text_hash": {
+      "label": "D3c: text hash",
+      "n_uap": 38721,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 27548,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3712,
+          "n_ctrl": 1788,
+          "weighted_or": 2.338,
+          "ci_lo": 2.089,
+          "ci_hi": 2.645
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1881,
+          "n_ctrl": 531,
+          "weighted_or": 2.015,
+          "ci_lo": 1.714,
+          "ci_hi": 2.374
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5580,
+          "n_ctrl": 852,
+          "weighted_or": 5.174,
+          "ci_lo": 4.442,
+          "ci_hi": 6.035
+        }
+      ]
+    },
+    "hard_cap": {
+      "label": "D3d: hard cap (1/coord/day)",
+      "n_uap": 37332,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 26616,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3600,
+          "n_ctrl": 1788,
+          "weighted_or": 2.347,
+          "ci_lo": 2.086,
+          "ci_hi": 2.661
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1805,
+          "n_ctrl": 531,
+          "weighted_or": 2.001,
+          "ci_lo": 1.71,
+          "ci_hi": 2.366
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5311,
+          "n_ctrl": 852,
+          "weighted_or": 5.097,
+          "ci_lo": 4.451,
+          "ci_hi": 5.969
+        }
+      ]
+    }
+  },
+  "D4_missingness": {
+    "counts": {
+      "total": 80332,
+      "has_coords": 80331,
+      "has_datetime": 79638,
+      "has_both": 79637,
+      "pct_geocoded": 100.0
+    },
+    "state_comparison": {
+      "geocoded_top10": {
+        "ca": 9655,
+        "wa": 4268,
+        "fl": 4200,
+        "tx": 3677,
+        "ny": 3219,
+        "az": 2689,
+        "il": 2645,
+        "pa": 2582,
+        "oh": 2425,
+        "mi": 2071
+      },
+      "non_geocoded_top10": {
+        "nm": 1
+      }
+    },
+    "year_comparison": {
+      "geocoded": {
+        "1990": 257,
+        "1991": 234,
+        "1992": 246,
+        "1993": 300,
+        "1994": 417,
+        "1995": 1066,
+        "1996": 826,
+        "1997": 1242,
+        "1998": 1739,
+        "1999": 2788,
+        "2000": 2752,
+        "2001": 3109,
+        "2002": 3211,
+        "2003": 3935,
+        "2004": 4220,
+        "2005": 4039,
+        "2006": 3682,
+        "2007": 4243,
+        "2008": 4777,
+        "2009": 4508,
+        "2010": 4258,
+        "2011": 5077,
+        "2012": 7308,
+        "2013": 6992,
+        "2014": 2252
+      },
+      "non_geocoded": {}
+    },
+    "shape_comparison": {
+      "geocoded": {
+        "light": 0.2113,
+        "triangle": 0.1003,
+        "circle": 0.097,
+        "fireball": 0.0792,
+        "other": 0.0721,
+        "unknown": 0.0712,
+        "sphere": 0.0687,
+        "disk": 0.0665,
+        "oval": 0.0476,
+        "formation": 0.0313
+      },
+      "non_geocoded": {
+        "rectangle": 1.0
+      }
+    },
+    "precision": {
+      "low_precision_count": 2621,
+      "pct_low_precision": 3.3,
+      "high_precision_count": 77710
+    }
+  },
+  "D5_seasonality": {
+    "month_histogram": {
+      "1": 2985,
+      "2": 2443,
+      "3": 2736,
+      "4": 2693,
+      "5": 2407,
+      "6": 3174,
+      "7": 4365,
+      "8": 4196,
+      "9": 3740,
+      "10": 3289,
+      "11": 3337,
+      "12": 2891
+    },
+    "month_exclusion_or60": {
+      "1": 5.167,
+      "2": 5.134,
+      "3": 5.165,
+      "4": 5.167,
+      "5": 5.166,
+      "6": 5.213,
+      "7": 5.169,
+      "8": 5.187,
+      "9": 5.209,
+      "10": 5.199,
+      "11": 5.178,
+      "12": 5.168
+    },
+    "high_activity_exclusion": {
+      "n_excluded": 4373,
+      "n_remaining": 33883
+    },
+    "excl_high_activity_or": {
+      "label": "D5c: excl high-activity",
+      "n_uap": 33883,
+      "n_ctrl": 19972,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 24080,
+          "n_ctrl": 16801,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3256,
+          "n_ctrl": 1788,
+          "weighted_or": 2.346,
+          "ci_lo": 2.08,
+          "ci_hi": 2.668
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1681,
+          "n_ctrl": 531,
+          "weighted_or": 2.06,
+          "ci_lo": 1.767,
+          "ci_hi": 2.472
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 4866,
+          "n_ctrl": 852,
+          "weighted_or": 5.162,
+          "ci_lo": 4.494,
+          "ci_hi": 6.161
+        }
+      ]
+    }
+  },
+  "D6_replication": {
+    "holdout_puget_socal": {
+      "label": "D6a: holdout Puget+SoCal",
+      "n_uap": 31597,
+      "n_ctrl": 18498,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 26194,
+          "n_ctrl": 16257,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 3408,
+          "n_ctrl": 1628,
+          "weighted_or": 2.236,
+          "ci_lo": 1.984,
+          "ci_hi": 2.544
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1467,
+          "n_ctrl": 445,
+          "weighted_or": 1.852,
+          "ci_lo": 1.582,
+          "ci_hi": 2.238
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 528,
+          "n_ctrl": 168,
+          "weighted_or": 0.868,
+          "ci_lo": 0.707,
+          "ci_hi": 1.114
+        }
+      ]
+    },
+    "split_west": {
+      "label": "D6b: west",
+      "n_uap": 14701,
+      "n_ctrl": 6529,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 6906,
+          "n_ctrl": 4694,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 1628,
+          "n_ctrl": 780,
+          "weighted_or": 2.778,
+          "ci_lo": 2.302,
+          "ci_hi": 3.337
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 764,
+          "n_ctrl": 225,
+          "weighted_or": 1.351,
+          "ci_lo": 1.065,
+          "ci_hi": 1.691
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 5403,
+          "n_ctrl": 830,
+          "weighted_or": 6.205,
+          "ci_lo": 5.392,
+          "ci_hi": 7.29
+        }
+      ]
+    },
+    "split_east_gulf": {
+      "label": "D6b: east_gulf",
+      "n_uap": 21258,
+      "n_ctrl": 11112,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 18065,
+          "n_ctrl": 9804,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 2041,
+          "n_ctrl": 996,
+          "weighted_or": 1.942,
+          "ci_lo": 1.656,
+          "ci_hi": 2.299
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1082,
+          "n_ctrl": 294,
+          "weighted_or": 4.12,
+          "ci_lo": 3.142,
+          "ci_hi": 5.752
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 70,
+          "n_ctrl": 18,
+          "weighted_or": 0.364,
+          "ci_lo": 0.228,
+          "ci_hi": 0.682
+        }
+      ]
+    },
+    "narrow_coastal": {
+      "label": "D6c: narrow coastal 0-20km",
+      "n_uap": 18234,
+      "n_ctrl": 6767,
+      "bins": [
+        {
+          "bin": "0-10 (flat)",
+          "n_uap": 9208,
+          "n_ctrl": 4630,
+          "weighted_or": 1.0,
+          "ci_lo": 1.0,
+          "ci_hi": 1.0
+        },
+        {
+          "bin": "10-30 (moderate)",
+          "n_uap": 2774,
+          "n_ctrl": 1239,
+          "weighted_or": 1.113,
+          "ci_lo": 0.969,
+          "ci_hi": 1.301
+        },
+        {
+          "bin": "30-60 (steep)",
+          "n_uap": 1658,
+          "n_ctrl": 314,
+          "weighted_or": 1.334,
+          "ci_lo": 1.1,
+          "ci_hi": 1.637
+        },
+        {
+          "bin": "60+ (very steep)",
+          "n_uap": 4594,
+          "n_ctrl": 584,
+          "weighted_or": 2.52,
+          "ci_lo": 2.145,
+          "ci_hi": 2.91
+        }
+      ]
+    },
+    "gradient_sanity": {
+      "lat_res_deg": 0.016667,
+      "lon_res_deg": 0.016667,
+      "lat_res_km": 1.85,
+      "lon_res_km_at_37N": 1.477,
+      "etopo_resolution": "1 arc-minute",
+      "gradient_units": "m/km (elevation change per horizontal distance)",
+      "lat_correction": "yes (111 km/deg)",
+      "lon_correction": "yes (111 * cos(lat) km/deg, applied per-row)",
+      "gradient_formula": "sqrt(grad_y^2 + grad_x^2) where grad_y = dz/(lat_res*111), grad_x = dz/(lon_res*111*cos(lat))"
+    },
+    "gradient_smoothing": {
+      "raw_canyon_cells": 133697,
+      "smoothed_3x3_canyon_cells": 127232,
+      "change_pct": -4.8
+    }
+  }
+}
