@@ -1,0 +1,509 @@
+#!/usr/bin/env python3
+"""
+Phase E-RED: Redesigned Evaluation of Frozen Geometric Scoring
+================================================================
+Scoring (S) frozen at phase-ev2-frozen (commit c2366d2, 60 m/km threshold).
+
+Redesign rationale:
+  The per-cell OR(60+ vs flat) evaluation was structurally underpowered —
+  it required BOTH flat and 60+ reports within a single 0.5° cell, which
+  only 11 cells achieved. The scoring function predicts WHERE the effect
+  should be strong, not whether a single cell can sustain an internal OR.
+
+  E-RED tests: does S predict excess UAP report density (O_i / E_i)?
+
+Unit of analysis:
+  - West Coast only (D6: effect only there, OR=6.18)
+  - Cells with N_uap >= 20 (testability)
+  - 0.5° grid from phase-ev2-frozen
+
+Expected reports E_i:
+  Population-weighted controls (same as Phase C/D), summed per cell.
+  R_i = O_i / E_i  (rate ratio).
+
+Metrics:
+  - Spearman(S, log(R)) across all testable West Coast cells
+  - Precision@K: fraction of top-K by S that are in top-20% of R
+  - Decile plot: S decile → mean log(R) with bootstrap CI
+  - Poisson regression: log(O_i) = α + log(E_i) + β·S_i
+
+Two passes:
+  E-RED primary: 200 km coastal band (continuity with prior phases)
+  E-RED secondary: 0-20 km coastal band (proximity mechanism test)
+"""
+
+import os, time, json, warnings
+import numpy as np
+import pandas as pd
+from datetime import datetime
+from collections import defaultdict
+from scipy.spatial import cKDTree
+from scipy.stats import spearmanr, rankdata, poisson
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+warnings.filterwarnings('ignore')
+t0 = time.time()
+
+BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+DATA_DIR = os.path.join(BASE_DIR, "data")
+OUT_DIR  = os.path.join(BASE_DIR, "phase_ev2")
+os.makedirs(OUT_DIR, exist_ok=True)
+
+R_EARTH = 6371.0
+GRID_DEG = 0.5
+WINSORIZE_PCT = 95
+N_BOOTSTRAP = 2000
+RNG_SEED = 42
+MIN_REPORTS = 20
+
+# West Coast definition
+WEST_COAST_LON_MAX = -115.0
+WEST_COAST_LAT_MIN = 30.0
+
+def elapsed():
+    return f"{time.time()-t0:.1f}s"
+
+def haversine_km_vec(lat1, lon1, lat2, lon2):
+    r = np.radians
+    dlat = r(np.asarray(lat2) - np.asarray(lat1))
+    dlon = r(np.asarray(lon2) - np.asarray(lon1))
+    a = np.sin(dlat/2)**2 + np.cos(r(lat1))*np.cos(r(lat2))*np.sin(dlon/2)**2
+    return R_EARTH * 2 * np.arcsin(np.sqrt(np.clip(a, 0, 1)))
+
+
+# ============================================================
+# LOAD FROZEN GRID
+# ============================================================
+print("=" * 70)
+print("PHASE E-RED: REDESIGNED EVALUATION")
+print("Scoring frozen at phase-ev2-frozen (60 m/km)")
+print("=" * 70)
+
+with open(os.path.join(OUT_DIR, "phase_ev2_grid.json")) as f:
+    grid_data = json.load(f)
+print(f"  Full grid: {len(grid_data)} cells")
+
+
+# ============================================================
+# LOAD GEOMETRY
+# ============================================================
+print(f"\n[LOAD] ETOPO... ({elapsed()})")
+import netCDF4 as nc
+ds = nc.Dataset(os.path.join(DATA_DIR, "etopo_subset.nc"))
+if 'y' in ds.variables:
+    elev_lats = ds.variables['y'][:]
+    elev_lons = ds.variables['x'][:]
+else:
+    elev_lats = ds.variables['lat'][:]
+    elev_lons = ds.variables['lon'][:]
+elevation = ds.variables['z'][:]
+ds.close()
+
+print(f"[LOAD] Coast... ({elapsed()})")
+coast_mask_arr = np.zeros_like(elevation, dtype=bool)
+nrows, ncols = elevation.shape
+for i in range(1, nrows-1):
+    for j in range(1, ncols-1):
+        if elevation[i, j] < 0:
+            if np.any(elevation[i-1:i+2, j-1:j+2] >= 0):
+                coast_mask_arr[i, j] = True
+coast_i, coast_j = np.where(coast_mask_arr)
+coast_lats = elev_lats[coast_i]
+coast_lons = elev_lons[coast_j]
+coast_tree = cKDTree(np.column_stack([coast_lats, coast_lons]))
+
+counties_df = pd.read_csv(os.path.join(DATA_DIR, "county_centroids_pop.csv"))
+county_tree = cKDTree(np.column_stack([counties_df['lat'].values, counties_df['lon'].values]))
+counties_pop = counties_df['pop'].values
+
+print(f"[LOAD] Geometry complete ({elapsed()})")
+
+
+# ============================================================
+# LOAD NUFORC
+# ============================================================
+print(f"\n[LOAD] NUFORC... ({elapsed()})")
+nuforc_cols = ['datetime_str','city','state','country','shape',
+               'duration_seconds','duration_text','description',
+               'date_posted','latitude','longitude']
+df_raw = pd.read_csv(os.path.join(DATA_DIR, "nuforc_reports.csv"),
+                      names=nuforc_cols, header=None, low_memory=False)
+df_raw['latitude'] = pd.to_numeric(df_raw['latitude'], errors='coerce')
+df_raw['longitude'] = pd.to_numeric(df_raw['longitude'], errors='coerce')
+df_raw = df_raw.dropna(subset=['latitude', 'longitude'])
+df_raw = df_raw[(df_raw['latitude'] != 0) & (df_raw['longitude'] != 0)]
+df_raw['_dt'] = pd.to_datetime(df_raw['datetime_str'], errors='coerce')
+df_raw['_year'] = df_raw['_dt'].dt.year
+df_raw = df_raw[(df_raw['_year'] >= 1990) & (df_raw['_year'] <= 2014)]
+df_raw = df_raw[(df_raw['latitude'] >= 20) & (df_raw['latitude'] <= 55) &
+                (df_raw['longitude'] >= -135) & (df_raw['longitude'] <= -55)]
+df_raw = df_raw.reset_index(drop=True)
+print(f"  Total CONUS reports: {len(df_raw):,}")
+
+
+# ============================================================
+# FUNCTION: compute E_i (expected reports from population) per cell
+# ============================================================
+def compute_expected(cell_lat, cell_lon, half_deg, coastal_band_km):
+    """
+    Generate population-weighted expected report density for a cell.
+    Returns expected count (proportional — will be normalized globally).
+    """
+    # Create grid of points within cell
+    grid_lat = np.linspace(cell_lat - half_deg, cell_lat + half_deg, 30)
+    grid_lon = np.linspace(cell_lon - half_deg, cell_lon + half_deg, 30)
+    glat, glon = np.meshgrid(grid_lat, grid_lon, indexing='ij')
+    gf, gln = glat.flatten(), glon.flatten()
+
+    # Coastal filter
+    cd_grid, _ = coast_tree.query(np.column_stack([gf, gln]), k=1)
+    coastal_mask = (cd_grid * 111.0) <= coastal_band_km
+    gc_lat = gf[coastal_mask]
+    gc_lon = gln[coastal_mask]
+
+    if len(gc_lat) < 5:
+        return 0.0
+
+    # Population weighting
+    n_k = min(10, len(counties_pop))
+    cd_county, ci_county = county_tree.query(np.column_stack([gc_lat, gc_lon]), k=n_k)
+    weights = np.zeros(len(gc_lat))
+    for k in range(n_k):
+        d_km = cd_county[:, k] * 111.0 + 1.0
+        weights += counties_pop[ci_county[:, k]] / (d_km**2)
+
+    # Land/ocean weighting
+    lat_idx = np.clip(np.searchsorted(elev_lats, gc_lat), 0, len(elev_lats)-1)
+    lon_idx = np.clip(np.searchsorted(elev_lons, gc_lon), 0, len(elev_lons)-1)
+    ge = elevation[lat_idx, lon_idx]
+    lw = np.where(ge >= 0, 3.0, 0.05)
+    weights *= lw
+
+    return float(weights.sum())
+
+
+# ============================================================
+# MAIN EVALUATION FUNCTION
+# ============================================================
+def run_evaluation(coastal_band_km, label):
+    print(f"\n{'='*70}")
+    print(f"E-RED: {label} (coastal band = {coastal_band_km} km)")
+    print(f"{'='*70}")
+
+    # Filter NUFORC to coastal band
+    _, c_idx = coast_tree.query(np.column_stack([df_raw['latitude'].values,
+                                                  df_raw['longitude'].values]), k=1)
+    d_coast = haversine_km_vec(df_raw['latitude'].values, df_raw['longitude'].values,
+                                coast_lats[c_idx], coast_lons[c_idx])
+    df_band = df_raw[d_coast <= coastal_band_km].copy().reset_index(drop=True)
+    print(f"  NUFORC in {coastal_band_km}km band: {len(df_band):,}")
+
+    # West Coast filter
+    df_west = df_band[(df_band['longitude'] <= WEST_COAST_LON_MAX) &
+                       (df_band['latitude'] >= WEST_COAST_LAT_MIN)].copy()
+    print(f"  West Coast: {len(df_west):,}")
+
+    # Count O_i per cell (West Coast only)
+    print(f"\n  Computing O_i per cell... ({elapsed()})")
+    half = GRID_DEG / 2
+    cell_data = []
+
+    for cell in grid_data:
+        lat_c, lon_c, S = cell['lat'], cell['lon'], cell['S']
+
+        # West Coast filter
+        if lon_c > WEST_COAST_LON_MAX or lat_c < WEST_COAST_LAT_MIN:
+            continue
+
+        # Count UAP in cell
+        in_cell = ((df_west['latitude'].values >= lat_c - half) &
+                   (df_west['latitude'].values < lat_c + half) &
+                   (df_west['longitude'].values >= lon_c - half) &
+                   (df_west['longitude'].values < lon_c + half))
+        O_i = int(in_cell.sum())
+
+        cell_data.append({
+            'lat': lat_c, 'lon': lon_c, 'S': S, 'O_i': O_i,
+            'n_steep': cell['n_steep_cells'],
+        })
+
+    print(f"  West Coast grid cells: {len(cell_data)}")
+
+    # Compute E_i
+    print(f"  Computing E_i (population-weighted expected)... ({elapsed()})")
+    for cd in cell_data:
+        cd['E_i_raw'] = compute_expected(cd['lat'], cd['lon'], half, coastal_band_km)
+
+    # Normalize E_i so sum(E_i) = sum(O_i) across all West Coast cells
+    total_O = sum(cd['O_i'] for cd in cell_data)
+    total_E_raw = sum(cd['E_i_raw'] for cd in cell_data)
+    if total_E_raw == 0:
+        print("  ERROR: total expected = 0")
+        return None
+
+    scale = total_O / total_E_raw
+    for cd in cell_data:
+        cd['E_i'] = cd['E_i_raw'] * scale
+
+    # Filter to testable cells (N >= MIN_REPORTS)
+    testable = [cd for cd in cell_data if cd['O_i'] >= MIN_REPORTS]
+    print(f"  Testable cells (N >= {MIN_REPORTS}): {len(testable)}")
+    n_hot = sum(1 for cd in testable if cd['S'] > 0)
+    n_cold = sum(1 for cd in testable if cd['S'] == 0)
+    print(f"    S > 0 (hot): {n_hot}")
+    print(f"    S = 0 (cold): {n_cold}")
+
+    if len(testable) < 10:
+        print("  Too few testable cells for analysis.")
+        return {"label": label, "n_testable": len(testable), "verdict": "INSUFFICIENT_DATA"}
+
+    # Compute R_i = O_i / E_i
+    for cd in testable:
+        cd['R_i'] = cd['O_i'] / cd['E_i'] if cd['E_i'] > 0 else np.nan
+        cd['logR'] = np.log(cd['R_i']) if cd['R_i'] > 0 else np.nan
+
+    # Remove NaN
+    testable = [cd for cd in testable if not np.isnan(cd['logR'])]
+    print(f"  Valid R_i: {len(testable)}")
+
+    S_arr = np.array([cd['S'] for cd in testable])
+    logR_arr = np.array([cd['logR'] for cd in testable])
+    R_arr = np.array([cd['R_i'] for cd in testable])
+    O_arr = np.array([cd['O_i'] for cd in testable])
+    E_arr = np.array([cd['E_i'] for cd in testable])
+
+    # ---- METRIC 1: Spearman ----
+    rho, p_val = spearmanr(S_arr, logR_arr)
+    print(f"\n  Spearman(S, log(R)): rho = {rho:.3f}, p = {p_val:.4f} (n = {len(testable)})")
+
+    # Bootstrap CI on Spearman
+    rng = np.random.RandomState(RNG_SEED)
+    boot_rhos = []
+    for _ in range(N_BOOTSTRAP):
+        idx = rng.choice(len(testable), len(testable), replace=True)
+        if len(np.unique(S_arr[idx])) > 1:
+            r, _ = spearmanr(S_arr[idx], logR_arr[idx])
+            boot_rhos.append(r)
+    rho_ci_lo = np.percentile(boot_rhos, 2.5)
+    rho_ci_hi = np.percentile(boot_rhos, 97.5)
+    print(f"  Bootstrap 95% CI: [{rho_ci_lo:.3f}, {rho_ci_hi:.3f}]")
+
+    # ---- METRIC 2: Precision@K ----
+    # Top-K by S → fraction in top-20% of R
+    K_values = [5, 10]
+    R_threshold_80 = np.percentile(R_arr, 80)
+    precision_results = {}
+    for K in K_values:
+        if K > len(testable):
+            continue
+        top_k_idx = np.argsort(-S_arr)[:K]
+        n_in_top_R = sum(1 for i in top_k_idx if R_arr[i] >= R_threshold_80)
+        prec = n_in_top_R / K
+        precision_results[K] = {'precision': round(prec, 3), 'n_hit': n_in_top_R,
+                                 'R_threshold_80': round(R_threshold_80, 3)}
+        print(f"  Precision@{K}: {n_in_top_R}/{K} = {prec:.1%} "
+              f"(top-20% R threshold = {R_threshold_80:.2f})")
+
+    # ---- METRIC 3: Decile plot ----
+    n_bins = min(5, len(testable) // 5)  # at least 5 per bin
+    if n_bins >= 3:
+        S_ranks = rankdata(S_arr)
+        bin_edges = np.linspace(0, len(testable), n_bins + 1).astype(int)
+        decile_means = []
+        decile_cis = []
+        decile_S_means = []
+
+        for b in range(n_bins):
+            idx_sorted = np.argsort(S_ranks)
+            lo, hi = bin_edges[b], bin_edges[b+1]
+            bin_idx = idx_sorted[lo:hi]
+            bin_logR = logR_arr[bin_idx]
+            bin_S = S_arr[bin_idx]
+
+            mean_logR = np.mean(bin_logR)
+            # Bootstrap CI
+            boots = []
+            for _ in range(N_BOOTSTRAP):
+                bi = rng.choice(len(bin_logR), len(bin_logR), replace=True)
+                boots.append(np.mean(bin_logR[bi]))
+            ci_lo = np.percentile(boots, 2.5)
+            ci_hi = np.percentile(boots, 97.5)
+
+            decile_means.append(mean_logR)
+            decile_cis.append((ci_lo, ci_hi))
+            decile_S_means.append(np.mean(bin_S))
+
+        # Plot
+        fig, ax = plt.subplots(1, 1, figsize=(8, 5))
+        x = range(1, n_bins + 1)
+        ax.bar(x, decile_means, color='steelblue', alpha=0.7, edgecolor='k')
+        for i in range(n_bins):
+            ax.plot([x[i], x[i]], [decile_cis[i][0], decile_cis[i][1]],
+                    color='black', linewidth=2)
+        ax.axhline(0, color='red', linestyle='--', alpha=0.5)
+        ax.set_xlabel(f'S quintile (1=lowest, {n_bins}=highest)')
+        ax.set_ylabel('Mean log(R)  [R = O_i / E_i]')
+        ax.set_title(f'E-RED {label}: Geometric Score vs Excess Report Rate\n'
+                     f'Spearman ρ={rho:.3f} (p={p_val:.4f}), n={len(testable)}')
+        ax.set_xticks(x)
+        ax.set_xticklabels([f'Q{i+1}\n(S̄={decile_S_means[i]:.2f})' for i in range(n_bins)])
+        plt.tight_layout()
+        plot_file = os.path.join(OUT_DIR, f"e_red_{label.replace(' ', '_').lower()}.png")
+        plt.savefig(plot_file, dpi=150)
+        plt.close()
+        print(f"  Saved plot: {plot_file}")
+    else:
+        print(f"  Too few cells for decile plot (n_bins={n_bins})")
+        decile_means = []
+        decile_cis = []
+
+    # ---- METRIC 4: Poisson regression ----
+    # log(O_i) = α + log(E_i) + β·S_i
+    # Equivalent: log(O_i / E_i) = α + β·S_i
+    # Simple OLS on log(R) ~ S (with bootstrap for CI on β)
+    from numpy.linalg import lstsq
+    X = np.column_stack([np.ones(len(testable)), S_arr])
+    beta, residuals, _, _ = lstsq(X, logR_arr, rcond=None)
+    alpha_hat, beta_hat = beta[0], beta[1]
+    print(f"\n  Poisson proxy (OLS on log(R) ~ S):")
+    print(f"    α = {alpha_hat:.3f}, β = {beta_hat:.3f}")
+
+    # Bootstrap β
+    boot_betas = []
+    for _ in range(N_BOOTSTRAP):
+        idx = rng.choice(len(testable), len(testable), replace=True)
+        Xb = np.column_stack([np.ones(len(idx)), S_arr[idx]])
+        try:
+            b, _, _, _ = lstsq(Xb, logR_arr[idx], rcond=None)
+            boot_betas.append(b[1])
+        except:
+            pass
+    beta_ci_lo = np.percentile(boot_betas, 2.5)
+    beta_ci_hi = np.percentile(boot_betas, 97.5)
+    print(f"    β 95% CI: [{beta_ci_lo:.3f}, {beta_ci_hi:.3f}]")
+    print(f"    Interpretation: 1 unit increase in S → exp(β) = {np.exp(beta_hat):.2f}x rate ratio")
+
+    # ---- DETAIL TABLE ----
+    print(f"\n  {'lat':>6} {'lon':>7} {'S':>6} {'O_i':>5} {'E_i':>7} {'R_i':>6} {'logR':>7} {'n_steep':>7}")
+    print(f"  {'-'*55}")
+    for cd in sorted(testable, key=lambda x: -x['S']):
+        print(f"  {cd['lat']:6.1f} {cd['lon']:7.1f} {cd['S']:6.3f} {cd['O_i']:5d} "
+              f"{cd['E_i']:7.1f} {cd['R_i']:6.2f} {cd['logR']:7.3f} {cd['n_steep']:7d}")
+
+    # ---- Spearman without Puget ----
+    puget_mask = ~((S_arr > 1.8) & (np.array([cd['lat'] for cd in testable]) > 46) &
+                    (np.array([cd['lat'] for cd in testable]) < 50))
+    if puget_mask.sum() > 5:
+        rho_nopuget, p_nopuget = spearmanr(S_arr[puget_mask], logR_arr[puget_mask])
+        print(f"\n  Spearman WITHOUT Puget cluster: rho = {rho_nopuget:.3f}, "
+              f"p = {p_nopuget:.4f} (n = {puget_mask.sum()})")
+    else:
+        rho_nopuget, p_nopuget = None, None
+
+    return {
+        "label": label,
+        "coastal_band_km": coastal_band_km,
+        "n_west_coast_cells": len(cell_data),
+        "n_testable": len(testable),
+        "n_hot": n_hot,
+        "n_cold": n_cold,
+        "spearman": {
+            "rho": round(rho, 4),
+            "p": round(p_val, 4),
+            "ci_lo": round(rho_ci_lo, 4),
+            "ci_hi": round(rho_ci_hi, 4),
+            "n": len(testable),
+        },
+        "spearman_no_puget": {
+            "rho": round(rho_nopuget, 4) if rho_nopuget is not None else None,
+            "p": round(p_nopuget, 4) if p_nopuget is not None else None,
+        },
+        "precision": precision_results,
+        "poisson_proxy": {
+            "alpha": round(alpha_hat, 4),
+            "beta": round(beta_hat, 4),
+            "beta_ci_lo": round(beta_ci_lo, 4),
+            "beta_ci_hi": round(beta_ci_hi, 4),
+            "exp_beta": round(np.exp(beta_hat), 4),
+        },
+        "decile_means": [round(d, 4) for d in decile_means],
+        "decile_cis": [(round(c[0], 4), round(c[1], 4)) for c in decile_cis],
+        "cell_details": [
+            {"lat": cd['lat'], "lon": cd['lon'], "S": round(cd['S'], 4),
+             "O_i": cd['O_i'], "E_i": round(cd['E_i'], 2),
+             "R_i": round(cd['R_i'], 4), "logR": round(cd['logR'], 4),
+             "n_steep": cd['n_steep']}
+            for cd in sorted(testable, key=lambda x: -x['S'])
+        ],
+    }
+
+
+# ============================================================
+# RUN
+# ============================================================
+res_primary = run_evaluation(200, "primary 200km")
+res_secondary = run_evaluation(20, "secondary 20km")
+
+
+# ============================================================
+# COMBINED SUMMARY
+# ============================================================
+print(f"\n{'='*70}")
+print("COMBINED SUMMARY: E-RED")
+print(f"{'='*70}")
+
+for tag, res in [("PRIMARY (200km)", res_primary), ("SECONDARY (20km)", res_secondary)]:
+    if res is None or res.get('n_testable', 0) < 10:
+        print(f"\n  {tag}: insufficient data")
+        continue
+    sp = res['spearman']
+    snp = res['spearman_no_puget']
+    poi = res['poisson_proxy']
+    print(f"\n  {tag}:")
+    print(f"    Testable cells: {res['n_testable']} (hot={res['n_hot']}, cold={res['n_cold']})")
+    print(f"    Spearman(S, logR): rho={sp['rho']:.3f} [{sp['ci_lo']:.3f}, {sp['ci_hi']:.3f}] p={sp['p']:.4f}")
+    if snp['rho'] is not None:
+        print(f"    Spearman no Puget: rho={snp['rho']:.3f} p={snp['p']:.4f}")
+    for K, pr in res['precision'].items():
+        print(f"    Precision@{K}: {pr['precision']:.1%}")
+    print(f"    β(S): {poi['beta']:.3f} [{poi['beta_ci_lo']:.3f}, {poi['beta_ci_hi']:.3f}]"
+          f"  exp(β)={poi['exp_beta']:.2f}x")
+
+
+# ============================================================
+# SAVE
+# ============================================================
+combined = {
+    "metadata": {
+        "script": "phase_e_red.py",
+        "timestamp": datetime.now().isoformat(),
+        "frozen_tag": "phase-ev2-frozen",
+        "frozen_commit": "c2366d2",
+        "threshold_mkm": 60,
+        "west_coast_def": f"lon <= {WEST_COAST_LON_MAX}, lat >= {WEST_COAST_LAT_MIN}",
+        "min_reports": MIN_REPORTS,
+        "n_bootstrap": N_BOOTSTRAP,
+        "description": "Redesigned evaluation: rate ratio R_i = O_i/E_i instead of per-cell OR",
+    },
+    "primary_200km": res_primary,
+    "secondary_20km": res_secondary,
+}
+
+out_file = os.path.join(OUT_DIR, "phase_e_red_evaluation.json")
+with open(out_file, 'w') as f:
+    json.dump(combined, f, indent=2, default=str)
+print(f"\n  Saved: {out_file}")
+
+import shutil
+repo_out = os.path.join(BASE_DIR, "uap-canyon-analysis", "results", "phase_ev2")
+os.makedirs(repo_out, exist_ok=True)
+shutil.copy2(out_file, repo_out)
+for png in [f for f in os.listdir(OUT_DIR) if f.startswith('e_red_') and f.endswith('.png')]:
+    shutil.copy2(os.path.join(OUT_DIR, png), repo_out)
+print(f"  Copied to repo")
+
+print(f"\n{'='*70}")
+print(f"DONE ({elapsed()})")
+print(f"{'='*70}")
