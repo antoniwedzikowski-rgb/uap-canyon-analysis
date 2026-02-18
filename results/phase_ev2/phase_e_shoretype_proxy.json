@@ -1,0 +1,34 @@
+{
+  "test": "Shoreline type proxy (cliff score from ETOPO land gradient)",
+  "S_cliff_correlation": {
+    "spearman_rho": 0.6126,
+    "spearman_p": 0.0,
+    "pearson_r": 0.4558
+  },
+  "cliff_logR_spearman": 0.3559,
+  "models": {
+    "A_S_only": {
+      "beta_S": 0.6562,
+      "R2": 0.1627
+    },
+    "B_cliff_only": {
+      "beta_cliff": 0.007009,
+      "R2": 0.14
+    },
+    "C_both": {
+      "beta_S": 0.4781,
+      "beta_cliff": 0.0045,
+      "R2": 0.2084
+    }
+  },
+  "F_tests": {
+    "S_given_cliff": {
+      "F": 8.556,
+      "p": 0.0043
+    },
+    "cliff_given_S": {
+      "F": 5.716,
+      "p": 0.0187
+    }
+  }
+}
