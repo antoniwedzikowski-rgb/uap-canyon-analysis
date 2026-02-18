@@ -201,6 +201,107 @@ framework.
 
 ---
 
+## Band Sensitivity Sweep (commit `69f7241`)
+
+Tested S–logR correlation at 10, 25, 50, 100, 200 km coastal bands,
+separately for West Coast and East Coast.
+
+### West Coast
+
+| Band (km) | n cells | Spearman ρ | p-value | w/o Puget ρ | w/o Puget p |
+|-----------|---------|------------|---------|-------------|-------------|
+| 10 | 39 | 0.149 | 0.37 (NS) | — | — |
+| 25 | 50 | 0.348 | 0.013 | 0.091 | 0.58 (NS) |
+| **50** | **63** | **0.430** | **0.0005** | — | — |
+| 100 | 83 | 0.372 | 0.0006 | — | — |
+| 200 | 102 | 0.374 | 0.0001 | 0.243 | 0.021 |
+
+Peak at 50 km supports a nearshore mechanism. Signal emerges at 25 km
+and stabilizes at 50+ km. The 10 km band lacks power (n = 39).
+
+### East Coast
+
+| Band (km) | n cells | Spearman ρ | p-value |
+|-----------|---------|------------|---------|
+| 10 | 41 | -0.068 | 0.67 |
+| 25 | 72 | 0.055 | 0.65 |
+| 50 | 108 | 0.029 | 0.77 |
+| 100 | 151 | 0.043 | 0.60 |
+| 200 | 190 | 0.055 | 0.46 |
+
+**Null at every bandwidth.** Only 2 testable S > 0 cells (both Miami area,
+S ≈ 0.32). East Coast canyon cells (Norfolk, Hudson) are too far from the
+NUFORC-dense areas to test. The CTH does not generalize to the East Coast.
+
+---
+
+## Shoreline Type Proxy Test (commit `1d7c948`)
+
+Tested Option 3 confound: does above-water coastal topography (rocky cliffs,
+viewpoints) explain the UAP excess better than below-water canyons (S)?
+
+**Proxy**: ETOPO land-side elevation gradient within 5 km of coast, per cell.
+High cliff_score = steep terrain near water (rocky/cliffy).
+
+### S vs cliff_score correlation
+
+| Metric | Value |
+|--------|-------|
+| Spearman(S, cliff) | **0.613** (p < 0.0001) |
+| Pearson(S, cliff) | 0.456 (p < 0.0001) |
+
+Moderate collinearity: where canyons exist underwater, the coast above tends
+to be steeper too. But ρ = 0.61 (not ~1) allows partial separation.
+
+### Competing models (logR ~ predictors, n = 102)
+
+| Model | R² | β_S | β_cliff |
+|-------|-----|-----|---------|
+| A: logR ~ S | 0.163 | +0.656 | — |
+| B: logR ~ cliff | 0.140 | — | +0.007 |
+| C: logR ~ S + cliff | **0.208** | +0.478 | +0.005 |
+
+**F-tests for incremental contribution:**
+- S adds to cliff-only: F = 8.56, **p = 0.004** — S survives controlling for cliff
+- Cliff adds to S-only: F = 5.72, **p = 0.019** — cliff also contributes
+
+Both predictors carry independent information. β_S bootstrap CI [+0.13, +0.83]
+excludes zero. β_cliff bootstrap CI [-0.0002, +0.0088] is marginal.
+
+### Within Puget (n = 11)
+
+| Correlation | ρ |
+|-------------|---|
+| S → logR | **0.773** |
+| cliff → logR | 0.273 |
+| S → cliff | 0.218 |
+
+Inside Puget, underwater canyon geometry (S) explains ~6× more variance than
+above-water terrain (cliff). The two predictors are only weakly correlated
+within Puget (ρ = 0.22), so collinearity is not an issue there.
+
+### Puget S=0 vs S>0 cliff comparison
+
+| Group | Mean cliff |
+|-------|-----------|
+| Puget S=0 (n=11) | 52.4 |
+| Puget S>0 (n=11) | 74.6 |
+
+Mann-Whitney p = 0.065 (NS). Canyon cells have somewhat steeper land
+topography, but the difference is not significant.
+
+### Assessment
+
+**Option 3 (cliff/viewpoint confound) is weakened but not fully eliminated.**
+
+The underwater canyon score S survives controlling for land-side cliff gradient
+(p = 0.004). Inside Puget, S dominates cliff by 3:1 in predictive power.
+However, the moderate S–cliff collinearity (ρ = 0.61) means perfect separation
+is impossible with ETOPO alone. A proper shoreline classification (e.g., NOAA
+ESI data with rocky/sandy/muddy categories) would provide a cleaner test.
+
+---
+
 ## Final Assessment: Path A vs Path B
 
 ### What survives
@@ -269,6 +370,9 @@ an unmeasured confound correlated with extreme submarine topography remains open
 | 14 | `phase_e_puget_interaction.py` | Puget interaction model (logR ~ S + P + S×P) |
 | 15 | `phase_e_puget_sanity.py` | Centering, Cook's D, LOO, within-group checks |
 | 16 | `phase_e_puget_confound.py` | Confound test: Puget S=0 vs Other S=0 rates |
+| 17 | `phase_e_band_sweep.py` | Coastal band sensitivity sweep (10–200 km, WC+EC) |
+| 17b | `phase_e_eastcoast_red.py` | East Coast E-RED check (null result) |
+| 18 | `phase_e_shoretype_proxy.py` | Shoreline type proxy: cliff vs canyon confound |
 
 ### Results (results/)
 
@@ -279,7 +383,10 @@ an unmeasured confound correlated with extreme submarine topography remains open
 | `phase_ev2/` | `phase_e_red_v2_evaluation.json` (primary results) |
 | `phase_ev2/` | `phase_e_puget_interaction.json`, `phase_e_puget_sanity.json` |
 | `phase_ev2/` | `phase_e_puget_confound.json` (confound test) |
-| `phase_ev2/` | `e_red_v2_*.png` (decile plots) |
+| `phase_ev2/` | `phase_e_band_sweep.json` (band sensitivity) |
+| `phase_ev2/` | `phase_e_eastcoast_check.json` (East Coast null) |
+| `phase_ev2/` | `phase_e_shoretype_proxy.json` (cliff confound test) |
+| `phase_ev2/` | `e_red_v2_*.png`, `e_red_band_sweep.png` (plots) |
 
 ### Git Tags
 
