@@ -1,0 +1,15 @@
+{
+  "test": "Norwegian fjord replication",
+  "preregistration": "phase_e_norway_preregistration.md",
+  "data_sources": {
+    "bathymetry": "SRTM30_PLUS (Scripps/UCSD)",
+    "uap_reports": "NUFORC (40 Norwegian records)",
+    "population": "WorldPop 2020 1km"
+  },
+  "n_coastal_cells": 463,
+  "n_testable": 17,
+  "n_with_S_gt_0": 17,
+  "verdict": "POSITIVE",
+  "spearman_rho": 0.4877,
+  "spearman_p": 0.047
+}
