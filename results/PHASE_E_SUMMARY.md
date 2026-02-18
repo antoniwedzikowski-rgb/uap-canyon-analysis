@@ -154,11 +154,99 @@ However, outside Puget Sound, S does not predict cell-level variation among othe
 Spearman (0.243 without Puget) is driven by the contrast between S > 0 and S = 0
 cells, not by dose-response within the S > 0 group.
 
+---
+
+## Confound Test (commit `f0cbbf9`)
+
+The Puget interaction result raised a critical question: is the Puget excess
+caused by canyon geometry, or is Puget Sound simply a region with more UAP
+reports (Navy bases, reporting culture, Pacific NW observer density)?
+
+### Test design
+
+Compare UAP rates (ΣO / ΣE) in a 2×2 design: Region (Puget / Other) × Canyon (S>0 / S=0).
+
+If Puget S=0 cells have elevated rates → **confound** (the region is "hot" regardless).
+If Puget S=0 cells have normal rates → **canyons matter** (excess is geometry-specific).
+
+### Rate table (ΣO / ΣE)
+
+|                  | S = 0 | S > 0 | Canyon uplift |
+|------------------|-------|-------|---------------|
+| **Puget**        | 0.528 | 5.035 | **9.54×**     |
+| **Other WC**     | 1.083 | 1.901 | 1.76×         |
+
+### Result: NOT a confound
+
+Puget S=0 cells have **lower** rates than expected (0.528), below the West Coast
+average (1.083). Mann-Whitney p = 0.58 — no significant elevation. The excess
+is specific to canyon cells (S>0), with a 9.54× uplift.
+
+San Diego shows a similar pattern (uplift 10.96×) but with only n=4 cells.
+
+### 2×2 interaction model
+
+| Coefficient | Value | Bootstrap 95% CI | F-test |
+|-------------|-------|------------------|--------|
+| β_Canyon | +0.674 | [+0.156, +1.191] | p = 0.031 * |
+| β_Puget | −0.147 | [−1.664, +1.470] | p = 0.73 NS |
+| β_Canyon×Puget | +0.841 | [−1.025, +2.626] | p = 0.17 NS |
+
+The canyon main effect is significant (p = 0.031) — canyon cells have higher
+rates than non-canyon cells **across the entire West Coast**. The Puget main
+effect is null — the region is not generically "hot". The interaction is
+positive but not significant (p = 0.17, n=102) — the canyon effect is larger
+in Puget but the sample is too small to confirm this statistically in a 2×2
+framework.
+
+---
+
+## Final Assessment: Path A vs Path B
+
+### What survives
+
+1. **Canyon cells have higher UAP rates** — β_Canyon is significant (p = 0.031)
+   across the entire West Coast. This is not Puget-only.
+
+2. **Puget is not a generic hotspot** — S=0 cells in Puget have below-average
+   rates (0.528). The Navy/culture confound is ruled out.
+
+3. **The canyon effect is strongest in Puget** — 9.54× uplift vs 1.76× elsewhere.
+   Within Puget, S correlates with logR at rho = 0.77 (p = 0.005).
+
+4. **San Diego echoes the pattern** — 10.96× canyon uplift (small n).
+
+### What does not survive
+
+1. **CTH as a universal prediction** — East Coast canyons (Norfolk, Hudson) show
+   no effect. The hypothesis that "shelf canyons → UAP everywhere" is falsified.
+
+2. **Generalizability across West Coast** — among S>0 cells outside Puget,
+   there is no S-logR correlation (rho = -0.05).
+
+### Verdict
+
+**Neither pure Path A nor pure Path B.** The data show:
+
+- Path B is wrong about Puget being an outlier/artefact — the confound test
+  rules this out. Canyon cells in Puget have 9.54× the rate of non-canyon cells
+  in the same region.
+
+- Path A is wrong about universality — the mechanism does not work on the East
+  Coast or generalize across all West Coast canyon locations.
+
+The empirical picture is: **canyon geometry is associated with UAP report excess
+in specific locations (Puget Sound, possibly San Diego) where canyon topography
+is extreme (fjord-like, high gradient density), but not at moderate canyon sites
+or on the East Coast.** Whether this reflects a genuine geophysical mechanism or
+an unmeasured confound correlated with extreme submarine topography remains open.
+
 ### Open questions
 
-- Why is Puget Sound qualitatively different? Possible factors: fjord-like
-  topography, dense population along narrow waterways, military presence
-  (Whidbey NAS, Bangor), or a genuine localized phenomenon.
+- Why do Puget and San Diego show the pattern but not Monterey, Santa Barbara,
+  or Humboldt? All have S > 0 but only Puget/SD show canyon uplift.
+- Is the within-Puget gradient (rho = 0.77, n = 11) stable to alternative E_i
+  models or population data?
 - The scoring function's aggregation radius (50 km) extends beyond the 0.5° cell
   boundary — cells can inherit S from neighboring steep features (CRITICAL-2,
   not yet resolved).
@@ -180,6 +268,7 @@ cells, not by dose-response within the S > 0 group.
 | 13 | `phase_e_red_v2.py` | E-RED v2 haversine-corrected + 20/25 km comparison |
 | 14 | `phase_e_puget_interaction.py` | Puget interaction model (logR ~ S + P + S×P) |
 | 15 | `phase_e_puget_sanity.py` | Centering, Cook's D, LOO, within-group checks |
+| 16 | `phase_e_puget_confound.py` | Confound test: Puget S=0 vs Other S=0 rates |
 
 ### Results (results/)
 
@@ -189,6 +278,7 @@ cells, not by dose-response within the S > 0 group.
 | `phase_ev2/` | `phase_ev2_predictions.json`, `phase_ev2_grid.json` |
 | `phase_ev2/` | `phase_e_red_v2_evaluation.json` (primary results) |
 | `phase_ev2/` | `phase_e_puget_interaction.json`, `phase_e_puget_sanity.json` |
+| `phase_ev2/` | `phase_e_puget_confound.json` (confound test) |
 | `phase_ev2/` | `e_red_v2_*.png` (decile plots) |
 
 ### Git Tags
