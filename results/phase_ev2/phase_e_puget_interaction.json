@@ -1,0 +1,63 @@
+{
+  "test": "Puget interaction",
+  "n_cells": 102,
+  "n_puget": 11,
+  "n_other": 91,
+  "puget_definition": "S > 1.8 AND 46 < lat < 50",
+  "model_1_baseline": {
+    "formula": "logR ~ S",
+    "alpha": 0.2973,
+    "beta_S": 0.6562,
+    "R2": 0.1627
+  },
+  "model_2_additive": {
+    "formula": "logR ~ S + Puget",
+    "alpha": 0.3034,
+    "beta_S": 0.5749,
+    "beta_Puget": 0.2382,
+    "R2": 0.1643
+  },
+  "model_3_interaction": {
+    "formula": "logR ~ S + Puget + S\u00d7Puget",
+    "alpha": 0.3147,
+    "beta_S": 0.5176,
+    "beta_Puget": -21.6392,
+    "beta_SxPuget": 11.0519,
+    "R2": 0.2568,
+    "bootstrap_CIs": {
+      "\u03b1 (intercept)": {
+        "point": 0.3147,
+        "ci_lo": 0.077,
+        "ci_hi": 0.5493
+      },
+      "\u03b2_S": {
+        "point": 0.5176,
+        "ci_lo": 0.1312,
+        "ci_hi": 0.9127
+      },
+      "\u03b2_Puget": {
+        "point": -21.6392,
+        "ci_lo": -34.4696,
+        "ci_hi": -15.8193
+      },
+      "\u03b2_S\u00d7Puget": {
+        "point": 11.0519,
+        "ci_lo": 8.1491,
+        "ci_hi": 17.6881
+      }
+    }
+  },
+  "F_test_interaction": {
+    "F_statistic": 12.2037,
+    "df1": 1,
+    "df2": 98,
+    "p_value": 0.0007,
+    "significant": true
+  },
+  "effective_slopes": {
+    "outside_puget": 0.5176,
+    "inside_puget": 11.5695,
+    "exp_outside": 1.6779,
+    "exp_inside": 105820.424
+  }
+}
