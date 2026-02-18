@@ -1,0 +1,37 @@
+{
+  "test": "Puget interaction sanity checks",
+  "centering": {
+    "grand_mean_S": 0.391,
+    "centered_beta_Puget": -17.3184,
+    "uncentered_beta_Puget": -21.6392,
+    "note": "Centered \u03b2_Puget is logR difference at mean S; uncentered is at S=0 (nonexistent)",
+    "pred_puget_at_mean_puget_S": 1.6849,
+    "pred_other_at_mean_puget_S": 1.344
+  },
+  "cooks_distance": {
+    "threshold_4n": 0.0392,
+    "n_influential": 2,
+    "n_influential_puget": 1,
+    "max_cook_cell": {
+      "lat": 49.25,
+      "lon": -123.25,
+      "S": 2.2364,
+      "R_i": 71.9385,
+      "cooks_d": 0.1218
+    }
+  },
+  "leave_one_out": {
+    "full_beta_SxPuget": 11.0519,
+    "loo_range": [
+      10.2199,
+      13.1025
+    ],
+    "loo_mean": 11.1595,
+    "all_positive": true
+  },
+  "within_puget_spearman": {
+    "rho": 0.7727,
+    "p": 0.0053,
+    "n": 11
+  }
+}
