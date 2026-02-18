@@ -1,0 +1,84 @@
+{
+  "test": "Puget confound test",
+  "question": "Is Puget UAP excess driven by canyons or regional confound?",
+  "group_rates": {
+    "Puget + Canyon (S>0)": {
+      "n": 11,
+      "mean_R": 12.361,
+      "median_R": 4.833,
+      "mean_logR": 1.685,
+      "sum_O": 2624,
+      "sum_E": 521.1,
+      "aggregate_rate": 5.035
+    },
+    "Puget + No Canyon (S=0)": {
+      "n": 7,
+      "mean_R": 4.906,
+      "median_R": 1.426,
+      "mean_logR": 0.17,
+      "sum_O": 451,
+      "sum_E": 854.9,
+      "aggregate_rate": 0.528
+    },
+    "Other + Canyon (S>0)": {
+      "n": 15,
+      "mean_R": 3.979,
+      "median_R": 2.947,
+      "mean_logR": 0.992,
+      "sum_O": 2943,
+      "sum_E": 1548.4,
+      "aggregate_rate": 1.901
+    },
+    "Other + No Canyon (S=0)": {
+      "n": 69,
+      "mean_R": 2.237,
+      "median_R": 1.439,
+      "mean_logR": 0.317,
+      "sum_O": 7545,
+      "sum_E": 6967.3,
+      "aggregate_rate": 1.083
+    }
+  },
+  "confound_test": {
+    "puget_s0_n": 7,
+    "other_s0_n": 69,
+    "puget_s0_aggregate_rate": 0.5275,
+    "other_s0_aggregate_rate": 1.0829,
+    "mann_whitney_p": 0.5835,
+    "verdict": "NO_CONFOUND"
+  },
+  "interaction_2x2": {
+    "alpha": 0.3173,
+    "beta_Canyon": 0.6744,
+    "beta_Puget": -0.1474,
+    "beta_CanyonxPuget": 0.8407,
+    "bootstrap_CIs": {
+      "\u03b1": {
+        "point": 0.3173,
+        "ci_lo": 0.0975,
+        "ci_hi": 0.5352
+      },
+      "\u03b2_Canyon": {
+        "point": 0.6744,
+        "ci_lo": 0.1561,
+        "ci_hi": 1.191
+      },
+      "\u03b2_Puget": {
+        "point": -0.1474,
+        "ci_lo": -1.6637,
+        "ci_hi": 1.4699
+      },
+      "\u03b2_Canyon\u00d7Puget": {
+        "point": 0.8407,
+        "ci_lo": -1.0248,
+        "ci_hi": 2.6261
+      }
+    }
+  },
+  "rate_table": {
+    "puget_s0": 0.5275,
+    "puget_s1": 5.0351,
+    "other_s0": 1.0829,
+    "other_s1": 1.9006
+  }
+}
