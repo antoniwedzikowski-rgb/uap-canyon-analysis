@@ -4,9 +4,9 @@ Statistical analysis of the spatial relationship between UAP (Unidentified Anoma
 
 ## Key Finding
 
-UAP reports within 200 km of the US coastline show elevated odds near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells) on the West Coast. The effect is binary (canyon vs. non-canyon), not a smooth dose-response gradient.
+UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001) and shows a marginally significant signal in Norwegian fjords (rho = 0.49, p = 0.047, n = 17 cells from 40 reports — suggestive but fragile).
 
-**Critical limitation**: The effect is regional. It replicates on the West Coast (OR = 6.21) but **reverses** on the East/Gulf Coast (OR = 0.36). It does not survive confound tests for ocean depth or ESI shore type. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
+**Critical limitations**: The effect is regional — it reverses on the East/Gulf Coast (OR = 0.36). The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). The Norway replication is low-powered. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
 
 ## Repository Structure
 
@@ -138,7 +138,7 @@ NUFORC data quality assessment and hypothesis discrimination.
 
 - **Sprint 1**: Logistic regression with population-matched controls. Canyon proximity effect survives port/military/population covariates.
 - **Sprint 2**: GAM partial dependence, cluster bootstrap (2,000 resamples), geocoding jitter test. Effect is not an artifact of binary discretization.
-- **Sprint 3**: Temporal permutation testing (1,000 shuffles), importance-weighted OR by gradient bin. Only the 60+ m/km bin shows reliable effect.
+- **Sprint 3**: Temporal permutation testing (1,000 shuffles), importance-weighted OR by gradient bin. Only the 60+ m/km bin shows reliable effect. **Note**: Sprint 3 temporal clustering result (p = 0.001) was CONUS-wide; does not replicate when restricted to West Coast (p = 1.0 for 1990-2014, p = 0.18 for post-2014). Not included in paper.
 
 ### Phase D: Robustness Audit
 
@@ -181,8 +181,8 @@ Pre-registered geometric scoring function frozen before evaluation.
 |----------|--------|--------|---------|
 | Ocean depth | Nested F-test | S dominant over depth | S_DOMINANT |
 | Magnetic anomaly | Nested F-test | S dominates; canyon cells have *lower* anomalies | S_DOMINANT |
-| ESI shore type | Nested F-test | Shore type explains S away | **SHORE_DOMINANT** |
-| Puget Sound | 2x2 interaction | Puget has baseline elevation, not canyon-specific | MIXED |
+| ESI shore type | Nested F-test (n=18, CA only) | All F-tests non-sig (p > 0.39); no Puget coverage | INCONCLUSIVE (underpowered) |
+| Puget Sound | 2x2 rate interaction | S=0 Puget rate (0.53) not elevated vs elsewhere (1.08) | NO_CONFOUND (canyon-specific) |
 
 **Replication (corrected — population-adjusted E_i, per-fold normalization):**
 
@@ -197,7 +197,7 @@ Pre-registered geometric scoring function frozen before evaluation.
 | Spatial forward: SoCal | 0.470 | 0.049 | Pass |
 | 5-year rolling windows | 21/21 positive | 18/21 sig | Pass |
 | Threshold sweep (20-100 m/km) | 0.374-0.416 | all < 0.0002 | Pass |
-| Norway replication | n/a | n/a | Underpowered (n=38) |
+| Norway fjord replication | 0.488 | 0.047 | Marginal (n=17 cells, 40 reports) |
 
 See `results/PHASE_E_SUMMARY.md` for the complete 600-line Phase E narrative.
 
