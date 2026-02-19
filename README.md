@@ -6,7 +6,7 @@ Statistical analysis of the spatial relationship between UAP (Unidentified Anoma
 
 UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
 
-**Critical limitations**: The effect is regional — it reverses on the East/Gulf Coast (OR = 0.36). The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
+**Critical limitations**: The effect is regional — it is not detected on the East/Gulf Coast (ρ = 0.055, p = 0.459, n_hot = 2 of 185 cells). The wider continental shelf places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data (NUFORC). This is a testability limitation, not a falsification. The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
 
 ## Repository Structure
 
@@ -154,7 +154,7 @@ Six-category stress-test of the headline result on 38,256 coastal reports (1990-
 | D4: Missingness | 99.999% geocoded | Non-issue |
 | D5: Seasonality | No month drives effect | Pass |
 | D6: West Coast only | OR = 6.21 | Pass |
-| **D6: East/Gulf Coast** | **OR = 0.36 (opposite)** | **Fail** |
+| **D6: East/Gulf Coast** | **ρ = 0.055, p = 0.459 (not detected; n_hot = 2/185)** | **Fail — testability** |
 | **D6: Holdout Puget+SoCal** | **OR = 0.87 (null)** | **Fail** |
 
 **Phase D extensions:**
