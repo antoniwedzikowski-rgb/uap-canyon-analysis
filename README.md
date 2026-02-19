@@ -187,6 +187,12 @@ Pre-registered geometric scoring function frozen before evaluation.
 
 The effect concentrates in regions with extreme submarine topography (Puget Sound fjords, Scripps/La Jolla canyons), with an identical pattern: S=0 suppression below baseline + S>0 uplift 6-10x. Rest of the West Coast shows weak uplift (1.4x). San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
 
+Monterey Canyon — one of the world's largest submarine canyons — shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation in which the effect scales with canyon proximity to shore, not canyon depth alone.
+
+**Non-linearity:** The relationship is non-linear. Quintile analysis shows Q1–Q4 of S have similar mean logR (0.20–0.46, overlapping CIs), while Q5 jumps to 1.40. The effect concentrates in the highest quintile (S > ~1.3), corresponding to cells with extreme near-shore canyon topography. The Spearman rho = 0.37 captures a real monotonic trend but understates the threshold-like character of the association.
+
+**Coastal band dependence:** The effect peaks at 50 km (rho = 0.43, p = 0.0005), is non-significant at 10 km (rho = 0.15, p = 0.37), and stabilizes at 100–200 km (rho = 0.37). This argues against a direct line-of-sight coastal observation mechanism and suggests a broader coastal-zone phenomenon.
+
 **Confound tests:**
 
 | Confound | Method | Result | Verdict |
@@ -194,6 +200,7 @@ The effect concentrates in regions with extreme submarine topography (Puget Soun
 | Ocean depth | Nested F-test | S dominant over depth | S_DOMINANT |
 | Magnetic anomaly | Nested F-test | S dominates; canyon cells have *lower* anomalies | S_DOMINANT |
 | ESI shore type | Nested F-test (n=18, CA only) | All F-tests non-sig (p > 0.39); no Puget coverage | INCONCLUSIVE (underpowered) |
+| Shore type proxy (ETOPO cliff) | Nested F-test (n=102) | S survives cliff control (p=0.004); cliff also independent (p=0.019); R²=0.21 combined | S_SURVIVES (both contribute) |
 | Puget Sound | 2x2 rate interaction | S=0 Puget rate (0.53) not elevated vs elsewhere (1.08) | NO_CONFOUND (canyon-specific) |
 | Coastal upwelling (chl-a) | Nested F-test (n=99) | S adds to chl-a: F=18.5, p<0.0001; chl-a uncorrelated with S (rho=-0.02); S_DOM at all radii (50-200km) | S_DOMINANT |
 
@@ -236,6 +243,9 @@ See `STATISTICAL_AUDIT_REPORT.md` for the full 47-finding audit and resolution s
 | 7 | Phase D still uses deg*111 approximation (not haversine) | MEDIUM | phase_d_robustness.py |
 | 8 | Post-2014 geocoding assigns identical coords per city | MEDIUM | phase_e_replication_suite.py |
 | 9 | min_reports threshold varies (20, 10, or 5) across tests | MEDIUM | phase_e_replication_suite.py |
+| 10 | Oregon S=0 regional excess (O/E = 2.09 vs 0.91 elsewhere, p ≈ 0.03) | MEDIUM | E_i population model |
+
+Oregon S=0 cells report at 2.1× expected rate, indicating a Pacific Northwest cultural factor not captured by the population model. That Puget Sound S=0 cells within this same region show suppressed rates (0.74×) strengthens the canyon-specific interpretation — the regional excess does not extend to non-canyon cells in Puget Sound.
 
 ## Data Sources
 
