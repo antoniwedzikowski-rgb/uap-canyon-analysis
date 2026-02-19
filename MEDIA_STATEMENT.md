@@ -12,9 +12,9 @@ A statistical analysis testing whether UAP (Unidentified Anomalous Phenomena) re
 
 ## Key finding
 
-UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features — Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, and port infrastructure. The association replicated in independent post-2014 data not used to develop the model (ρ = 0.35, p = 0.0001), is stable across temporal splits (1990-2002 and 2003-2014 both significant), survives all tested gradient thresholds (20-100 m/km), and correctly predicted 4 out of 5 top hotspot cells in held-out spatial validation.
+UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features — Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, port infrastructure, and proximity to 35 Navy offshore operating area polygons (NOAA MarineCadastre). The association replicated in independent post-2014 data not used to develop the model (ρ = 0.35, p = 0.0001), is stable across temporal splits (1990-2002 and 2003-2014 both significant), survives all tested gradient thresholds (20-100 m/km), and correctly predicted 4 out of 5 top hotspot cells in held-out spatial validation.
 
-The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells) and San Diego (9.8× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association.
+The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells) and San Diego (9.8× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay canyon cells — located 127–192 km from the nearest Navy operating area — still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells), ruling out military proximity as an explanation at that distance.
 
 ## What the data does not show
 
@@ -22,7 +22,7 @@ The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). 
 
 ## Methodology
 
-The analysis uses 23 Python scripts and 13 public datasets including NUFORC sighting reports (80,332 reports, 1990-2014; primary analysis restricted to West Coast 200 km coastal band), NOAA ETOPO1 bathymetry, US Census population data, military base locations, and port infrastructure. Canyon features are detected via gradient magnitude on the continental shelf (threshold 60 m/km). Report rates are population-adjusted using inverse distance weighting from county-level census data.
+The analysis uses 24 Python scripts and 14 public datasets including NUFORC sighting reports (80,332 reports, 1990-2014; primary analysis restricted to West Coast 200 km coastal band), NOAA ETOPO1 bathymetry, US Census population data, military base locations, Navy operating area boundaries, and port infrastructure. Canyon features are detected via gradient magnitude on the continental shelf (threshold 60 m/km). Report rates are population-adjusted using inverse distance weighting from county-level census data.
 
 ## Next steps
 
