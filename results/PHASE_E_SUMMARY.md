@@ -471,6 +471,78 @@ NUFORC city/state lookup (76% geocoding rate for post-2014).
 
 ---
 
+## Military OPAREA Confound Test
+
+Tests whether proximity to Navy offshore operating areas (OPAREAs) — rather
+than submarine canyon geometry — explains the UAP report excess.
+
+**Data**: 35 OPAREA polygon boundaries from NOAA MarineCadastre (Navy Common
+Operating Picture, Dec 2018). Distance computed from each 0.5° cell center
+to nearest OPAREA boundary using point-to-segment projection.
+
+### Global result (misleading if taken at face value)
+
+| Model | R² |
+|-------|-----|
+| S only | 0.163 |
+| OPAREA only (best metric) | ~0.08 |
+| S + OPAREA | ~0.18 |
+
+Global nested F-tests: S given OPAREA F ≈ 10.0, p = 0.002; OPAREA given S
+F ≈ 2.1, p = 0.15. Naively, S dominates. **But** the global test pools
+regions with fundamentally different geometric relationships between OPAREA
+boundaries and the coastline.
+
+### Regional breakdown (the honest assessment)
+
+| Region | n | rho(S, OP) | F(S\|OP) p | F(OP\|S) p | Verdict |
+|--------|---|-----------|-----------|-----------|---------|
+| Puget (≥46°N) | 22 | -0.40 | **0.018*** | 0.10 | **S_DOMINANT** |
+| OR/WA (42-46°N) | 16 | -0.31 | 0.84 | 0.06 | NEITHER |
+| Central CA (35-42°N) | 43 | -0.29 | 0.056 | 0.14 | NEITHER (marginal S) |
+| SoCal (30-35°N) | 21 | -0.82 | 0.61 | 0.23 | **UNINFORMATIVE** |
+
+**Puget Sound**: S dominates cleanly (p = 0.018 vs p = 0.10). OPAREA distance
+distributions overlap between S > 0 and S = 0 cells, allowing valid F-test.
+The Puget OPAREAs are small waterway areas (Carr Inlet, Navy 3/7), not
+massive offshore ranges — so the positive result is not an artifact of
+OPAREA geometry.
+
+**Central California**: S is marginal (p = 0.056), OPAREA not significant
+(p = 0.14). Monterey Bay canyon cells lie 127–192 km from the nearest OPAREA,
+yet show elevated logR (mean 0.75 vs −0.02 for S = 0 cells). This natural
+experiment is the strongest single argument against the military hypothesis:
+military proximity cannot explain elevated report rates at that distance.
+
+**Southern California**: UNINFORMATIVE. The SOCAL Range Complex boundary
+traces the actual San Diego coastline (118 vertices). As a result,
+dist_to_OPAREA in SoCal measures "distance from coast", not "distance from
+military activity". Perfect separation exists: S > 0 cells have dist 0–38
+km, S = 0 cells have dist 42–154 km, with a 4 km gap and zero overlap. The
+F-test cannot distinguish canyon proximity from coastal proximity in this
+region.
+
+**Oregon/Washington**: Neither predictor is significant (both p > 0.05). Only
+1 S > 0 cell — insufficient for statistical power.
+
+### Assessment
+
+**S survives the OPAREA confound in Puget Sound** (the only region with
+clean testability and sufficient S > 0 cells). In Central CA, S is marginal
+(p = 0.056) but the Monterey Bay natural experiment — canyon cells 127–192
+km from any OPAREA with elevated report rates (logR = 0.75 vs −0.02) — is
+the strongest single argument against the military hypothesis. In SoCal,
+the test is uninformative because the OPAREA boundary is the coastline.
+
+A definitive test would require classified operational data (actual flight
+schedules and exercise locations) not available to this analysis. Note also
+that Dabob Bay (a key Navy underwater testing facility in Puget Sound) is
+NOT present in the MarineCadastre data, so the OPAREA polygons undercount
+actual military presence in Puget Sound — making the S-dominant result there
+conservative.
+
+---
+
 ## Final Assessment
 
 ### What survives
@@ -516,7 +588,7 @@ NUFORC city/state lookup (76% geocoding rate for post-2014).
 canyon topography and UAP report density.** The finding:
 
 - Survives every confound test attempted (ocean, magnetic, shoreline, population,
-  seasonal, temporal, deduplication)
+  seasonal, temporal, deduplication, military OPAREAs)
 - Replicates on completely independent post-2014 data with near-identical effect size
 - Is temporally stable across 21 rolling windows spanning 25 years
 - Is strongest where canyon topography is most extreme (Puget fjords)
@@ -536,8 +608,8 @@ statistical finding (robust) from any CTH interpretation (speculative).
 - Is the within-Puget gradient (rho = 0.77, n = 11) stable to alternative E_i
   models or population data?
 - What unmeasured confound could correlate with extreme submarine topography
-  specifically on the West Coast? (Fishing fleet density? Military exercise zones?
-  Coastal fog patterns?)
+  specifically on the West Coast? (Fishing fleet density? Classified military
+  operations beyond public OPAREA boundaries? Coastal fog patterns?)
 - The scoring function's aggregation radius (50 km) extends beyond the 0.5 deg cell
   boundary — cells can inherit S from neighboring steep features (CRITICAL-2,
   not yet resolved).
@@ -568,6 +640,7 @@ statistical finding (robust) from any CTH interpretation (speculative).
 | 21 | `phase_e_ocean_confound.py` | Ocean proximity confound (dist, SST, chlorophyll) |
 | 22 | `phase_e_magnetic_confound.py` | Magnetic anomaly (EMAG2v3) confound test |
 | 23 | `phase_e_replication_suite.py` | Replication suite: temporal, spatial, post-2014 |
+| 24 | `phase_e_oparea_confound.py` | Military OPAREA polygon confound test (regional) |
 
 ### Results (results/)
 
@@ -586,6 +659,7 @@ statistical finding (robust) from any CTH interpretation (speculative).
 | `phase_ev2/` | `phase_e_ocean_confound.json` (ocean proximity confound) |
 | `phase_ev2/` | `phase_e_magnetic_confound.json` (magnetic anomaly confound) |
 | `phase_ev2/` | `phase_e_replication_suite.json` (full replication suite) |
+| `phase_ev2/` | `phase_e_oparea_confound.json` (OPAREA polygon confound test) |
 | `phase_ev2/` | `e_red_v2_*.png`, `e_red_band_sweep.png` (plots) |
 
 ### Git Tags

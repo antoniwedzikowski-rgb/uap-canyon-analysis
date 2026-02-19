@@ -48,6 +48,16 @@ All data files are included in this repository except ETOPO1 (52 MB netCDF), whi
 - **Columns**: name, lat, lon, type
 - **Note**: Measures distance to physical installations, not offshore training ranges (OPAREAs)
 
+## Military Operating Areas (OPAREAs)
+- **File**: `oparea_polygons.json` (cached GeoJSON, downloaded at runtime)
+- **Source**: NOAA MarineCadastre Military Operating Area Boundaries
+- **URL**: https://marinecadastre.gov/downloads/data/mc/MilitaryCollection.zip
+- **API**: https://coast.noaa.gov/arcgis/rest/services/Hosted/MilitaryOperatingAreas/FeatureServer/0
+- **Records**: 35 polygon features (Navy Common Operating Picture, published Dec 2018)
+- **Description**: Offshore military operating/training area boundaries used to test whether UAP report density correlates with proximity to Navy operations rather than canyon topography
+- **Key West Coast OPAREAs**: SOCAL Range Complex (traces SD coastline), PMSR (104 km offshore), PACNORWEST (~18 km offshore), Navy 3/7 and Carr Inlet (small Puget Sound waterway areas)
+- **Note**: Does NOT include all military testing facilities (e.g., Dabob Bay NUWC is absent). SOCAL Range Complex boundary traces the actual San Diego coastline, making dist_to_OPAREA a proxy for coastal distance in SoCal — see regional analysis in phase_e_oparea_confound.py
+
 ## Port/Marina Locations
 - **File**: `port_coords_cache.npz` (122 KB, included)
 - **Source**: OpenStreetMap via Overpass API

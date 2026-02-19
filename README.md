@@ -109,6 +109,7 @@ UAP research/                          # Working directory (scripts + data)
 ├── phase_e_norway_replication.py      # Norway out-of-sample replication         [SUPERSEDED by logistic]
 ├── phase_e_norway_logistic.py        # Norway logistic w/ pop control           [FINAL — NULL result]
 ├── phase_e_chla_confound.py            # Upwelling (MODIS chl-a) confound test    [FINAL — S_DOMINANT]
+├── phase_e_oparea_confound.py          # Military OPAREA polygon confound test    [FINAL — S_REGIONAL_DOMINANT]
 ├── phase_e_threshold_sensitivity.py   # Threshold sweep (20-100 m/km)            [AUDIT FIX — confirms robustness]
 │
 │── # Report generation
@@ -203,6 +204,7 @@ Monterey Canyon — one of the world's largest submarine canyons — shows inter
 | Shore type proxy (ETOPO cliff) | Nested F-test (n=102) | S survives cliff control (p=0.004); cliff also independent (p=0.019); R²=0.21 combined | S_SURVIVES (both contribute) |
 | Puget Sound | 2x2 rate interaction | S=0 Puget rate (0.53) not elevated vs elsewhere (1.08) | NO_CONFOUND (canyon-specific) |
 | Coastal upwelling (chl-a) | Nested F-test (n=99) | S adds to chl-a: F=18.5, p<0.0001; chl-a uncorrelated with S (rho=-0.02); S_DOM at all radii (50-200km) | S_DOMINANT |
+| Military OPAREAs (polygons) | Regional nested F-test (35 OPAREA polygons, NOAA MarineCadastre) | S dominant in Puget (p=0.018 vs p=0.10); Central CA marginal (p=0.056) but Monterey canyon cells 127-192 km from OPAREA with logR=0.75; SoCal uninformative (OPAREA boundary = coastline) | S_SURVIVES_REGIONALLY |
 
 **Replication (corrected — population-adjusted E_i, per-fold normalization):**
 
@@ -266,6 +268,7 @@ All data files are in `data/`. ETOPO1 bathymetry (52 MB netCDF) must be download
 | ESI shoreline | `esi/` | coastal segments | NOAA ESI |
 | Norway bathymetry | `srtm30_norway.nc` | 30 arc-sec grid | SRTM30 |
 | Chlorophyll-a (upwelling) | `modis_chla_westcoast.nc` | 4 km grid | NASA MODIS Aqua L3 (2003-2020 clim., CoastWatch ERDDAP) |
+| Military OPAREAs | `oparea_polygons.json` | 35 polygons | NOAA MarineCadastre (Navy Common Operating Picture, Dec 2018) |
 
 See `data/sources.md` for full provenance and download instructions.
 
