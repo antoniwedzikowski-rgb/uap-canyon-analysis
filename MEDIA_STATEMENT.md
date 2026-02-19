@@ -1,0 +1,37 @@
+# Media Statement — UAP-Canyon Spatial Association Analysis
+
+**Author:** Antoni Wedzikowski — lawyer and independent researcher based in Warsaw, Poland
+**Contact:** via GitHub Issues or through referring publication
+**Repository:** https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis
+
+---
+
+## What is this?
+
+A statistical analysis testing whether UAP (Unidentified Anomalous Phenomena) reports from the NUFORC database cluster near submarine canyon features along the US coastline. The full code, data, and methodology are open-source under MIT license.
+
+## Key finding
+
+UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features — Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, and port infrastructure. The association replicated in independent post-2014 data not used to develop the model, and correctly predicted 4 out of 5 top hotspot cells in held-out spatial validation.
+
+The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells) and San Diego (9.8× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association.
+
+## What the data does not show
+
+The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). The wider continental shelf there places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data. This is a testability limitation, not a falsification. The effect concentrates in specific West Coast regions — primarily Puget Sound and the San Diego canyon system — and does not generalise across the full US coastline.
+
+## Methodology
+
+The analysis uses 23 Python scripts and 13 public datasets including NUFORC sighting reports (80,332 total; 38,256 coastal subset used in primary analysis, 1990-2014), NOAA ETOPO1 bathymetry, US Census population data, military base locations, and port infrastructure. Canyon features are detected via gradient magnitude on the continental shelf (threshold 60 m/km). Report rates are population-adjusted using inverse distance weighting from county-level census data.
+
+## Next steps
+
+The priority is to prepare a preprint for arXiv with full methodology available for independent scrutiny. The goal is peer review, independent replication with non-US data, and engagement from researchers working on spatial analysis or the systematic study of anomalous aerial phenomena.
+
+## For accurate reporting
+
+This is a preliminary, single-author analysis showing a robust regional signal whose mechanism and scope remain genuinely uncertain. Any coverage should note that the effect is not detected on the East Coast and is concentrated in specific West Coast regions. The goal is to contribute to a body of evidence, not to make claims that outrun it.
+
+---
+
+*Analysis conducted with Claude Code (Anthropic) as a research partner. Analytical decisions and domain knowledge are the author's. AI served as a force multiplier for rigorous testing.*
