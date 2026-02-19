@@ -108,6 +108,7 @@ UAP research/                          # Working directory (scripts + data)
 ├── phase_e_replication_suite.py       # Temporal splits, LOO, post-2014          [FINAL — corrected, see audit]
 ├── phase_e_norway_replication.py      # Norway out-of-sample replication         [SUPERSEDED by logistic]
 ├── phase_e_norway_logistic.py        # Norway logistic w/ pop control           [FINAL — NULL result]
+├── phase_e_chla_confound.py            # Upwelling (MODIS chl-a) confound test    [FINAL — S_DOMINANT]
 ├── phase_e_threshold_sensitivity.py   # Threshold sweep (20-100 m/km)            [AUDIT FIX — confirms robustness]
 │
 │── # Report generation
@@ -176,6 +177,16 @@ Pre-registered geometric scoring function frozen before evaluation.
 - Bootstrap 95% CI: [0.190, 0.531]
 - exp(beta) = 1.93 (OLS log-linear proxy)
 
+**Regional breakdown (O/E rate by canyon presence):**
+
+| Region | S=0 rate | S>0 rate | Uplift | n (S>0 / S=0) |
+|--------|----------|----------|--------|----------------|
+| Puget Sound (46-50N) | 0.74 | 5.04 | 6.8x | 11 / 11 |
+| San Diego (32-33.5N) | 0.60 | 5.85 | 9.8x | 3 / 2 |
+| Rest of West Coast | 1.08 | 1.53 | 1.4x | 12 / 63 |
+
+The effect concentrates in regions with extreme submarine topography (Puget Sound fjords, Scripps/La Jolla canyons), with an identical pattern: S=0 suppression below baseline + S>0 uplift 6-10x. Rest of the West Coast shows weak uplift (1.4x). San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
+
 **Confound tests:**
 
 | Confound | Method | Result | Verdict |
@@ -184,6 +195,7 @@ Pre-registered geometric scoring function frozen before evaluation.
 | Magnetic anomaly | Nested F-test | S dominates; canyon cells have *lower* anomalies | S_DOMINANT |
 | ESI shore type | Nested F-test (n=18, CA only) | All F-tests non-sig (p > 0.39); no Puget coverage | INCONCLUSIVE (underpowered) |
 | Puget Sound | 2x2 rate interaction | S=0 Puget rate (0.53) not elevated vs elsewhere (1.08) | NO_CONFOUND (canyon-specific) |
+| Coastal upwelling (chl-a) | Nested F-test (n=99) | S adds to chl-a: F=18.5, p<0.0001; chl-a uncorrelated with S (rho=-0.02); S_DOM at all radii (50-200km) | S_DOMINANT |
 
 **Replication (corrected — population-adjusted E_i, per-fold normalization):**
 
@@ -243,6 +255,7 @@ All data files are in `data/`. ETOPO1 bathymetry (52 MB netCDF) must be download
 | Magnetic anomaly | `EMAG2v3.tif` | global grid | NOAA EMAG2 |
 | ESI shoreline | `esi/` | coastal segments | NOAA ESI |
 | Norway bathymetry | `srtm30_norway.nc` | 30 arc-sec grid | SRTM30 |
+| Chlorophyll-a (upwelling) | `modis_chla_westcoast.nc` | 4 km grid | NASA MODIS Aqua L3 (2003-2020 clim., CoastWatch ERDDAP) |
 
 See `data/sources.md` for full provenance and download instructions.
 

@@ -1,0 +1,150 @@
+{
+  "test": "MODIS Chl-a upwelling confound",
+  "data_source": "MODIS Aqua L3 mapped Chl-a, monthly 4km, mean 2003-2020, NASA ERDDAP",
+  "n_cells_original": 102,
+  "n_cells_valid": 99,
+  "n_cells_dropped": 3,
+  "correlations": {
+    "chla_log_mean": {
+      "rho_logR": 0.0212,
+      "p_logR": 0.8349,
+      "rho_S": -0.019,
+      "p_S": 0.852
+    },
+    "chla_mean": {
+      "rho_logR": -0.0374,
+      "p_logR": 0.7134,
+      "rho_S": -0.0847,
+      "p_S": 0.4043
+    },
+    "chla_std": {
+      "rho_logR": -0.0341,
+      "p_logR": 0.7373,
+      "rho_S": -0.0518,
+      "p_S": 0.6109
+    },
+    "chla_max": {
+      "rho_logR": 0.0129,
+      "p_logR": 0.8994,
+      "rho_S": 0.0525,
+      "p_S": 0.6058
+    }
+  },
+  "S_vs_logR": {
+    "rho": 0.3756,
+    "p": 0.0001
+  },
+  "best_chla_predictor": "chla_mean",
+  "models": {
+    "A_S_only": {
+      "R2": 0.1618
+    },
+    "B_chla_only": {
+      "predictor": "chla_mean",
+      "R2": 0.016
+    },
+    "C_combined": {
+      "R2": 0.175
+    },
+    "full_confounds_no_S": {
+      "R2": 0.1259
+    },
+    "full_with_S": {
+      "R2": 0.1986
+    }
+  },
+  "F_tests": {
+    "S_given_chla": {
+      "F": 18.501,
+      "p": 0.0
+    },
+    "chla_given_S": {
+      "F": 1.532,
+      "p": 0.2189
+    },
+    "S_given_all_confounds": {
+      "F": 8.526,
+      "p": 0.0044
+    }
+  },
+  "bootstrap": {
+    "n_boot": 5000,
+    "beta_S": {
+      "estimate": 0.651296,
+      "ci_lo": 0.344845,
+      "ci_hi": 0.96208
+    },
+    "beta_chla_mean": {
+      "estimate": 0.033367,
+      "ci_lo": -0.046255,
+      "ci_hi": 0.077858
+    }
+  },
+  "canyon_vs_noncanyon": {
+    "chla_log_mean": {
+      "S_pos_mean": 0.8098,
+      "S_zero_mean": 0.9849,
+      "U": 810.0,
+      "p": 0.2708
+    },
+    "chla_mean": {
+      "S_pos_mean": 4.2765,
+      "S_zero_mean": 5.0572,
+      "U": 723.0,
+      "p": 0.073
+    },
+    "chla_std": {
+      "S_pos_mean": 3.7658,
+      "S_zero_mean": 4.7772,
+      "U": 814.0,
+      "p": 0.2849
+    },
+    "chla_max": {
+      "S_pos_mean": 31.9311,
+      "S_zero_mean": 36.223,
+      "U": 975.0,
+      "p": 0.8386
+    }
+  },
+  "radius_sensitivity": {
+    "50": {
+      "n": 47,
+      "rho_S_chla": -0.0909,
+      "F_S_given_chla": 10.594,
+      "p_S_given_chla": 0.0022,
+      "F_chla_given_S": 0.721,
+      "p_chla_given_S": 0.4004,
+      "verdict": "S_DOM"
+    },
+    "100": {
+      "n": 74,
+      "rho_S_chla": -0.0452,
+      "F_S_given_chla": 13.135,
+      "p_S_given_chla": 0.0005,
+      "F_chla_given_S": 0.462,
+      "p_chla_given_S": 0.4989,
+      "verdict": "S_DOM"
+    },
+    "150": {
+      "n": 95,
+      "rho_S_chla": -0.0401,
+      "F_S_given_chla": 18.342,
+      "p_S_given_chla": 0.0,
+      "F_chla_given_S": 0.044,
+      "p_chla_given_S": 0.8336,
+      "verdict": "S_DOM"
+    },
+    "200": {
+      "n": 99,
+      "rho_S_chla": -0.019,
+      "F_S_given_chla": 18.301,
+      "p_S_given_chla": 0.0,
+      "F_chla_given_S": 0.131,
+      "p_chla_given_S": 0.7187,
+      "verdict": "S_DOM"
+    }
+  },
+  "search_radius_km": 200.0,
+  "interpretation": "S_DOMINANT",
+  "final_verdict": "S_SURVIVES_ALL"
+}
