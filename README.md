@@ -4,9 +4,9 @@ Statistical analysis of the spatial relationship between UAP (Unidentified Anoma
 
 ## Key Finding
 
-UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001) and shows a marginally significant signal in Norwegian fjords (rho = 0.49, p = 0.047, n = 17 cells from 40 reports — suggestive but fragile).
+UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
 
-**Critical limitations**: The effect is regional — it reverses on the East/Gulf Coast (OR = 0.36). The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). The Norway replication is low-powered. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
+**Critical limitations**: The effect is regional — it reverses on the East/Gulf Coast (OR = 0.36). The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
 
 ## Repository Structure
 
@@ -106,7 +106,8 @@ UAP research/                          # Working directory (scripts + data)
 ├── phase_e_esi_shoretype.py           # ESI shore type confound                  [FINAL]
 ├── phase_e_shoretype_proxy.py         # Shore type proxy analysis                [EXPLORATORY]
 ├── phase_e_replication_suite.py       # Temporal splits, LOO, post-2014          [FINAL — corrected, see audit]
-├── phase_e_norway_replication.py      # Norway out-of-sample replication         [FINAL — underpowered]
+├── phase_e_norway_replication.py      # Norway out-of-sample replication         [SUPERSEDED by logistic]
+├── phase_e_norway_logistic.py        # Norway logistic w/ pop control           [FINAL — NULL result]
 ├── phase_e_threshold_sensitivity.py   # Threshold sweep (20-100 m/km)            [AUDIT FIX — confirms robustness]
 │
 │── # Report generation
@@ -197,7 +198,7 @@ Pre-registered geometric scoring function frozen before evaluation.
 | Spatial forward: SoCal | 0.470 | 0.049 | Pass |
 | 5-year rolling windows | 21/21 positive | 18/21 sig | Pass |
 | Threshold sweep (20-100 m/km) | 0.374-0.416 | all < 0.0002 | Pass |
-| Norway fjord replication | 0.488 | 0.047 | Marginal (n=17 cells, 40 reports) |
+| Norway fjord replication | — | — | Inconclusive (see Supplementary below) |
 
 See `results/PHASE_E_SUMMARY.md` for the complete 600-line Phase E narrative.
 
@@ -253,6 +254,24 @@ See `data/sources.md` for full provenance and download instructions.
 4. **Primary test**: Spearman correlation between S and log(O_i/E_i) across 0.5-degree cells with 20+ reports
 5. **Confound testing**: Nested F-tests comparing full model (S + confound) vs reduced models
 6. **Replication**: Temporal splits, leave-one-region-out CV, post-2014 independent data, Norway out-of-sample
+
+## Supplementary: Norway Fjord Replication
+
+Attempted out-of-country replication on Norwegian fjords (SRTM30 bathymetry, WorldPop population, 40 NUFORC reports in 463 coastal cells). Included for transparency.
+
+**Original test** (Spearman on 17 cells with reports): rho = 0.49, p = 0.047. However, all 17 testable cells have S > 0 — Norway's entire coastline is fjords, leaving no flat-shelf control group.
+
+**Population-controlled retest** (logistic regression on 227 cells with pop > 0):
+
+| Test | Statistic | p | Interpretation |
+|------|-----------|---|----------------|
+| Logistic: S + log(pop) | S coef = 0.03, OR = 1.03 | 0.76 | S adds nothing after pop control |
+| LR test (S added to pop-only) | chi2 = 0.09 | 0.76 | Pop-only model sufficient |
+| Population alone | log(pop) coef = 0.61 | 0.0001 | Reports track population, not canyons |
+| Full-sample Spearman (n=227) | rho = 0.07 | 0.32 | No correlation including zero-report cells |
+| Binary Fisher (S>0 vs S=0) | 17/220 vs 0/7 | 0.58 | Only 7 S=0 cells — test underpowered |
+
+**Verdict**: Inconclusive. The original rho = 0.49 is explained by population (larger fjord cities sit near steeper gradients). With only 7 flat-shelf cells, Norway cannot provide a meaningful canyon-vs-flat contrast. Scripts: `phase_e_norway_replication.py` (original), `phase_e_norway_logistic.py` (population-controlled).
 
 ## Requirements
 
