@@ -109,6 +109,7 @@ This is a correlation, not an explanation. We do not know *why* sightings cluste
 - **Hydrophone or sonar data** from NOAA or navy acoustic monitoring networks near canyon systems could test whether there is any anomalous underwater acoustic activity correlated with surface reports
 - **Improved population models** using nighttime lights (VIIRS) or mobile phone density data instead of county-level census would reduce uncertainty in the population adjustment
 - **Temporal correlation** with oceanographic events (internal waves, upwelling episodes) could test physical mechanisms
+- **Time-of-day analysis.** NUFORC reports include hour-level timestamps. 80.5% of reports occur at night. A canyon-specific breakdown by hour and darkness conditions has not yet been performed
 - If independent replications consistently fail, or if a confound is identified that explains the Puget/Monterey/San Diego concentration, the finding should be downgraded or retracted
 
 ## How to verify
