@@ -38,6 +38,23 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) cluster within 50 km of shore. East/Gulf Coast canyons (red) are 100–400 km offshore — beyond the reach of land-based observer data.*
 
+### Anticipated objections
+
+**"It's just population — more people live near canyons."**
+Report rates are population-adjusted using inverse distance weighting from 3,108 US county centroids. The key test: in Puget Sound, cells *without* canyon features report at 0.74× the expected rate (below baseline), while canyon cells report at 5.04× — a 6.8× differential within the same metropolitan region. If population were driving the effect, non-canyon Puget cells would also be elevated. They are not.
+
+**"It's military activity — Navy operates near those canyons."**
+We controlled for proximity to 171 DoD installations and 35 Navy offshore operating area (OPAREA) polygons from NOAA MarineCadastre. Canyon score (S) remains the dominant predictor in Puget Sound (p = 0.018 vs OPAREA p = 0.10). Monterey Bay canyon cells sit 127–192 km from the nearest OPAREA boundary and still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells).
+
+**"It's coastal geography — you're just measuring coastline complexity."**
+We tested a shore-type proxy (ETOPO coastal cliff metric) as an alternative predictor. Canyon score S survives cliff control (p = 0.004). Both contribute independently (combined R² = 0.21), but canyon steepness is not reducible to coastline shape.
+
+**"It's fishing ports or marine traffic."**
+Port infrastructure (7,747 ports/marinas from OpenStreetMap) is included as a covariate in the model. The canyon association survives this control.
+
+**"You cherry-picked the threshold."**
+The 60 m/km gradient threshold was selected during Phase C/D, but a sensitivity sweep across all thresholds from 20 to 100 m/km shows the association is significant at every threshold tested (rho 0.37–0.42, all p < 0.0002).
+
 ## What the data does not show
 
 The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). The wider continental shelf there places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data. This is a testability limitation, not a falsification. The effect concentrates in specific West Coast regions — primarily Puget Sound and the San Diego canyon system — and does not generalise across the full US coastline. An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group.

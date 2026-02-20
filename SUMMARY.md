@@ -25,6 +25,39 @@ The statistical association (Spearman rho = 0.37, p = 0.0001) held up across eve
 
 The effect **does not appear** on the US East Coast. But this is likely a data limitation, not evidence against the hypothesis — East Coast canyons sit 100-400 km offshore (beyond the continental shelf edge), too far for land-based observers to report anything unusual above them. West Coast canyons, by contrast, come within 50 km of shore.
 
+## Key figures
+
+**Figure 1 — Where are submarine canyons?**
+![Study Area](figures/figure1_study_area.png)
+*Red dots = steep underwater canyon cells detected from NOAA ocean floor data. On the West Coast, canyons sit close to shore. On the East Coast, they are far offshore.*
+
+**Figure 2 — The headline result**
+![Quintile Result](figures/e_red_v2_primary_200km.png)
+*We split 102 West Coast grid cells into five groups by canyon proximity. The top group (Q5, strongest canyon signal) shows ~25x more reports than expected. Population-adjusted.*
+
+**Figure 3 — Where the effect is strongest**
+![Hero Bathymetry](figures/figure_hero_bathymetry.png)
+*Color = ocean depth. Orange/red dots = canyon cells. Faint red scatter = individual UFO reports. Notice how report clusters and canyon cells overlap in Puget Sound, Monterey Bay, and San Diego.*
+
+**Figure 4 — West Coast vs East Coast**
+![Band Sweep](figures/e_red_band_sweep.png)
+*Green = statistically significant. The canyon-UFO association is robust on the West Coast but absent on the East Coast, where canyons are too far from shore.*
+
+**Figure 5 — Why only the West Coast?**
+![Canyon Distances](figures/d7a_canyon_head_distances.png)
+*West Coast canyons (blue) are within 50 km of shore. East Coast canyons (red) are 100-400 km offshore — too far for anyone on land to see anything above them.*
+
+## "But isn't it just population?"
+
+This is the first question everyone asks, and we tested it extensively:
+
+- **Report rates are population-adjusted** — we don't count raw sightings, we measure whether an area has *more* sightings than its population would predict
+- **The killer test**: In Puget Sound (Seattle metro area), grid cells *without* canyon features have *fewer* reports than expected (0.74x). Canyon cells in the same region have 5x more. If this were just "big city = more reports," both would be elevated. Only the canyon cells are.
+- **Military activity**: We controlled for 171 military bases and 35 Navy offshore operating areas. The canyon effect survives. Monterey Bay canyon cells are 127–192 km from the nearest Navy zone and still show elevated rates.
+- **Ports and marine traffic**: Controlled for 7,747 ports and marinas. Survives.
+- **Coastal geography**: Tested whether coastline shape (cliffs, complexity) explains the pattern. Canyon steepness adds predictive power beyond coastal shape alone.
+- **Threshold choice**: The canyon detection threshold (60 m/km gradient) was not cherry-picked — sweeping all thresholds from 20 to 100 m/km shows the association is significant at every value tested.
+
 ## What this means
 
 This is a correlation, not an explanation. We do not know *why* sightings cluster near underwater canyons. Possible interpretations range from atmospheric effects caused by deep-water upwelling, to observer biases we haven't identified, to something genuinely anomalous. The finding is robust enough to warrant independent replication and further investigation.
