@@ -108,6 +108,6 @@ Everything is open-source. Clone the repository, install Python dependencies, do
 
 ---
 
-**Author:** Antoni Wedzikowski — independent researcher, lawyer and legaltech founder, Warsaw, Poland
+**Author:** Antoni Wędzikowski — independent researcher, lawyer and legaltech founder, Warsaw, Poland
 **Repository:** [github.com/antoniwedzikowski-rgb/uap-canyon-analysis](https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis)
 **Contact:** [LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · GitHub Issues

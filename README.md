@@ -345,7 +345,7 @@ A non-technical overview of the full analysis (Phases B–E), generated with Not
 
 ## Author
 
-**Antoni Wedzikowski** — independent researcher, lawyer and legaltech founder, Warsaw, Poland
+**Antoni Wędzikowski** — independent researcher, lawyer and legaltech founder, Warsaw, Poland
 [LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · [GitHub](https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis)
 
 ## License
