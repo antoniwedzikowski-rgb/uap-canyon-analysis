@@ -313,6 +313,11 @@ A non-technical overview generated with NotebookLM:
 
 [`media/UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a`](media/UAP_Sightings_Cluster_Around_Submarine_Canyons.m4a)
 
+## Author
+
+**Antoni Wedzikowski** — independent researcher, lawyer and legaltech founder, Warsaw, Poland
+[LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · [GitHub](https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis)
+
 ## License
 
 MIT

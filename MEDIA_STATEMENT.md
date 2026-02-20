@@ -1,7 +1,7 @@
 # Media Statement — UAP-Canyon Spatial Association Analysis
 
-**Author:** Antoni Wedzikowski — lawyer and independent researcher based in Warsaw, Poland
-**Contact:** via GitHub Issues or through referring publication
+**Author:** Antoni Wedzikowski — independent researcher, lawyer and legaltech founder based in Warsaw, Poland
+**Contact:** [LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · via GitHub Issues or through referring publication
 **Repository:** https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis
 
 ---

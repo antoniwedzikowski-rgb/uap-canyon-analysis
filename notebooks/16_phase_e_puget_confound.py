@@ -30,7 +30,7 @@ from numpy.linalg import lstsq
 from scipy.stats import spearmanr, mannwhitneyu, ttest_ind
 from scipy.stats import f as f_dist
 
-BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 # ============================================================
 # LOAD

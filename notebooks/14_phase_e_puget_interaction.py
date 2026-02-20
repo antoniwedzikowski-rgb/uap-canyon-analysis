@@ -15,7 +15,7 @@ import json, os
 import numpy as np
 from numpy.linalg import lstsq
 
-BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 # ============================================================
 # LOAD cell details from E-RED v2 primary

@@ -39,7 +39,7 @@ import netCDF4 as nc
 warnings.filterwarnings('ignore')
 t0 = time.time()
 
-BASE_DIR = "/Users/antoniwedzikowski/Desktop/UAP research"
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 OUT_DIR  = os.path.join(BASE_DIR, "phase_ev2")
 os.makedirs(OUT_DIR, exist_ok=True)
