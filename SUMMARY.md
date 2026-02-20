@@ -16,10 +16,11 @@ We took 80,000+ UFO sighting reports from the National UFO Reporting Center (NUF
 
 ## What we found
 
-Along the US West Coast, UFO sighting rates are significantly elevated near steep underwater canyons, even after accounting for population and military activity. The strongest effect appears in two regions:
+Along the US West Coast, UFO sighting rates are significantly elevated near steep underwater canyons, even after accounting for population and military activity. The strongest effect appears in three regions:
 
 - **Puget Sound** (Washington state): 6.8x more reports near canyon features than expected
 - **San Diego**: 9.8x more reports near the Scripps/La Jolla canyon system
+- **Monterey Bay**: 2.75–4.80x more reports near one of the world's largest submarine canyons
 
 The statistical association (Spearman rho = 0.37, p = 0.0001) held up across every test we ran: different time periods, different canyon definitions, held-out data from 2014-2023, and multiple confound checks.
 
@@ -51,7 +52,7 @@ The effect **does not appear** on the US East Coast. But this is likely a data l
 
 ## How strong is the evidence?
 
-- **It's not uniform** — the effect is concentrated in Puget Sound (6.8x uplift) and San Diego (9.8x). The rest of the West Coast shows only 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."
+- **It's not uniform** — the effect is strongest in Puget Sound (6.8x), San Diego (9.8x), and Monterey Bay (2.75–4.80x) — all regions where canyons come closest to shore. The remaining West Coast cells average 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."
 - **Dose-response** — Monterey Canyon, one of the world's largest underwater canyons, shows an intermediate effect (2.75–4.80x). Bigger canyon closer to shore = stronger signal. This is what a real physical association looks like.
 - **Stable across 25 years** — the association holds in 1990–2002 and 2003–2014 separately, and in 21 out of 21 rolling 5-year windows. It's not driven by a single event.
 - **Predicted before testing** — the model was built using only ocean floor geometry, without looking at any UFO data. It then correctly predicted 4 out of 5 top hotspot locations.
@@ -88,7 +89,7 @@ This is a correlation, not an explanation. We do not know *why* sightings cluste
 ## Limitations and honest uncertainties
 
 - **Regional, not global** — the effect is detected only on the US West Coast. It is not detected on the East Coast, though this may be a data limitation (canyons too far from shore) rather than evidence against the hypothesis
-- **Concentrated** — Puget Sound and San Diego drive most of the signal. The rest of the West Coast shows only weak uplift (1.4x). We do not know why these two regions are so much stronger
+- **Concentrated** — Puget Sound, San Diego, and Monterey Bay drive most of the signal. The remaining West Coast cells average only 1.4x uplift. All three strong regions have canyons unusually close to shore
 - **Self-reported data** — NUFORC is a voluntary reporting database. We cannot rule out unknown reporting biases correlated with coastal geography
 - **Single-author, pre-peer-review** — this analysis has not been independently replicated or published in a peer-reviewed journal
 - **No causal mechanism** — we show a spatial correlation, not an explanation. We do not claim to know *why* this pattern exists
@@ -100,7 +101,7 @@ This is a correlation, not an explanation. We do not know *why* sightings cluste
 - **Hydrophone or sonar data** from NOAA or navy acoustic monitoring networks near canyon systems could test whether there is any anomalous underwater acoustic activity correlated with surface reports
 - **Improved population models** using nighttime lights (VIIRS) or mobile phone density data instead of county-level census would reduce uncertainty in the population adjustment
 - **Temporal correlation** with oceanographic events (internal waves, upwelling episodes) could test physical mechanisms
-- If independent replications consistently fail, or if a confound is identified that explains the Puget/San Diego concentration, the finding should be downgraded or retracted
+- If independent replications consistently fail, or if a confound is identified that explains the Puget/Monterey/San Diego concentration, the finding should be downgraded or retracted
 
 ## How to verify
 

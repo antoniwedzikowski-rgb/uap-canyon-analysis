@@ -139,6 +139,11 @@ df["latitude"] = pd.to_numeric(df["latitude"], errors="coerce")
 df["longitude"] = pd.to_numeric(df["longitude"], errors="coerce")
 df = df.dropna(subset=["latitude", "longitude"])
 
+# Filter to analysis period (consistent with Phase E primary analysis)
+df["_dt"] = pd.to_datetime(df["datetime"], errors="coerce")
+df["_year"] = df["_dt"].dt.year
+df = df[(df["_year"] >= 1990) & (df["_year"] <= 2014)]
+
 # Filter to West Coast bounding box (with small buffer for scatter)
 buf = 2.0
 wc = df[
@@ -335,7 +340,7 @@ gl.ylabel_style = {"size": 8, "color": GRAY_DARK}
 # --- 5h. Title ---
 ax.set_title(
     "Submarine Canyon Bathymetry and UAP Report Distribution\n"
-    "US West Coast  |  NOAA ETOPO 2022  |  NUFORC 1949\u20132014",
+    "US West Coast  |  NOAA ETOPO 2022  |  NUFORC 1990\u20132014",
     fontsize=13,
     fontweight="bold",
     color=GRAY_DARK,

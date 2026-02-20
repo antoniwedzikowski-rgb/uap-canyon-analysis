@@ -186,7 +186,7 @@ Pre-registered geometric scoring function frozen before evaluation.
 | San Diego (32-33.5N) | 0.60 | 5.85 | 9.8x | 3 / 2 |
 | Rest of West Coast | 1.08 | 1.53 | 1.4x | 12 / 63 |
 
-The effect concentrates in regions with extreme submarine topography (Puget Sound fjords, Scripps/La Jolla canyons), with an identical pattern: S=0 suppression below baseline + S>0 uplift 6-10x. Rest of the West Coast shows weak uplift (1.4x). San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
+The effect concentrates in regions with extreme near-shore submarine topography (Puget Sound fjords, Monterey Bay canyon, Scripps/La Jolla canyons), with an identical pattern: S=0 suppression below baseline + S>0 uplift. The remaining West Coast cells average 1.4x uplift. San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
 
 Monterey Canyon — one of the world's largest submarine canyons — shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation in which the effect scales with canyon proximity to shore, not canyon depth alone.
 

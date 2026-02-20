@@ -14,7 +14,7 @@ A statistical analysis testing whether UAP (Unidentified Anomalous Phenomena) re
 
 UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features — Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, port infrastructure, and proximity to 35 Navy offshore operating area polygons (NOAA MarineCadastre). The association replicated in independent post-2014 data not used to develop the model (ρ = 0.35, p = 0.0001), is stable across temporal splits (1990-2002 and 2003-2014 both significant), survives all tested gradient thresholds (20-100 m/km), and correctly predicted 4 out of 5 top hotspot cells in held-out spatial validation.
 
-The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells) and San Diego (9.8× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay canyon cells — located 127–192 km from the nearest Navy operating area — still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells), ruling out military proximity as an explanation at that distance.
+The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells), San Diego (9.8× uplift), and Monterey Bay (2.75–4.80× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay canyon cells — located 127–192 km from the nearest Navy operating area — still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells), ruling out military proximity as an explanation at that distance.
 
 ### Key figures
 
@@ -28,7 +28,7 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 
 **Figure 3 — West Coast zoom: bathymetry, canyon cells, and UAP report density**
 ![Hero Bathymetry](figures/figure_hero_bathymetry.png)
-*Color bathymetry from NOAA ETOPO1. Orange/red dots = shelf cells with gradient >60 m/km (submarine canyon features). Faint red scatter = individual UAP reports (NUFORC, 1949–2014). Five major canyon systems labeled. Note how canyon cells and UAP report clusters overlap in Puget Sound, Monterey Bay, and the San Diego corridor.*
+*Color bathymetry from NOAA ETOPO1. Orange/red dots = shelf cells with gradient >60 m/km (submarine canyon features). Faint red scatter = individual UAP reports (NUFORC, 1990–2014). Five major canyon systems labeled. Note how canyon cells and UAP report clusters overlap in Puget Sound, Monterey Bay, and the San Diego corridor.*
 
 **Figure 4 — West Coast vs East Coast: the geographic asymmetry**
 ![Band Sweep](figures/e_red_band_sweep.png)
@@ -87,7 +87,7 @@ The scoring function was frozen before evaluation — it uses only bathymetric g
 
 ## What the data does not show
 
-The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). The wider continental shelf there places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data. This is a testability limitation, not a falsification. The effect concentrates in specific West Coast regions — primarily Puget Sound and the San Diego canyon system — and does not generalise across the full US coastline. An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group.
+The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). The wider continental shelf there places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data. This is a testability limitation, not a falsification. The effect concentrates in specific West Coast regions — primarily Puget Sound, Monterey Bay, and the San Diego canyon system — and does not generalise across the full US coastline. An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group.
 
 ## Methodology
 
@@ -101,7 +101,7 @@ Beyond that, I would welcome engagement from researchers who work on spatial ana
 
 ## Honest uncertainties
 
-- The effect is regional (West Coast only) and concentrated in two areas (Puget Sound, San Diego). The rest of the West Coast shows weak signal (1.4× uplift). We do not know why these two regions are so much stronger.
+- The effect is regional (West Coast only) and strongest in three canyon systems — Puget Sound (6.8×), San Diego (9.8×), and Monterey Bay (2.75–4.80×). The remaining West Coast cells average 1.4× uplift. All three strong regions have canyons unusually close to shore.
 - NUFORC is a self-reported database. We cannot rule out unknown reporting biases correlated with coastal geography.
 - This is a single-author analysis that has not been independently replicated or published in a peer-reviewed journal.
 - An attempted replication on Norwegian fjords is inconclusive — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group for comparison.
@@ -113,7 +113,7 @@ Beyond that, I would welcome engagement from researchers who work on spatial ana
 - **Hydrophone or sonar data** from NOAA or navy acoustic monitoring networks near canyon systems could test whether anomalous underwater acoustic activity correlates with surface reports.
 - **Improved population models** using nighttime lights (VIIRS) or mobile phone density instead of county-level census would reduce uncertainty in the population adjustment.
 - **Temporal correlation** with oceanographic events (internal waves, upwelling episodes) could test physical mechanisms.
-- If independent replications consistently fail, or if a confound is identified that explains the Puget/San Diego concentration, the finding should be downgraded or retracted.
+- If independent replications consistently fail, or if a confound is identified that explains the Puget/Monterey/San Diego concentration, the finding should be downgraded or retracted.
 
 ## For accurate reporting
 
