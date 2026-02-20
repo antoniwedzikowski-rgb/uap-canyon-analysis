@@ -6,7 +6,7 @@ Statistical analysis of the spatial relationship between UAP (Unidentified Anoma
 
 UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
 
-**Critical limitations**: The effect is regional — it is not detected on the East/Gulf Coast (ρ = 0.055, p = 0.459, n_hot = 2 of 185 cells). The wider continental shelf places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data (NUFORC). This is a testability limitation, not a falsification. The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
+**Critical limitations**: The effect is regional. It is not detected on the East/Gulf Coast (ρ = 0.055, p = 0.459, n_hot = 2 of 185 cells). The wider continental shelf places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data (NUFORC). This is a testability limitation, not a falsification. The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
 
 ## Repository Structure
 
@@ -187,9 +187,9 @@ Pre-registered geometric scoring function frozen before evaluation.
 | Monterey Bay (36-37.5N) | 1.13 | 2.75–4.80 | 2.4–4.3x | 3 / 12 |
 | Rest of West Coast | 1.08 | 1.53 | 1.4x | 9 / 51 |
 
-The effect concentrates in regions with extreme near-shore submarine topography, with an identical pattern: S=0 suppression below baseline + S>0 uplift. San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
+The effect concentrates in regions with extreme near-shore submarine topography, with an identical pattern: S=0 suppression below baseline + S>0 uplift. San Diego has only n=5 cells, too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
 
-Monterey Canyon — one of the world's largest submarine canyons — shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation. Critically, Monterey canyon cells sit 127–192 km from the nearest Navy operating area, while non-canyon cells in the same region report at baseline (logR = −0.02). This combination — dose-response, military elimination, canyon-specific uplift — makes Monterey a natural experiment for the canyon hypothesis.
+Monterey Canyon, one of the world's largest submarine canyons, shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation. Critically, Monterey canyon cells sit 127–192 km from the nearest Navy operating area, while non-canyon cells in the same region report at baseline (logR = −0.02). This combination of dose-response, military elimination, and canyon-specific uplift makes Monterey a natural experiment for the canyon hypothesis.
 
 **Non-linearity:** The relationship is non-linear. Quintile analysis shows Q1–Q4 of S have similar mean logR (0.20–0.46, overlapping CIs), while Q5 jumps to 1.40. The effect concentrates in the highest quintile (S > ~1.3), corresponding to cells with extreme near-shore canyon topography. The Spearman rho = 0.37 captures a real monotonic trend but understates the threshold-like character of the association.
 
@@ -248,7 +248,7 @@ See `STATISTICAL_AUDIT_REPORT.md` for the full 47-finding audit and resolution s
 | 9 | min_reports threshold varies (20, 10, or 5) across tests | MEDIUM | phase_e_replication_suite.py |
 | 10 | Oregon S=0 regional excess (O/E = 2.09 vs 0.91 elsewhere, p ≈ 0.03) | MEDIUM | E_i population model |
 
-Oregon S=0 cells report at 2.1× expected rate, indicating a Pacific Northwest cultural factor not captured by the population model. That Puget Sound S=0 cells within this same region show suppressed rates (0.74×) strengthens the canyon-specific interpretation — the regional excess does not extend to non-canyon cells in Puget Sound.
+Oregon S=0 cells report at 2.1× expected rate, indicating a Pacific Northwest cultural factor not captured by the population model. That Puget Sound S=0 cells within this same region show suppressed rates (0.74×) strengthens the canyon-specific interpretation: the regional excess does not extend to non-canyon cells in Puget Sound.
 
 ## Data Sources
 
@@ -346,7 +346,7 @@ A non-technical overview of the full analysis (Phases B–E), generated with Not
 
 ## Author
 
-**Antoni Wędzikowski** — independent researcher, lawyer and legaltech founder, Warsaw, Poland
+**Antoni Wędzikowski**, independent researcher, lawyer and legaltech founder, Warsaw, Poland
 [LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · [GitHub](https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis)
 
 ## License
