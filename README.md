@@ -299,6 +299,36 @@ Attempted out-of-country replication on Norwegian fjords (SRTM30 bathymetry, Wor
 
 **Verdict**: Inconclusive. The original rho = 0.49 is explained by population (larger fjord cities sit near steeper gradients). With only 7 flat-shelf cells, Norway cannot provide a meaningful canyon-vs-flat contrast. Scripts: `phase_e_norway_replication.py` (original), `phase_e_norway_logistic.py` (population-controlled).
 
+## Quick Start
+
+Reproduce the headline result in under 5 minutes:
+
+```bash
+# 1. Clone and install
+git clone https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis.git
+cd uap-canyon-analysis
+pip install -r requirements.txt
+
+# 2. Download ETOPO1 bathymetry (~52 MB) — the only file not included
+#    Get ETOPO1_Bed_g_gmt4.grd.gz from:
+#    https://www.ngdc.noaa.gov/mgg/global/relief/ETOPO1/data/bedrock/grid_registered/netcdf/
+#    Then subset it:
+python -c "
+import xarray as xr
+ds = xr.open_dataset('ETOPO1_Bed_g_gmt4.grd')
+subset = ds.sel(lat=slice(20, 55), lon=slice(-135, -55))
+subset.to_netcdf('data/etopo_subset.nc')
+"
+
+# 3. Run the scoring function (geometry only — no UAP data touched)
+python notebooks/10_phase_ev2_scoring.py
+
+# 4. Run the primary evaluation (produces Spearman rho = 0.374, p = 0.0001)
+python notebooks/13_phase_e_red_v2.py
+```
+
+The included data files (`data/nuforc_reports.csv`, `data/census_county_pop.json`, `data/military_bases_us.csv`, `data/port_coords_cache.npz`) are all you need beyond ETOPO1. See `data/sources.md` for full provenance.
+
 ## Requirements
 
 ```bash
