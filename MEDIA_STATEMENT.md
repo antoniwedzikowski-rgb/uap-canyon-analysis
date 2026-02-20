@@ -16,6 +16,24 @@ UAP reports within 200 km of the US West Coast show a statistically significant 
 
 The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells) and San Diego (9.8× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay canyon cells — located 127–192 km from the nearest Navy operating area — still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells), ruling out military proximity as an explanation at that distance.
 
+### Key figures
+
+**Figure 1 — Study area: US coastline with submarine canyon features (>60 m/km gradient)**
+![Study Area](figures/figure1_study_area.png)
+*Red dots mark steep submarine canyon cells detected from NOAA ETOPO1 bathymetry. Named canyons labeled. Note the concentration of near-shore canyons on the West Coast versus far-offshore canyons on the East Coast.*
+
+**Figure 2 — Headline result: UAP report excess by canyon score quintile**
+![Quintile Result](figures/e_red_v2_primary_200km.png)
+*102 West Coast grid cells split into quintiles by canyon proximity score (S). Q1–Q4 (no/weak canyon) show modest excess. Q5 (strongest canyon signal) jumps to ~25× expected rate. Population-adjusted, haversine-corrected.*
+
+**Figure 3 — West Coast vs East Coast: the geographic asymmetry**
+![Band Sweep](figures/e_red_band_sweep.png)
+*Green = statistically significant (p < 0.05). The canyon–UAP association is robust across all coastal band widths on the West Coast but absent on the East Coast, where canyons sit far from shore.*
+
+**Figure 4 — Why the asymmetry exists: canyon proximity to shore**
+![Canyon Distances](figures/d7a_canyon_head_distances.png)
+*West Coast canyons (blue) cluster within 50 km of shore. East/Gulf Coast canyons (red) are 100–400 km offshore — beyond the reach of land-based observer data.*
+
 ## What the data does not show
 
 The effect is not detected on the East and Gulf Coasts (ρ = 0.055, p = 0.459). The wider continental shelf there places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data. This is a testability limitation, not a falsification. The effect concentrates in specific West Coast regions — primarily Puget Sound and the San Diego canyon system — and does not generalise across the full US coastline. An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group.
