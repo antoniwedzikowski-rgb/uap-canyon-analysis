@@ -97,6 +97,8 @@ The analysis uses 24 Python scripts and 14 public datasets including NUFORC sigh
 
 The priority is to prepare a preprint for arXiv with full methodology available for independent scrutiny. The goal is peer review, independent replication with non-US data, and engagement from researchers working on spatial analysis or the systematic study of anomalous aerial phenomena.
 
+Beyond that, I would welcome engagement from researchers who work on spatial analysis, geophysical data, or the systematic study of anomalous aerial phenomena. Projects like VASCO, led by Beatriz Villarroel, or the Galileo Project at Harvard have established frameworks for rigorous work in this space, and their perspective on the methodology and the geographic asymmetry would be invaluable.
+
 ## Honest uncertainties
 
 - The effect is regional (West Coast only) and concentrated in two areas (Puget Sound, San Diego). The rest of the West Coast shows weak signal (1.4× uplift). We do not know why these two regions are so much stronger.
