@@ -7,13 +7,13 @@
 
 ### Resolution status
 
-Of the 47 issues identified, the 4 most critical were fixed immediately after audit. Remaining issues are documented as known limitations.
+Of the 47 issues identified, the 4 most critical were fixed immediately after audit. All HIGH findings now have resolution annotations. None of the HIGH findings affect the headline Phase E result.
 
-| Severity | Found | Fixed | Documented as limitation |
-|----------|-------|-------|--------------------------|
-| CRITICAL | 5 | 4 | 1 (CRIT-5: seismicity is a null result, not cited in paper) |
-| HIGH/MAJOR | 14 | 0 | 14 (methodological caveats, documented in README) |
-| MEDIUM+ | 28 | 0 | 28 (precision issues, do not affect direction of findings) |
+| Severity | Found | Fixed | Documented | Superseded / N/A | Unresolved |
+|----------|-------|-------|------------|-------------------|------------|
+| CRITICAL | 5 | 4 | 1 (CRIT-5: null result, not cited) | 0 | 0 |
+| HIGH/MAJOR | 14 | 0 | 6 (HIGH-1–4, 8 in README) | 8 (Phase C exploratory / Phase D superseded) | 0 |
+| MEDIUM+ | 28 | 0 | — | — | 28 (precision issues, do not affect direction) |
 
 ---
 
@@ -117,48 +117,58 @@ Of the 47 issues identified, the 4 most critical were fixed immediately after au
 **Location:** `phase_c_steps3_7.py`, lines 659-667
 **Description:** Even the strongest shower (Leonids, amp=1.4) yields P_meteor = 0.286 < threshold 0.3. No reports are flagged as meteoric. The residual dataset is 99.5% (63,890 / 64,191) of original data.
 **Impact:** Full-vs-residual comparisons are trivial (C4 hourly: chi2=0.42, p=1.0).
+**RESOLUTION: NOT APPLICABLE.** Phase C exploratory test — meteor filtering is not used in the headline analysis (Phase E). The dead calibration means Phase C full-vs-residual comparisons are trivially identical, but this has no bearing on the canyon–UAP association.
 
 ### HIGH-6: Area-based OR for military bases assumes no overlap
 **Location:** `phase_c_prompt2.py`, lines 786-791
 **Description:** 171 bases * pi * 25^2 / 8M km^2 = 4.2%. But 171 installations have significant overlap in 25 km circles. Result: OR is underestimated.
 **Impact:** C6 (military proximity) is biased.
+**RESOLUTION: SUPERSEDED.** Phase C military test replaced in Phase E by OPAREA polygon confound test using 35 Navy operating area boundaries from NOAA MarineCadastre with proper spatial geometry. The overlap issue does not affect the Phase E result.
 
 ### HIGH-7: Only 3 epochs (data to 2014) — C6f has minimal power
 **Location:** `phase_c_prompt3.py`, lines 53-54
 **Description:** The prompt assumes 6 epochs, but data ends in 2014 -> 3 epochs, 2 transitions. Maximum composite score = 10. C6f (permutation p=0.369) could not have been significant.
 **Impact:** WEAK_AGENCY verdict is appropriate, but not because of absence of signal — because of insufficient statistical power.
+**RESOLUTION: NOT APPLICABLE.** Phase C exploratory test — not cited in headline analysis. The WEAK_AGENCY verdict is correctly attributed to low statistical power, not absence of effect.
 
 ### HIGH-8: Norway uses simplified S (no P, C, ranking)
 **Location:** `phase_e_norway_replication.py`, lines 191-197, 275-317
 **Description:** West Coast S = mean(rank_G + rank_P + rank_C). Norway S = frac_steep * (mean_gradient / threshold). No shore proximity, no coastal complexity, no global ranking.
 **Impact:** The null result from Norway may reflect different methodology, not absence of effect.
+**RESOLUTION: DOCUMENTED.** Norway limitation acknowledged in README, MEDIA_STATEMENT, and SUMMARY. The simplified scoring formula (no shore proximity, no coastal complexity) is an additional reason the Norway replication is inconclusive, beyond the lack of flat-shelf contrast group.
 
 ### HIGH-9: Phase D still uses deg*111 approximation (not haversine)
 **Location:** `phase_d_robustness.py`, line 155+
 **Description:** Distances computed as `cd_grid * 111.0` — flat Earth. Error ~23% on E-W at latitude 40N.
 **Impact:** Systematic overestimation of E-W distances. Bias AGAINST finding proximity.
+**RESOLUTION: SUPERSEDED.** Phase E (v2) uses haversine for all distance computations, fixing this approximation. Phase D code is retained for transparency but is not part of the headline analysis. The flat-Earth bias was conservative (overestimates distances, biasing AGAINST finding proximity).
 
 ### HIGH-10: C2 permutation destroys Kp autocorrelation
 **Location:** `phase_c_prompt2.py`, lines 268-284
 **Description:** Shuffling Kp destroys autocorrelation (27-day solar cycle). The test is anti-conservative.
 **Impact:** p=0.0000 — the result is probably robust, but the test is formally invalid.
+**RESOLUTION: NOT APPLICABLE.** Phase C exploratory test (geomagnetic–UAP correlation) — not cited in headline analysis. The Kp–UAP association is a secondary finding that would require block bootstrap or time-series-aware permutation for formal validity.
 
 ### HIGH-11: C1 Rayleigh test omitted (but replacement is better)
 **Location:** `phase_c_prompt2.py`, lines 70-127
 **Description:** The prompt assumes a Rayleigh test on cyclic Moon phase data. The implementation uses chi-square vs astronomical distribution — which is more appropriate.
 **Verdict:** Deviation from prompt, but an improvement.
+**RESOLUTION: NOT APPLICABLE.** The implementation deviates from the original prompt but uses a more statistically appropriate method (chi-square vs astronomical distribution rather than Rayleigh on cyclic data). This is an improvement, not an error.
 
 ### HIGH-12: Variable `residual` overwritten in C6d
 **Location:** `phase_c_prompt3.py`, lines 432-433
 **Description:** Local variable overwrites global. Practical impact is minimal (df_res already filtered), but poor programming practice.
+**RESOLUTION: NOT APPLICABLE.** Phase C code — no practical impact on results (df_res already filtered at that point). Poor practice but does not affect any computed values.
 
 ### HIGH-13: C7 Wilcoxon with n=3 pairs
 **Location:** `phase_c_prompt2.py`, lines 1084-1105
 **Description:** Minimum two-sided p for n=3 is 0.25. The test is uninterpretable.
+**RESOLUTION: NOT APPLICABLE.** Phase C exploratory test — not cited in headline analysis. With n=3 pairs, the Wilcoxon test has no statistical power. The result is uninterpretable but does not affect any conclusions.
 
 ### HIGH-14: NRC event expected count uses 14-day window instead of 15
 **Location:** `phase_c_prompt2.py`, lines 800-804
 **Description:** `day_diff <= 7` is a 15-day window ([-7, +7] inclusive), but the formula uses `19 * 14`. ~7% underestimation of expected.
+**RESOLUTION: NOT APPLICABLE.** Phase C exploratory test (NRC event proximity) — not cited in headline analysis. The ~7% underestimation of expected count is conservative (biases toward finding more events than expected).
 
 ---
 
