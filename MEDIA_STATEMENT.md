@@ -38,6 +38,30 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) cluster within 50 km of shore. East/Gulf Coast canyons (red) are 100–400 km offshore — beyond the reach of land-based observer data.*
 
+### Strength of evidence
+
+**Regional breakdown** — the effect is not uniform across the West Coast:
+
+| Region | Reports per expected (no canyon) | Reports per expected (canyon cells) | Uplift | Grid cells |
+|--------|--------------------------------|-------------------------------------|--------|------------|
+| Puget Sound (46–50°N) | 0.74× | 5.04× | 6.8× | 22 |
+| San Diego (32–33.5°N) | 0.60× | 5.85× | 9.8× | 5 |
+| Rest of West Coast | 1.08× | 1.53× | 1.4× | 75 |
+
+Non-canyon cells in Puget Sound and San Diego report *below* baseline — the uplift is canyon-specific, not regional.
+
+**Dose-response** — Monterey Canyon, one of the world's largest submarine canyons, shows intermediate canyon scores (S = 1.3–1.6) and intermediate uplift (2.75–4.80×). The effect scales with canyon proximity to shore, not canyon depth alone.
+
+**Non-linearity** — Quintile analysis shows Q1–Q4 (no/weak canyon) have similar report excess (logR 0.20–0.46, overlapping confidence intervals). Q5 (strongest canyon signal) jumps to logR = 1.40 (~25× expected). The effect concentrates in the extreme tail.
+
+**Temporal stability** — The association holds in both halves of the dataset (1990–2002: ρ = 0.32, p = 0.002; 2003–2014: ρ = 0.36, p = 0.0003) and in 21 out of 21 rolling 5-year windows (18 of 21 statistically significant). It is not driven by a single event or time period.
+
+**Coastal band dependence** — The effect peaks at 50 km from shore (ρ = 0.43), is non-significant at 10 km (ρ = 0.15), and stabilizes at 100–200 km (ρ = 0.37). This argues against a direct line-of-sight observation mechanism and suggests a broader coastal-zone phenomenon.
+
+**Bootstrap confidence interval** — 2,000-resample cluster bootstrap yields 95% CI: [0.190, 0.531]. The lower bound is far from zero.
+
+**Magnetic anomaly** — Canyon score S dominates magnetic anomaly in nested F-tests. Canyon cells have *lower* magnetic anomalies than non-canyon cells — the opposite of what a magnetic-attraction hypothesis would predict.
+
 ### Anticipated objections
 
 **"It's just population — more people live near canyons."**
@@ -73,6 +97,22 @@ The analysis uses 24 Python scripts and 14 public datasets including NUFORC sigh
 
 The priority is to prepare a preprint for arXiv with full methodology available for independent scrutiny. The goal is peer review, independent replication with non-US data, and engagement from researchers working on spatial analysis or the systematic study of anomalous aerial phenomena.
 
+## Honest uncertainties
+
+- The effect is regional (West Coast only) and concentrated in two areas (Puget Sound, San Diego). The rest of the West Coast shows weak signal (1.4× uplift). We do not know why these two regions are so much stronger.
+- NUFORC is a self-reported database. We cannot rule out unknown reporting biases correlated with coastal geography.
+- This is a single-author analysis that has not been independently replicated or published in a peer-reviewed journal.
+- An attempted replication on Norwegian fjords is inconclusive — Norway's coastline is entirely fjords, leaving no flat-shelf contrast group for comparison.
+- We show a spatial correlation, not a causal mechanism. We do not claim to know *why* this pattern exists.
+
+## What would strengthen or weaken this finding
+
+- **Independent replication** in countries with near-shore canyons and independent UAP/UFO databases (Japan, Chile, Portugal, Mediterranean) would be the strongest test.
+- **Hydrophone or sonar data** from NOAA or navy acoustic monitoring networks near canyon systems could test whether anomalous underwater acoustic activity correlates with surface reports.
+- **Improved population models** using nighttime lights (VIIRS) or mobile phone density instead of county-level census would reduce uncertainty in the population adjustment.
+- **Temporal correlation** with oceanographic events (internal waves, upwelling episodes) could test physical mechanisms.
+- If independent replications consistently fail, or if a confound is identified that explains the Puget/San Diego concentration, the finding should be downgraded or retracted.
+
 ## For accurate reporting
 
 This is a preliminary, single-author analysis showing a robust regional signal whose mechanism and scope remain genuinely uncertain. Any coverage should note that the effect is not detected on the East Coast and is concentrated in specific West Coast regions. The goal is to contribute to a body of evidence, not to make claims that outrun it.
@@ -80,3 +120,5 @@ This is a preliminary, single-author analysis showing a robust regional signal w
 ---
 
 *Analysis conducted with Claude Code (Anthropic) as a research partner. Analytical decisions and domain knowledge are the author's. AI served as a force multiplier for rigorous testing.*
+
+**Audio walkthrough:** [`UAPs_Cluster_Over_Steep_Underwater_Canyons.m4a`](media/UAPs_Cluster_Over_Steep_Underwater_Canyons.m4a) (NotebookLM overview, ~20 min)

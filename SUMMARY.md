@@ -2,6 +2,8 @@
 
 **A plain-language summary for non-scientists**
 
+**Audio walkthrough:** [`UAPs_Cluster_Over_Steep_Underwater_Canyons.m4a`](media/UAPs_Cluster_Over_Steep_Underwater_Canyons.m4a) (NotebookLM, ~20 min)
+
 ---
 
 ## The question
@@ -47,6 +49,15 @@ The effect **does not appear** on the US East Coast. But this is likely a data l
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) are within 50 km of shore. East Coast canyons (red) are 100-400 km offshore — too far for anyone on land to see anything above them.*
 
+## How strong is the evidence?
+
+- **It's not uniform** — the effect is concentrated in Puget Sound (6.8x uplift) and San Diego (9.8x). The rest of the West Coast shows only 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."
+- **Dose-response** — Monterey Canyon, one of the world's largest underwater canyons, shows an intermediate effect (2.75–4.80x). Bigger canyon closer to shore = stronger signal. This is what a real physical association looks like.
+- **Stable across 25 years** — the association holds in 1990–2002 and 2003–2014 separately, and in 21 out of 21 rolling 5-year windows. It's not driven by a single event.
+- **Predicted before testing** — the model was built using only ocean floor geometry, without looking at any UFO data. It then correctly predicted 4 out of 5 top hotspot locations.
+- **Replicated in unseen data** — post-2014 reports (not used in any part of model development) show the same association (rho = 0.35, p = 0.0001).
+- **Not a line-of-sight effect** — the signal peaks at 50 km from shore, not at the water's edge (10 km). This suggests something broader than "people on beaches see things over the ocean."
+
 ## "But isn't it just population?"
 
 This is the first question everyone asks, and we tested it extensively:
@@ -74,13 +85,22 @@ This is a correlation, not an explanation. We do not know *why* sightings cluste
 | Out-of-sample replication (post-2014 data) | rho = 0.35, p = 0.0001 |
 | Confounds tested and survived | population, military, ports, ocean depth, magnetic anomaly, coastal upwelling, Navy operating areas |
 
-## Limitations
+## Limitations and honest uncertainties
 
-- The effect is regional (West Coast only), not global
-- It concentrates in Puget Sound and San Diego — the rest of the West Coast shows weak signal
-- NUFORC is a self-reported database with inherent biases
-- This is a single-author analysis awaiting peer review
-- No causal mechanism is proposed or implied
+- **Regional, not global** — the effect is detected only on the US West Coast. It is not detected on the East Coast, though this may be a data limitation (canyons too far from shore) rather than evidence against the hypothesis
+- **Concentrated** — Puget Sound and San Diego drive most of the signal. The rest of the West Coast shows only weak uplift (1.4x). We do not know why these two regions are so much stronger
+- **Self-reported data** — NUFORC is a voluntary reporting database. We cannot rule out unknown reporting biases correlated with coastal geography
+- **Single-author, pre-peer-review** — this analysis has not been independently replicated or published in a peer-reviewed journal
+- **No causal mechanism** — we show a spatial correlation, not an explanation. We do not claim to know *why* this pattern exists
+- **Norway inconclusive** — an attempted replication on Norwegian fjords failed after population control. Norway's entire coastline is fjords, leaving no flat-shelf contrast group to test against
+
+## What would strengthen or weaken this finding
+
+- **Independent replication** in countries with near-shore canyons and independent UAP/UFO databases (Japan, Chile, Portugal, Mediterranean) would be the strongest test
+- **Hydrophone or sonar data** from NOAA or navy acoustic monitoring networks near canyon systems could test whether there is any anomalous underwater acoustic activity correlated with surface reports
+- **Improved population models** using nighttime lights (VIIRS) or mobile phone density data instead of county-level census would reduce uncertainty in the population adjustment
+- **Temporal correlation** with oceanographic events (internal waves, upwelling episodes) could test physical mechanisms
+- If independent replications consistently fail, or if a confound is identified that explains the Puget/San Diego concentration, the finding should be downgraded or retracted
 
 ## How to verify
 
