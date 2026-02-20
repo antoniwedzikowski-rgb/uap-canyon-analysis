@@ -26,11 +26,15 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 ![Quintile Result](figures/e_red_v2_primary_200km.png)
 *102 West Coast grid cells split into quintiles by canyon proximity score (S). Q1–Q4 (no/weak canyon) show modest excess. Q5 (strongest canyon signal) jumps to ~25× expected rate. Population-adjusted, haversine-corrected.*
 
-**Figure 3 — West Coast vs East Coast: the geographic asymmetry**
+**Figure 3 — West Coast zoom: bathymetry, canyon cells, and UAP report density**
+![Hero Bathymetry](figures/figure_hero_bathymetry.png)
+*Color bathymetry from NOAA ETOPO1. Orange/red dots = shelf cells with gradient >60 m/km (submarine canyon features). Faint red scatter = individual UAP reports (NUFORC, 1949–2014). Five major canyon systems labeled. Note how canyon cells and UAP report clusters overlap in Puget Sound, Monterey Bay, and the San Diego corridor.*
+
+**Figure 4 — West Coast vs East Coast: the geographic asymmetry**
 ![Band Sweep](figures/e_red_band_sweep.png)
 *Green = statistically significant (p < 0.05). The canyon–UAP association is robust across all coastal band widths on the West Coast but absent on the East Coast, where canyons sit far from shore.*
 
-**Figure 4 — Why the asymmetry exists: canyon proximity to shore**
+**Figure 5 — Why the asymmetry exists: canyon proximity to shore**
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) cluster within 50 km of shore. East/Gulf Coast canyons (red) are 100–400 km offshore — beyond the reach of land-based observer data.*
 
