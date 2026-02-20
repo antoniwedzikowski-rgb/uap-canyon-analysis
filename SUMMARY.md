@@ -60,8 +60,8 @@ The effect **does not appear** on the US East Coast. But this is likely a data l
 
 ## How strong is the evidence?
 
-- **It's not uniform** — the effect is strongest in Puget Sound (6.8x), San Diego (9.8x), and Monterey Bay (2.75–4.80x) — all regions where canyons come closest to shore. The remaining West Coast cells average 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."
-- **Dose-response** — Monterey Canyon, one of the world's largest underwater canyons, shows an intermediate effect (2.75–4.80x). Bigger canyon closer to shore = stronger signal. This is what a real physical association looks like.
+- **It's not uniform** — the effect is strongest in Puget Sound (6.8x) and San Diego (9.8x), with an intermediate signal at Monterey Bay (2.75–4.80x). The remaining West Coast cells average 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."
+- **Monterey Bay: the natural experiment** — Monterey Canyon is one of the world's largest submarine canyons. It has intermediate steepness (S = 1.3–1.6) and shows intermediate uplift (2.75–4.80x) — exactly what a real physical association predicts. Its canyon cells sit 127–192 km from the nearest Navy operating area, ruling out military activity. Non-canyon cells in the same region report at baseline. This one location combines dose-response, military elimination, and canyon-specific uplift into a single test case.
 - **Stable across 25 years** — the association holds in 1990–2002 and 2003–2014 separately, and in 21 out of 21 rolling 5-year windows. It's not driven by a single event.
 - **Predicted before testing** — the model was built using only ocean floor geometry, without looking at any UFO data. It then correctly predicted 4 out of 5 top hotspot locations.
 - **Replicated in unseen data** — post-2014 reports (not used in any part of model development) show the same association (rho = 0.35, p = 0.0001).

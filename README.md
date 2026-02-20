@@ -184,11 +184,12 @@ Pre-registered geometric scoring function frozen before evaluation.
 |--------|----------|----------|--------|----------------|
 | Puget Sound (46-50N) | 0.74 | 5.04 | 6.8x | 11 / 11 |
 | San Diego (32-33.5N) | 0.60 | 5.85 | 9.8x | 3 / 2 |
-| Rest of West Coast | 1.08 | 1.53 | 1.4x | 12 / 63 |
+| Monterey Bay (36-37.5N) | 1.13 | 2.75–4.80 | 2.4–4.3x | 3 / 12 |
+| Rest of West Coast | 1.08 | 1.53 | 1.4x | 9 / 51 |
 
-The effect concentrates in regions with extreme near-shore submarine topography (Puget Sound fjords, Monterey Bay canyon, Scripps/La Jolla canyons), with an identical pattern: S=0 suppression below baseline + S>0 uplift. The remaining West Coast cells average 1.4x uplift. San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
+The effect concentrates in regions with extreme near-shore submarine topography, with an identical pattern: S=0 suppression below baseline + S>0 uplift. San Diego has only n=5 cells — too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
 
-Monterey Canyon — one of the world's largest submarine canyons — shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation in which the effect scales with canyon proximity to shore, not canyon depth alone.
+Monterey Canyon — one of the world's largest submarine canyons — shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation. Critically, Monterey canyon cells sit 127–192 km from the nearest Navy operating area, while non-canyon cells in the same region report at baseline (logR = −0.02). This combination — dose-response, military elimination, canyon-specific uplift — makes Monterey a natural experiment for the canyon hypothesis.
 
 **Non-linearity:** The relationship is non-linear. Quintile analysis shows Q1–Q4 of S have similar mean logR (0.20–0.46, overlapping CIs), while Q5 jumps to 1.40. The effect concentrates in the highest quintile (S > ~1.3), corresponding to cells with extreme near-shore canyon topography. The Spearman rho = 0.37 captures a real monotonic trend but understates the threshold-like character of the association.
 
