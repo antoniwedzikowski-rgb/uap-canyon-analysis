@@ -50,6 +50,14 @@ The effect **does not appear** on the US East Coast. But this is likely a data l
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) are within 50 km of shore. East Coast canyons (red) are 100-400 km offshore — too far for anyone on land to see anything above them.*
 
+**Figure 6 — Blind prediction vs reality**
+![Prediction vs Reality](figures/figure_prediction_vs_reality.png)
+*Left: what the model predicted from ocean-floor geometry alone (no UAP data). Right: actual population-adjusted UAP report excess. The pattern matches. Black outlines on right panel mark canyon cells.*
+
+**Figure 7 — Robustness scorecard**
+![Scorecard](figures/figure_scorecard.png)
+*9 hostile tests. 7 passed. 1 honest limitation (regional concentration). 1 null control (East Coast) behaves as expected.*
+
 ## How strong is the evidence?
 
 - **It's not uniform** — the effect is strongest in Puget Sound (6.8x), San Diego (9.8x), and Monterey Bay (2.75–4.80x) — all regions where canyons come closest to shore. The remaining West Coast cells average 1.4x. Importantly, non-canyon cells *in those same regions* report *below* baseline — the uplift is canyon-specific, not "Seattle has lots of people."

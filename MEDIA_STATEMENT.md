@@ -38,6 +38,14 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 ![Canyon Distances](figures/d7a_canyon_head_distances.png)
 *West Coast canyons (blue) cluster within 50 km of shore. East/Gulf Coast canyons (red) are 100–400 km offshore — beyond the reach of land-based observer data.*
 
+**Figure 6 — Blind prediction vs reality**
+![Prediction vs Reality](figures/figure_prediction_vs_reality.png)
+*Left: canyon score S computed from ocean-floor geometry alone (no UAP data used). Right: population-adjusted UAP report excess (logR). Black outlines mark canyon cells. The prediction matches the reality — Spearman rho = 0.37, p = 0.0001.*
+
+**Figure 7 — Robustness scorecard**
+![Scorecard](figures/figure_scorecard.png)
+*Summary of all robustness tests. 7 of 9 passed. 1 shows regional concentration (honest limitation). 1 null control (East Coast) behaves as expected.*
+
 ### Strength of evidence
 
 **Regional breakdown** — the effect is not uniform across the West Coast:
