@@ -52,8 +52,14 @@ We tested a shore-type proxy (ETOPO coastal cliff metric) as an alternative pred
 **"It's fishing ports or marine traffic."**
 Port infrastructure (7,747 ports/marinas from OpenStreetMap) is included as a covariate in the model. The canyon association survives this control.
 
+**"It's ocean currents or upwelling attracting marine activity."**
+We tested coastal upwelling directly using satellite chlorophyll-a data (NASA MODIS Aqua, 2003–2020 climatology). Upwelling (chl-a) is uncorrelated with canyon steepness (rho = −0.02) and canyon score S remains the dominant predictor when chl-a is added to the model (F = 18.5, p < 0.0001). The two variables are orthogonal — upwelling does not explain the canyon association.
+
 **"You cherry-picked the threshold."**
 The 60 m/km gradient threshold was selected during Phase C/D, but a sensitivity sweep across all thresholds from 20 to 100 m/km shows the association is significant at every threshold tested (rho 0.37–0.42, all p < 0.0002).
+
+**"How do we know the model isn't overfit?"**
+The scoring function was frozen before evaluation — it uses only bathymetric geometry (gradient, proximity, coastal complexity) and touches no UAP data. In held-out spatial validation (leave-one-region-out cross-validation), it correctly predicted 4 out of 5 top hotspot cells. It also replicated in fully independent post-2014 data (rho = 0.35, p = 0.0001) that was not used at any stage of model development.
 
 ## What the data does not show
 
