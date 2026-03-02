@@ -2,6 +2,10 @@
 
 Statistical analysis of the spatial relationship between UAP (Unidentified Anomalous Phenomena) reports from NUFORC and submarine canyon locations along the US coastline.
 
+## Media Coverage
+
+- **Daily Mail** (2025): [UFO hotspots and underwater canyons on the West Coast](https://www.dailymail.co.uk/sciencetech/article-15573389/ufo-hotspots-underwater-canyons-west-coast.html)
+
 ## Key Finding
 
 UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
