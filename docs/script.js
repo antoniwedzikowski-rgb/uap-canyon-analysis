@@ -127,6 +127,24 @@
     e.stopPropagation();
   });
 
+  // ---- Scroll reveal ----
+  var revealObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll('.section, .section-wide, .section-compact, .stats-row').forEach(function (el) {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+
   // ---- Init on load ----
   updateProgress();
   updateNav();
