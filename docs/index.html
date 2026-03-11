@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UAP-Canyon Spatial Association Analysis</title>
+  <meta name="description" content="Statistical analysis of the spatial relationship between UAP reports and submarine canyon features along the US West Coast. Spearman rho = 0.37, p = 0.0001. Open data, open code.">
+  <meta property="og:title" content="UAP Reports and Submarine Canyon Geometry">
+  <meta property="og:description" content="Something concentrates near steep underwater canyons off the US West Coast. We measured it. Open-source spatial analysis of 80,332 reports.">
+  <meta property="og:image" content="figures/figure_hero_bathymetry.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">UAP-Canyon Analysis</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#finding">Finding</a></li>
+        <li><a href="#map">Map</a></li>
+        <li><a href="#signal">Signal</a></li>
+        <li><a href="#code">Code</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-opening">Something concentrates near steep underwater canyons off the US West Coast. We measured it.</p>
+      <h1 class="hero-title">UAP Reports and Submarine Canyon Geometry: A Spatial Analysis</h1>
+      <p class="hero-subline">80,332 reports &middot; 25 years &middot; One signal</p>
+      <p class="hero-tagline">What public data says about something that officially doesn't exist.</p>
+    </div>
+  </section>
+
+  <!-- The Finding -->
+  <section class="section" id="finding">
+    <div class="content-narrow">
+      <h2 class="section-heading">The Finding</h2>
+      <p>Between 1990 and 2014, the National UFO Reporting Center collected over 80,000 sighting reports across the United States. When those reports are mapped against NOAA ocean-floor data and adjusted for population density, a pattern emerges along the West Coast: areas near steep submarine canyon features&mdash;underwater slopes exceeding 60 metres per kilometre&mdash;show significantly elevated report rates. The effect is not gradual. It behaves like a threshold: below a certain steepness, nothing. Above it, a clear excess. The association holds across different time periods, different canyon definitions, and independent post-2014 data that was never used to build the model.</p>
+      <p>The same test on the East and Gulf Coasts finds nothing. There, submarine canyons sit 100 to 400 kilometres offshore, far beyond the continental shelf edge. No land-based observer could report anything above them. The geographic asymmetry is unexplained.</p>
+    </div>
+  </section>
+
+  <!-- The Map -->
+  <section class="section section-wide" id="map">
+    <div class="content-wide">
+      <figure class="figure-full">
+        <img src="figures/figure_hero_bathymetry.png" alt="West Coast bathymetry with submarine canyon cells and UAP report density overlay" loading="eager" decoding="async" class="figure-img clickable">
+        <figcaption>NOAA ETOPO1 bathymetry, 1990&ndash;2014 NUFORC reports (red scatter), and canyon cells (&gt;60 m/km gradient, orange dots). Five major canyon systems labelled.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Key Statistics -->
+  <section class="section" id="statistics">
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">&rho; = 0.37</div>
+        <div class="stat-label">Primary Spearman correlation</div>
+        <div class="stat-detail">p = 0.0001, n = 102 cells</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">&rho; = 0.35</div>
+        <div class="stat-label">Post-2014 replication</div>
+        <div class="stat-detail">p = 0.0001, independent holdout</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">85%</div>
+        <div class="stat-label">Canyon overlap</div>
+        <div class="stat-detail">at &gt;60 m/km gradient threshold</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">OR &asymp; 4</div>
+        <div class="stat-label">Binary weighted odds ratio</div>
+        <div class="stat-detail">95% CI: 1.4&ndash;10.8</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Signal -->
+  <section class="section" id="signal">
+    <div class="content-narrow">
+      <h2 class="section-heading">The Signal</h2>
+      <p>A permutation test asks a simple question: if the association between canyon proximity and report density were random, how often would we see a result this strong? The observed statistic is compared against 1,000 random shuffles of the data. If the real value sits far outside the distribution of shuffled values, the association is unlikely to be coincidence.</p>
+      <p class="text-muted">In this case, fewer than 1 in 10,000 shuffles produced a result as strong as the observed one. The p-value of 0.0001 is not a belief. It is a measurement.</p>
+    </div>
+    <div class="content-wide">
+      <figure class="figure-full">
+        <img src="figures/sprint3_temporal_permutation.png" alt="Permutation test distribution showing observed signal versus null distribution" loading="lazy" decoding="async" class="figure-img clickable">
+        <figcaption>Observed statistic (red line) versus 1,000 random shuffles. The real value falls far outside the null distribution.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Additional Figures -->
+  <section class="section" id="figures">
+    <div class="content-narrow">
+      <h2 class="section-heading">Robustness</h2>
+    </div>
+    <div class="content-wide">
+      <figure class="figure-full">
+        <img src="figures/sprint2_gam_partial_dependence.png" alt="Generalized additive model partial dependence plot" loading="lazy" decoding="async" class="figure-img clickable">
+        <figcaption>GAM partial dependence: canyon proximity effect after adjusting for population and covariates.</figcaption>
+      </figure>
+
+      <figure class="figure-full">
+        <img src="figures/sprint3_dose_robustness_weighted_or.png" alt="Weighted odds ratios with confidence intervals by gradient bin" loading="lazy" decoding="async" class="figure-img clickable">
+        <figcaption>Population-weighted odds ratios by gradient bin. The effect concentrates above 60 m/km&mdash;a threshold, not a gradient.</figcaption>
+      </figure>
+
+      <figure class="figure-full">
+        <img src="figures/sprint2_bootstrap_distributions.png" alt="Bootstrap distribution of the primary statistic" loading="lazy" decoding="async" class="figure-img clickable">
+        <figcaption>Cluster bootstrap (2,000 resamples). The 95% confidence interval excludes zero.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- What This Is Not -->
+  <section class="section" id="disclaimer">
+    <div class="content-narrow">
+      <h2 class="section-heading">What This Is Not</h2>
+      <ul class="clean-list">
+        <li>This is not a claim about what is generating the signal.</li>
+        <li>This is not a claim about extraterrestrial intelligence.</li>
+        <li>This is a documented spatial correlation in public data.</li>
+        <li>The mechanism is unknown.</li>
+        <li>The geographic asymmetry&mdash;a West Coast signal, an East Coast absence&mdash;is unexplained.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="section" id="methods">
+    <div class="content-narrow">
+      <h2 class="section-heading">Methodology</h2>
+      <ul class="method-list">
+        <li><strong>Dataset:</strong> NUFORC, 80,332 geocoded reports, 1990&ndash;2014. Analysis window ends before the December 2017 NYT disclosure and subsequent media spike.</li>
+        <li><strong>Bathymetry:</strong> NOAA ETOPO1, 1 arc-minute resolution.</li>
+        <li><strong>Population control:</strong> Inverse distance weighting kernel from US Census 2020 county centroids (3,108 counties).</li>
+        <li><strong>Spatial grid:</strong> 0.5-degree cells, minimum 20 reports per cell for inclusion.</li>
+        <li><strong>Canyon detection:</strong> Gradient magnitude &gt;60 m/km on the continental shelf (0 to &minus;500 m depth).</li>
+        <li><strong>Confounds tested:</strong> Population density, military operating areas (35 OPAREA polygons), ocean depth, magnetic anomaly, earthquake frequency, port proximity (7,747 locations), seasonal patterns, deduplication variants.</li>
+        <li><strong>Replication:</strong> Temporal split (post-2014 independent data), leave-one-region-out cross-validation, 21 rolling 5-year windows.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Code & Data -->
+  <section class="section" id="code">
+    <div class="content-narrow">
+      <h2 class="section-heading">Code &amp; Data</h2>
+      <p>Every result on this page can be reproduced from public data using the linked code.</p>
+      <div class="code-links">
+        <a href="https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis" target="_blank" rel="noopener" class="btn-primary">View on GitHub</a>
+        <a href="media/UAPs_Cluster_Over_Steep_Underwater_Canyons.m4a" class="btn-secondary" download>Audio walkthrough (20 min, 37 MB)</a>
+      </div>
+      <p class="text-muted">Approximately 65 Python scripts, fully public, MIT license. All data sources documented with download instructions.</p>
+    </div>
+  </section>
+
+  <!-- Press Coverage -->
+  <section class="section section-compact" id="press">
+    <div class="content-narrow">
+      <p class="press-line">As covered by: <a href="https://www.dailymail.co.uk/sciencetech/article-15573389/ufo-hotspots-underwater-canyons-west-coast.html" target="_blank" rel="noopener">Daily Mail</a> &mdash; &ldquo;UFO hotspots cluster near underwater canyons off the US West Coast&rdquo;</p>
+    </div>
+  </section>
+
+  <!-- Preprint -->
+  <section class="section section-compact">
+    <div class="content-narrow">
+      <p class="preprint-line">Preprint forthcoming.</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="content-narrow">
+      <h2 class="section-heading">About</h2>
+      <p><strong>Antoni W&#281;dzikowski</strong> &mdash; citizen scientist, lawyer, and legaltech founder based in Warsaw, Poland. Not an academic. No institutional stake in the outcome. The signal was found by following the data.</p>
+      <div class="about-links">
+        <a href="https://www.linkedin.com/in/antekwedzikowski/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content-narrow">
+      <p>&copy; 2025 &middot; Part of an ongoing citizen science series.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
