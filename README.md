@@ -56,7 +56,8 @@ uap-canyon-analysis/
 │   ├── prompts/                             # LLM prompts used during development
 │   └── qa/                                  # QA task logs and revision memos
 │
-├── preprint_v2.md                           # Manuscript (Markdown source)
+├── preprint.md                              # Manuscript (Markdown source)
+├── preprint.pdf                             # Manuscript (PDF)
 ├── STATISTICAL_AUDIT_REPORT.md              # 47-finding statistical audit
 └── requirements.txt                         # Python dependencies
 ```
