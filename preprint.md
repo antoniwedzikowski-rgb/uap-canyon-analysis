@@ -3,8 +3,6 @@
 **Antoni Wędzikowski**
 Independent researcher, Warsaw, Poland
 
-**Preprint v2** — revised 2026-03-30
-
 ---
 
 ## Abstract
@@ -261,7 +259,7 @@ The Norwegian test is inconclusive. The simplified scoring formula used for Norw
 
 ### 5.1 Summary of Findings
 
-Submarine canyon steepness predicts UAP report density along the US West Coast (ρ = 0.374, p = 0.0001, n = 102). The association survived nested confound tests (ocean depth, magnetic anomalies, chlorophyll-a, military proximity), persists across temporal splits including a post-2014 holdout, and remains positive in 4 of 5 spatial cross-validation folds. It concentrates in Puget Sound, La Jolla/San Diego, and Monterey Bay; excluding Puget Sound weakens but does not eliminate it (ρ = 0.243, p = 0.021). The association is absent on the East Coast and inconclusive in Norway.
+Submarine canyon steepness predicts UAP report density along the US West Coast (ρ = 0.374, p = 0.0001, n = 102). Nested confound tests (ocean depth, magnetic anomalies, chlorophyll-a, military proximity) did not eliminate the association. It persists across temporal splits including a post-2014 holdout, and remains positive in 4 of 5 spatial cross-validation folds. The signal concentrates in Puget Sound, La Jolla/San Diego, and Monterey Bay; excluding Puget Sound weakens but does not eliminate it (ρ = 0.243, p = 0.021). The association is absent on the East Coast and inconclusive in Norway.
 
 ### 5.2 What This Study Does Not Show
 
