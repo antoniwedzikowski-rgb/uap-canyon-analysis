@@ -1,6 +1,10 @@
 # UAP-Canyon Spatial Association Analysis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19340933.svg)](https://doi.org/10.5281/zenodo.19340933)
+
 Statistical analysis of the spatial relationship between UAP (Unidentified Anomalous Phenomena) reports from NUFORC and submarine canyon locations along the US coastline.
+
+**Preprint:** Wędzikowski, A. (2026). Submarine Canyon Gradient Predicts UAP Report Density Along the US West Coast: A Geospatial Correlational Study. Zenodo. [doi:10.5281/zenodo.19340933](https://doi.org/10.5281/zenodo.19340933)
 
 ## Media Coverage
 
