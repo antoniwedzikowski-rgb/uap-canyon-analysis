@@ -1,8 +1,12 @@
 # Media Statement: UAP-Canyon Spatial Association Analysis
 
+> **Note:** This is a communication document for media use, not a source-of-truth scientific document. For canonical results, see the preprint and `results/phase_ev2/` JSON files. Numbers here may be rounded or simplified for accessibility.
+
 **Author:** Antoni Wędzikowski, independent researcher, lawyer and legaltech founder based in Warsaw, Poland
 **Contact:** [LinkedIn](https://www.linkedin.com/in/antekwedzikowski/) · via GitHub Issues or through referring publication
 **Repository:** https://github.com/antoniwedzikowski-rgb/uap-canyon-analysis
+
+**Media coverage:** The study was presented on TVP (Polish public television) in Tomasz Sekielski's program (March 2026), the first Polish television segment to treat UAP research seriously, alongside military officials, politicians, and scientists.
 
 ---
 
@@ -12,9 +16,9 @@ A statistical analysis testing whether UAP (Unidentified Anomalous Phenomena) re
 
 ## Key finding
 
-UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features: Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, port infrastructure, and proximity to 35 Navy offshore operating area polygons (NOAA MarineCadastre). The association replicated in independent post-2014 data not used to develop the model (ρ = 0.35, p = 0.0001), is stable across temporal splits (1990-2002 and 2003-2014 both significant), survives all tested gradient thresholds (20-100 m/km), and correctly predicted 4 out of 5 top hotspot cells in held-out spatial validation.
+UAP reports within 200 km of the US West Coast show a statistically significant spatial association with steep submarine canyon features: Spearman ρ = 0.374 (p = 0.0001, n = 102 grid cells, 200 km coastal band) after controlling for population density, military installations, port infrastructure, and proximity to 35 Navy offshore operating area polygons (NOAA MarineCadastre). The association replicated in temporally independent post-2014 data not used to develop the model (ρ = 0.35, p = 0.0001; note: post-2014 data shares city-centroid geocoding structure with primary dataset), is stable across temporal splits (1990-2002 and 2003-2014 both significant), survives all tested gradient thresholds (20-100 m/km), and correctly identified 4 out of 5 top hotspot cells in the primary evaluation (Precision@5 = 0.8).
 
-The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells), San Diego (9.8× uplift), and Monterey Bay (2.75–4.80× uplift). Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay canyon cells, located 127–192 km from the nearest Navy operating area, still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells), ruling out military proximity as an explanation at that distance.
+The effect concentrates in regions with extreme near-shore topography: Puget Sound (6.8× uplift, ρ = 0.77, p = 0.005, n = 11 cells), San Diego (9.8× uplift), and Monterey Bay. Coastal upwelling (satellite chlorophyll-a) was orthogonal to canyon steepness and did not explain the association. Monterey Bay provides one of the cleanest local examples in the dataset: its two canyon cells remain elevated (R = 2.75 and 4.80) despite lying 127–141 km from the nearest mapped Navy operating area.
 
 ### Key figures
 
@@ -54,16 +58,16 @@ The effect concentrates in regions with extreme near-shore topography: Puget Sou
 |--------|--------------------------------|-------------------------------------|--------|------------|
 | Puget Sound (46–50°N) | 0.74× | 5.04× | 6.8× | 22 |
 | San Diego (32–33.5°N) | 0.60× | 5.85× | 9.8× | 5 |
-| Monterey Bay (36–37.5°N) | 1.13× | 2.75–4.80× | 2.4–4.3× | 15 |
-| Rest of West Coast | 1.08× | 1.53× | 1.4× | 60 |
+| Monterey Bay (36–37°N) | 1.21× | 3.18× | 2.6× | 10 |
+| Rest of West Coast | 1.06× | 1.46× | 1.4× | 65 |
 
 Non-canyon cells in Puget Sound and San Diego report *below* baseline. The uplift is canyon-specific, not regional.
 
-**Monterey Bay: a natural experiment.** Monterey Canyon is one of the world's largest submarine canyons. Its canyon cells have intermediate steepness scores (S = 1.3–1.6) and show intermediate uplift (2.75–4.80×), exactly what a real physical association predicts (dose-response). Critically, these cells sit 127–192 km from the nearest Navy operating area, ruling out military activity as an explanation. Non-canyon cells in the same region report at baseline (logR = −0.02). This combination of large canyon, distance from military, intermediate dose-response, and canyon-specific uplift makes Monterey the single strongest piece of evidence that the association is not an artifact of population, military activity, or reporting bias.
+**Monterey Bay: a strong local example.** Monterey Canyon is one of the world's largest submarine canyons. Its two Monterey Bay canyon cells have intermediate steepness scores (S = 1.35–1.61), elevated report ratios (R = 2.75 and 4.80), and lie 127–141 km from the nearest mapped Navy operating area. This makes Monterey one of the strongest local examples in the present dataset, while still falling short of a stand-alone causal test.
 
 **Non-linearity.** Quintile analysis shows Q1–Q4 (no/weak canyon) have similar report excess (logR 0.20–0.46, overlapping confidence intervals). Q5 (strongest canyon signal) jumps to logR = 1.40 (~25× expected). The effect concentrates in the extreme tail.
 
-**Temporal stability.** The association holds in both halves of the dataset (1990–2002: ρ = 0.32, p = 0.002; 2003–2014: ρ = 0.36, p = 0.0003) and in 21 out of 21 rolling 5-year windows (18 of 21 statistically significant). It is not driven by a single event or time period.
+**Temporal stability.** The association holds in both halves of the dataset (1990–2002: ρ = 0.34, p = 0.003; 2003–2014: ρ = 0.36, p < 0.0001) and in 21 out of 21 rolling 5-year windows (18 of 21 statistically significant). It is not driven by a single event or time period.
 
 **Coastal band dependence.** The effect peaks at 50 km from shore (ρ = 0.43), is non-significant at 10 km (ρ = 0.15), and stabilizes at 100–200 km (ρ = 0.37). This argues against a direct line-of-sight observation mechanism and suggests a broader coastal-zone phenomenon.
 
@@ -77,7 +81,7 @@ Non-canyon cells in Puget Sound and San Diego report *below* baseline. The uplif
 Report rates are population-adjusted using inverse distance weighting from 3,108 US county centroids. The key test: in Puget Sound, cells *without* canyon features report at 0.74× the expected rate (below baseline), while canyon cells report at 5.04×, a 6.8× differential within the same metropolitan region. If population were driving the effect, non-canyon Puget cells would also be elevated.
 
 **"It's military activity. The Navy operates near those canyons."**
-We controlled for proximity to 171 DoD installations and 35 Navy offshore operating area (OPAREA) polygons from NOAA MarineCadastre. Canyon score (S) remains the dominant predictor in Puget Sound (p = 0.018 vs OPAREA p = 0.10). Monterey Bay canyon cells sit 127–192 km from the nearest OPAREA boundary and still show elevated report rates (logR = 0.75 vs −0.02 for non-canyon cells).
+We controlled for proximity to 171 DoD installations and 35 Navy offshore operating area (OPAREA) polygons from NOAA MarineCadastre. Canyon score (S) remains the dominant predictor in Puget Sound (p = 0.018 vs OPAREA p = 0.10). Monterey Bay remains informative because its two canyon cells lie 127–141 km from the nearest mapped OPAREA boundary and still show elevated report ratios (R = 2.75 and 4.80).
 
 **"It's coastal geography. You're just measuring coastline complexity."**
 We tested a shore-type proxy (ETOPO coastal cliff metric) as an alternative predictor. Canyon score S survives cliff control (p = 0.004). Both contribute independently (combined R² = 0.21), but canyon steepness is not reducible to coastline shape.
@@ -92,7 +96,7 @@ We tested coastal upwelling directly using satellite chlorophyll-a data (NASA MO
 The 60 m/km gradient threshold was selected during Phase C/D, but a sensitivity sweep across all thresholds from 20 to 100 m/km shows the association is significant at every threshold tested (rho 0.37–0.42, all p < 0.0002).
 
 **"How do we know the model isn't overfit?"**
-The scoring function was frozen before evaluation. It uses only bathymetric geometry (gradient, proximity, coastal complexity) and touches no UAP data. In held-out spatial validation (leave-one-region-out cross-validation), it correctly predicted 4 out of 5 top hotspot cells. It also replicated in fully independent post-2014 data (rho = 0.35, p = 0.0001) that was not used at any stage of model development.
+The scoring function was frozen before evaluation. It uses only bathymetric geometry (gradient, proximity, coastal complexity) and touches no UAP data. In the primary evaluation, it correctly identified 4 out of 5 top hotspot cells (Precision@5 = 0.8). In leave-one-region-out cross-validation, the Puget (ρ = 0.60, p = 0.017) and SoCal (ρ = 0.47, p = 0.049) folds are independently significant. The association also replicated in temporally independent post-2014 data (rho = 0.35, p = 0.0001) not used at any stage of model development, though this replication shares the same city-centroid geocoding structure as the primary dataset.
 
 ## What the data does not show
 
@@ -110,7 +114,7 @@ Beyond that, I would welcome engagement from researchers who work on spatial ana
 
 ## Honest uncertainties
 
-- The effect is regional (West Coast only) and strongest in three canyon systems: Puget Sound (6.8×), San Diego (9.8×), and Monterey Bay (2.75–4.80×). The remaining West Coast cells average 1.4× uplift. All three strong regions have canyons unusually close to shore.
+- The effect is regional (West Coast only) and strongest in three canyon systems: Puget Sound (6.8×), San Diego (9.8×), and Monterey Bay (2.6×). The remaining West Coast cells average 1.4× uplift. All three strong regions have canyons unusually close to shore.
 - NUFORC is a self-reported database. We cannot rule out unknown reporting biases correlated with coastal geography.
 - This is a single-author analysis that has not been independently replicated or published in a peer-reviewed journal.
 - An attempted replication on Norwegian fjords is inconclusive. Norway's coastline is entirely fjords, leaving no flat-shelf contrast group for comparison.

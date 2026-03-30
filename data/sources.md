@@ -1,6 +1,23 @@
 # Data Sources
 
-All data files are included in this repository except ETOPO1 (52 MB netCDF), which must be downloaded separately.
+This document describes all data sources used in the analysis. **Core datasets** for the primary pipeline (scoring + evaluation) are included in the repository. **External datasets** required for confound tests, robustness checks, and international replication must be downloaded separately or are fetched at runtime by the relevant scripts.
+
+### Included in repository
+- `nuforc_reports.csv` — primary UAP report data (13 MB)
+- `census_county_pop.json` — US Census 2020 population (164 KB)
+- `county_centroids_pop.csv` — county geographic centroids (158 KB)
+- `military_bases_us.csv` — DoD installation locations (6 KB)
+- `port_coords_cache.npz` — port/marina coordinates (122 KB)
+
+### External (not included, downloaded separately or at runtime)
+- ETOPO1 bathymetry (52 MB netCDF — see download instructions below)
+- EMAG2v3 magnetic anomaly grid (used by `phase_e_magnetic_confound.py`)
+- MODIS chlorophyll-a (fetched at runtime by `phase_e_chla_confound.py` via ERDDAP)
+- NOAA ESI shoreline classification (used by `phase_e_esi_shoretype.py`)
+- Navy OPAREA polygons (fetched at runtime by `phase_e_oparea_confound.py` via MarineCadastre API)
+- SRTM30 Norway bathymetry (used by `phase_e_norway_replication.py`)
+- Post-2014 NUFORC data (used by `phase_e_replication_suite.py`, sourced from HuggingFace kcimc/NUFORC)
+- USGS earthquake catalog, Kp geomagnetic index (used by earlier Phase C/D scripts, not part of final pipeline)
 
 ## NUFORC Reports
 - **File**: `nuforc_reports.csv` (13 MB, included)

@@ -15,12 +15,12 @@ import json, os
 import numpy as np
 from numpy.linalg import lstsq
 
-BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ============================================================
 # LOAD cell details from E-RED v2 primary
 # ============================================================
-with open(os.path.join(BASE_DIR, "phase_ev2", "phase_e_red_v2_evaluation.json")) as f:
+with open(os.path.join(BASE_DIR, "results", "phase_ev2", "phase_e_red_v2_evaluation.json")) as f:
     data = json.load(f)
 
 cells = data["primary_200km"]["cell_details"]
@@ -225,13 +225,8 @@ results = {
     },
 }
 
-out_file = os.path.join(BASE_DIR, "phase_ev2", "phase_e_puget_interaction.json")
+out_file = os.path.join(BASE_DIR, "results", "phase_ev2", "phase_e_puget_interaction.json")
 with open(out_file, 'w') as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved: {out_file}")
 
-import shutil
-repo_out = os.path.join(BASE_DIR, "uap-canyon-analysis", "results", "phase_ev2")
-os.makedirs(repo_out, exist_ok=True)
-shutil.copy2(out_file, repo_out)
-print(f"Copied to repo")

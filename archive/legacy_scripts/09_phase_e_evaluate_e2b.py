@@ -31,9 +31,9 @@ import matplotlib.pyplot as plt
 warnings.filterwarnings('ignore')
 t0 = time.time()
 
-BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA_DIR = os.path.join(BASE_DIR, "data")
-OUT_DIR  = os.path.join(BASE_DIR, "phase_e")
+OUT_DIR  = os.path.join(BASE_DIR, "results", "phase_e")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 R_EARTH = 6371.0
@@ -735,10 +735,6 @@ with open(eval_file, 'w') as f:
 print(f"\n  Saved: {eval_file}")
 
 # Also copy to results dir
-import shutil
-repo_out = os.path.join(BASE_DIR, "uap-canyon-analysis", "results", "phase_e")
-os.makedirs(repo_out, exist_ok=True)
-shutil.copy2(eval_file, os.path.join(repo_out, "phase_e_e2b_e2c_evaluation.json"))
 print(f"  Copied to: {repo_out}")
 
 print(f"\n{'='*70}")

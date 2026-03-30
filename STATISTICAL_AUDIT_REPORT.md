@@ -96,7 +96,7 @@ Of the 47 issues identified, the 4 most critical were fixed immediately after au
 **RESOLUTION: DOCUMENTED.** Phase B v1 -> v2 transition documented in README. Both results preserved in repo for transparency.
 
 ### HIGH-2: Canyon effect is confined to the 0-25 km coastal band
-**Location:** `results_v2_robustness.json`, section "distance_matched"
+**Location:** `results/phase_d_results.json` (Phase D robustness tests; original file `results_v2_robustness.json` from development not included in release), section "distance_matched"
 **Description:** 0-25 km: OR=2.63; 25-50 km: OR=0.12; 50+ km: OR=0.0. Canyons that reach the shoreline are geographically correlated with ports, river mouths, and population centers (La Jolla, Monterey, Hudson/NYC).
 **Impact:** The signal may be a population confound that the county-centroid proxy fails to capture.
 **RESOLUTION: DOCUMENTED.** The E-RED v2 band sweep (figure `e_red_band_sweep.png`) shows the effect peaks at 50 km, is non-significant at 10 km, and stabilizes at 100-200 km — inconsistent with a pure 0-25 km line-of-sight effect. Listed as known limitation.
@@ -236,7 +236,7 @@ Of the 47 issues identified, the 4 most critical were fixed immediately after au
 **Location:** `phase_c_prompt3.py`, line 46
 
 ### MED-16: Placebo baseline OR = 2.27 (not 1.0)
-**Location:** `results_v2_robustness.json`, section "placebo"
+**Location:** `results/phase_d_results.json` (Phase D robustness tests; original file `results_v2_robustness.json` from development not included in release), section "placebo"
 **Description:** Random shelf points ALSO show UAP proximity excess. The signal is partly a shelf-proximity effect, not exclusively a canyon effect.
 
 ### MED-17: Population proxy still too coarse (county centroids)
@@ -354,13 +354,13 @@ Phase D robustness (D1-D6) is well-designed and honestly reported. The key findi
 
 ### What is questionable
 
-1. **Replication suite** is largely broken (uniform E_i + data leakage in LOO/spatial CV). Until CRIT-1 and CRIT-2/3 are fixed, temporal replication and spatial CV cannot be cited.
+1. **Replication suite** was largely broken before audit (uniform E_i + data leakage in LOO/spatial CV). **CRIT-1 and CRIT-2/3 have been fixed.** Post-fix: temporal replication and spatial CV are now methodologically sound, though effect sizes decreased modestly (LOO mean rho: 0.38 → 0.315; post-2014 rho improved from 0.28 to 0.35 after population model correction).
 
-2. **Post-2014 "replication"** inherits spatial structure from the original data (same geocoding lookup). It is not an independent test.
+2. **Post-2014 "replication"** inherits spatial structure from the original data (same geocoding lookup). It is a temporal stability check, not a spatially independent test.
 
-3. **ESI shore type confound** (SHORE_DOMINANT) undermines the main hypothesis — shore type explains S, not the other way around.
+3. **ESI shore type confound** (n=18, California only) is underpowered and does not cover Puget Sound. The full-dataset shore type proxy test (n=102) shows both S and cliff steepness contribute independently (combined R²=0.21). The ESI result is inconclusive rather than falsifying.
 
-4. **The 60 m/km threshold** is data-derived. The main effect is real but its magnitude is inflated by post-selection.
+4. **The 60 m/km threshold** is data-derived. **CRIT-4 resolved:** threshold sweep (20–100 m/km) shows all thresholds significant (rho 0.374–0.416). The effect is not an artifact of threshold choice.
 
 ### Summary verdict
 

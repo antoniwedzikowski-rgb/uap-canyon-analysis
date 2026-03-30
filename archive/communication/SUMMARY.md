@@ -78,7 +78,7 @@ This is the first question everyone asks, and we tested it extensively:
 - **Coastal geography**: Tested whether coastline shape (cliffs, complexity) explains the pattern. Canyon steepness adds predictive power beyond coastal shape alone.
 - **Ocean currents / upwelling**: Tested directly using satellite chlorophyll-a data (NASA MODIS). Upwelling is uncorrelated with canyon steepness and does not explain the association.
 - **Threshold choice**: The canyon detection threshold (60 m/km gradient) was not cherry-picked. Sweeping all thresholds from 20 to 100 m/km shows the association is significant at every value tested.
-- **Overfitting**: The scoring model was frozen before seeing any UFO data. It uses only ocean floor geometry, correctly predicted 4 out of 5 top hotspot cells in held-out regions, and replicated in fully independent post-2014 data not used during development.
+- **Overfitting**: The scoring model was frozen before seeing any UFO data. It uses only ocean floor geometry, correctly predicted 4 out of 5 top hotspot cells in the primary evaluation, and replicated in temporally independent post-2014 data not used during development (though the post-2014 data shares the same city-centroid geocoding structure).
 
 ## What this means
 

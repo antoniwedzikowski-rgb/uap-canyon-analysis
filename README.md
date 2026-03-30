@@ -8,120 +8,60 @@ Statistical analysis of the spatial relationship between UAP (Unidentified Anoma
 
 ## Key Finding
 
-UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in post-2014 independent data (rho = 0.35, p = 0.0001). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
+UAP reports within 200 km of the US West Coast show elevated density near steep submarine canyon features (gradient >60 m/km), with a population-adjusted Spearman rho = 0.37 (p = 0.0001, n = 102 testable cells). The effect is primarily spatial (canyon cells have higher population-adjusted report rates). It replicates in temporally independent post-2014 data (rho = 0.35, p = 0.0001), though this replication shares the same city-centroid geocoding structure as the primary dataset (see Limitation #8). An out-of-country replication on Norwegian fjords was attempted but is inconclusive after population control (see Supplementary: Norway below).
 
 **Critical limitations**: The effect is regional. It is not detected on the East/Gulf Coast (ρ = 0.055, p = 0.459, n_hot = 2 of 185 cells). The wider continental shelf places canyons far from shore, leaving insufficient contrast to test the hypothesis with land-based observer data (NUFORC). This is a testability limitation, not a falsification. The ESI shore type confound test is inconclusive (n = 18, California only, no Puget coverage). No independent out-of-country replication exists. This geographic asymmetry is the primary threat to a general bathymetric interpretation.
 
 ## Repository Structure
 
-The project spans seven analysis phases (B through E) with ~65 Python scripts. Each script is annotated as:
-- **FINAL** — part of the definitive analysis pipeline, results cited in paper
-- **EXPLORATORY** — developmental or null-result analyses, not in paper
-- **SUPERSEDED** — replaced by a later version
-- **AUDIT FIX** — post-audit correction scripts
+This release contains 19 Python scripts in `notebooks/` covering the full Phase E evaluation pipeline, confound tests, replication, and figure generation. Older exploratory and superseded scripts (Sprints 1-3, Phase D, earlier Phase E iterations) are retained in `archive/legacy_scripts/` for transparency.
 
 ```
-UAP research/                          # Working directory (scripts + data)
-├── data/                              # All input datasets
-│   ├── nuforc_reports.csv             # 80,332 NUFORC reports (primary)
-│   ├── nuforc_post2014.csv            # Post-2014 HuggingFace NUFORC dump
-│   ├── etopo_subset.nc                # ETOPO1 bathymetry (1 arc-min)
-│   ├── census_county_pop.json         # 2020 county population
-│   ├── county_centroids_pop.csv       # County centroids + pop
-│   ├── military_bases_us.csv          # 171 DoD installations
-│   ├── port_coords_cache.npz          # 7,747 ports/marinas
-│   ├── earthquakes_*.csv              # USGS earthquakes 1990-2015
-│   ├── kp_index.txt                   # Geomagnetic Kp index
-│   ├── google_trends_ufo.csv          # Media interest proxy
-│   ├── EMAG2v3.tif                    # Magnetic anomaly data
-│   ├── emag2v3_westcoast.tif          # West Coast magnetic subset
-│   ├── esi/                           # ESI shoreline classification
-│   ├── srtm30_norway.nc              # Norway bathymetry
-│   └── norway_*.json/csv/tif          # Norway replication datasets
+uap-canyon-analysis/
+├── data/                                    # Input datasets (see data/sources.md)
+│   ├── nuforc_reports.csv                   # 80,332 NUFORC reports (included, 13 MB)
+│   ├── census_county_pop.json               # 2020 county population (included)
+│   ├── county_centroids_pop.csv             # County centroids + pop (included)
+│   ├── military_bases_us.csv                # 171 DoD installations (included)
+│   ├── port_coords_cache.npz               # 7,747 ports/marinas (included)
+│   └── sources.md                           # Full data provenance documentation
 │
-├── Prompty/                           # LLM prompts used to generate scripts
-│   ├── claude_code_prompt_uap_phase_b.md
-│   ├── Phase C/                       # Phase C prompt files
-│   └── sprint*_prompt.md
+├── notebooks/                               # Active analysis scripts (19 files)
+│   ├── 10_phase_ev2_scoring.py              # Canyon scoring function (geometry only)
+│   ├── 13_phase_e_red_v2.py                 # PRIMARY EVALUATION (haversine-corrected)
+│   ├── 14-17b: Regional + confound tests    # Puget, band sweep, East Coast
+│   ├── phase_e_*_confound.py                # Nested F-test confound analyses
+│   ├── phase_e_replication_suite.py         # Temporal splits, LOO, post-2014
+│   ├── phase_e_norway_*.py                  # Norway replication (Spearman + logistic)
+│   ├── phase_e_threshold_sensitivity.py     # Threshold sweep (20-100 m/km)
+│   └── generate_*.py                        # Figure generation scripts
 │
-├── phase_c/                           # Phase C outputs (calibration, plots)
-├── phase_d/                           # Phase D outputs
-├── phase_d7/                          # D7 canyon anatomy outputs
-├── phase_d8/                          # D8 Puget-specific outputs
-├── phase_e/                           # Phase E v1 outputs (superseded)
-├── phase_ev2/                         # Phase E v2 outputs + all confound JSONs
-├── figures/                           # Visualization outputs
+├── results/                                 # JSON results + narrative summaries
+│   ├── phase_ev2/                           # All Phase E v2 result JSONs (18 files)
+│   │   ├── phase_e_red_v2_evaluation.json   # PRIMARY RESULT (rho=0.374, p=0.0001)
+│   │   ├── phase_e_replication_suite.json   # Temporal + spatial replication
+│   │   ├── phase_e_*_confound.json          # All confound test results
+│   │   └── ...
+│   ├── phase_d_results.json                 # Phase D robustness results
+│   └── PHASE_E_SUMMARY.md                   # Phase E narrative (contains pre-audit note)
 │
-├── uap-canyon-analysis/               # Git repo (publishable subset)
-│   ├── notebooks/                     # Numbered analysis scripts (01-17+)
-│   ├── results/                       # JSON results + PHASE_E_SUMMARY.md
-│   ├── figures/                       # Publication figures
-│   ├── data/                          # Data subset (symlinks/copies)
-│   ├── prompts/                       # Sprint prompts
-│   └── media/                         # Audio walkthrough
+├── figures/                                 # Publication figures (PNG)
 │
-│── # ===== ANALYSIS SCRIPTS (top-level) =====
+├── archive/                                 # Non-canonical materials (retained for transparency)
+│   ├── legacy_scripts/                      # Sprints 1-3, Phase D, superseded Phase E scripts
+│   ├── exploratory_results/                 # Sprint results, Phase E v1 outputs
+│   ├── exploratory_figures/                 # Sprint-era and diagnostic figures
+│   ├── communication/                       # MEDIA_STATEMENT.md, SUMMARY.md, docs/ landing page
+│   ├── drafts/                              # Earlier manuscript drafts
+│   ├── prompts/                             # LLM prompts used during development
+│   └── qa/                                  # QA task logs and revision memos
 │
-│── # Phase B: Initial hypothesis test [EXPLORATORY — superseded by Phase E]
-├── uap_ocean_analysis_phase_b.py      # B v1: full-ocean canyon proximity
-├── uap_ocean_phase_b_v2.py            # B v2: coastal-shelf refinement
-├── uap_phase_b_v2_robustness.py       # B v2: leave-one-out, placebo, bands
-│
-│── # Phase C: Data calibration & discriminating tests
-├── phase_c_prompt1.py                 # C1: data prep, night/media calibration    [FINAL]
-├── phase_c_steps3_7.py                # C3-C7: NPP, earthquake correlations       [EXPLORATORY — null results, not in paper]
-├── phase_c_fix_gaps.py                # C: gap-filling for calibration            [FINAL]
-├── phase_c_prompt2.py                 # C2: discriminating tests (Agency verdict)  [FINAL]
-├── phase_c_prompt3.py                 # C3: adaptation tests (WEAK_AGENCY)        [FINAL]
-├── phase_c_c3_permutation_fix.py      # C3: seismic permutation fix               [EXPLORATORY — seismicity null, not in paper]
-│
-│── # Sprint 1-3: Core statistical analysis [FINAL]
-├── sprint1_observer_controls.py       # Logistic regression + covariates
-├── sprint1_fix_nan_interaction.py     # NaN interaction fix
-├── sprint2_continuous_model.py        # GAM, bootstrap, jitter tests
-├── sprint3_temporal_doseresponse.py   # Temporal permutation, dose-response
-│
-│── # Phase D: Robustness audit [FINAL]
-├── phase_d_robustness.py              # D1-D6: full robustness suite
-├── phase_d_k_comparison.py            # Population weighting comparison
-├── phase_d7_canyon_anatomy.py         # D7: canyon-specific anatomy tests
-├── phase_d7d_within_west_test.py      # D7d: within-West-Coast variation
-├── phase_d8_puget_tests.py            # D8: Puget Sound deep-dive
-│
-│── # Phase E: Out-of-sample prediction
-├── phase_e_scoring.py                 # E v1: scoring function (20 m/km)          [SUPERSEDED by phase_ev2_scoring.py]
-├── phase_e_evaluate.py                # E v1: evaluation                          [SUPERSEDED]
-├── phase_e_evaluate_e2b.py            # E v1: CONUS-restricted evaluation         [SUPERSEDED]
-├── phase_e_diagnostic.py              # E: threshold mismatch diagnosis           [EXPLORATORY]
-├── phase_ev2_scoring.py               # E v2: scoring function (60 m/km)          [FINAL — geometry only, no UAP data]
-├── phase_ev2_evaluate.py              # E v2: evaluation                          [FINAL]
-├── phase_e_red.py                     # E-RED v1: population-adjusted rates       [SUPERSEDED by v2]
-├── phase_e_red_v2.py                  # E-RED v2: haversine-corrected             [FINAL — PRIMARY EVALUATION]
-│
-│── # Phase E: Confound & replication tests
-├── phase_e_puget_interaction.py       # Puget interaction model                   [FINAL]
-├── phase_e_puget_sanity.py            # Puget sanity checks                      [EXPLORATORY]
-├── phase_e_puget_confound.py          # Puget 2x2 confound test                  [FINAL]
-├── phase_e_band_sweep.py              # Coastal band parameter sweep             [FINAL]
-├── phase_e_eastcoast_check.py         # East Coast quick check                   [EXPLORATORY]
-├── phase_e_eastcoast_red.py           # East Coast full E-RED                    [FINAL]
-├── phase_e_ocean_confound.py          # Ocean depth confound (F-test)            [FINAL]
-├── phase_e_magnetic_confound.py       # Magnetic anomaly confound                [FINAL]
-├── phase_e_esi_shoretype.py           # ESI shore type confound                  [FINAL]
-├── phase_e_shoretype_proxy.py         # Shore type proxy analysis                [EXPLORATORY]
-├── phase_e_replication_suite.py       # Temporal splits, LOO, post-2014          [FINAL — corrected, see audit]
-├── phase_e_norway_replication.py      # Norway out-of-sample replication         [SUPERSEDED by logistic]
-├── phase_e_norway_logistic.py        # Norway logistic w/ pop control           [FINAL — NULL result]
-├── phase_e_chla_confound.py            # Upwelling (MODIS chl-a) confound test    [FINAL — S_DOMINANT]
-├── phase_e_oparea_confound.py          # Military OPAREA polygon confound test    [FINAL — S_REGIONAL_DOMINANT]
-├── phase_e_threshold_sensitivity.py   # Threshold sweep (20-100 m/km)            [AUDIT FIX — confirms robustness]
-│
-│── # Report generation
-├── generate_visualizations.py
-├── generate_report_docx.py
-├── generate_reddit_docx.py
-└── generate_sprint1_report.py
+├── preprint_v2.md                           # Manuscript (Markdown source)
+├── STATISTICAL_AUDIT_REPORT.md              # 47-finding statistical audit
+└── requirements.txt                         # Python dependencies
 ```
+
+**External data required:** ETOPO1 bathymetry (~52 MB netCDF) must be downloaded separately — see `data/sources.md` for instructions. Some confound scripts also fetch data at runtime (MODIS chl-a, OPAREA polygons). See `data/sources.md` for the full list of included vs. external datasets.
 
 ## Analysis Phases
 
@@ -188,12 +128,12 @@ Pre-registered geometric scoring function frozen before evaluation.
 |--------|----------|----------|--------|----------------|
 | Puget Sound (46-50N) | 0.74 | 5.04 | 6.8x | 11 / 11 |
 | San Diego (32-33.5N) | 0.60 | 5.85 | 9.8x | 3 / 2 |
-| Monterey Bay (36-37.5N) | 1.13 | 2.75–4.80 | 2.4–4.3x | 3 / 12 |
-| Rest of West Coast | 1.08 | 1.53 | 1.4x | 9 / 51 |
+| Monterey Bay (36-37N) | 1.21 | 3.18 | 2.6x | 2 / 8 |
+| Rest of West Coast | 1.06 | 1.46 | 1.4x | 10 / 55 |
 
 The effect concentrates in regions with extreme near-shore submarine topography, with an identical pattern: S=0 suppression below baseline + S>0 uplift. San Diego has only n=5 cells, too few for independent statistical test, but the LOO SoCal fold (rho = 0.49, p = 0.024, n = 21) is significant.
 
-Monterey Canyon, one of the world's largest submarine canyons, shows intermediate S (1.3–1.6) and intermediate uplift (2.75–4.80×), consistent with a dose-response interpretation. Critically, Monterey canyon cells sit 127–192 km from the nearest Navy operating area, while non-canyon cells in the same region report at baseline (logR = −0.02). This combination of dose-response, military elimination, and canyon-specific uplift makes Monterey a natural experiment for the canyon hypothesis.
+Monterey Bay provides one of the cleanest local examples in the present dataset. Its two canyon cells have intermediate steepness scores (S = 1.35–1.61), elevated report ratios (R = 2.75 and 4.80), and lie 127–141 km from the nearest mapped Navy operating area. This makes Monterey a strong local case for the canyon association without turning it into a stand-alone causal test.
 
 **Non-linearity:** The relationship is non-linear. Quintile analysis shows Q1–Q4 of S have similar mean logR (0.20–0.46, overlapping CIs), while Q5 jumps to 1.40. The effect concentrates in the highest quintile (S > ~1.3), corresponding to cells with extreme near-shore canyon topography. The Spearman rho = 0.37 captures a real monotonic trend but understates the threshold-like character of the association.
 
@@ -209,7 +149,7 @@ Monterey Canyon, one of the world's largest submarine canyons, shows intermediat
 | Shore type proxy (ETOPO cliff) | Nested F-test (n=102) | S survives cliff control (p=0.004); cliff also independent (p=0.019); R²=0.21 combined | S_SURVIVES (both contribute) |
 | Puget Sound | 2x2 rate interaction | S=0 Puget rate (0.53) not elevated vs elsewhere (1.08) | NO_CONFOUND (canyon-specific) |
 | Coastal upwelling (chl-a) | Nested F-test (n=99) | S adds to chl-a: F=18.5, p<0.0001; chl-a uncorrelated with S (rho=-0.02); S_DOM at all radii (50-200km) | S_DOMINANT |
-| Military OPAREAs (polygons) | Regional nested F-test (35 OPAREA polygons, NOAA MarineCadastre) | S dominant in Puget (p=0.018 vs p=0.10); Central CA marginal (p=0.056) but Monterey canyon cells 127-192 km from OPAREA with logR=0.75; SoCal uninformative (OPAREA boundary = coastline) | S_SURVIVES_REGIONALLY |
+| Military OPAREAs (polygons) | Regional nested F-test (35 OPAREA polygons, NOAA MarineCadastre) | S dominant in Puget (p=0.018 vs p=0.10); Central CA marginal (p=0.056); Monterey Bay remains informative because its two canyon cells lie 127-141 km from the nearest mapped OPAREA and still show elevated report ratios (R = 2.75 and 4.80); SoCal uninformative (OPAREA boundary = coastline) | S_SURVIVES_REGIONALLY |
 
 **Replication (corrected — population-adjusted E_i, per-fold normalization):**
 
@@ -256,26 +196,29 @@ Oregon S=0 cells report at 2.1× expected rate, indicating a Pacific Northwest c
 
 ## Data Sources
 
-All data files are in `data/`. ETOPO1 bathymetry (52 MB netCDF) must be downloaded separately.
+Core datasets for the primary pipeline are included in `data/`. Confound tests and international replication require external data downloaded separately or fetched at runtime. See `data/sources.md` for full provenance and download instructions.
+
+**Included in this release:**
 
 | Dataset | File | Records | Source |
 |---------|------|---------|--------|
 | NUFORC reports | `nuforc_reports.csv` | 80,332 | NUFORC (1990-2014) |
-| NUFORC post-2014 | `nuforc_post2014.csv` | ~50k | HuggingFace kcimc/NUFORC |
-| Bathymetry | `etopo_subset.nc` | 1 arc-min grid | NOAA ETOPO1 |
 | Population | `census_county_pop.json` | 3,108 counties | US Census 2020 |
 | County centroids | `county_centroids_pop.csv` | 3,108 | US Census |
 | Military bases | `military_bases_us.csv` | 171 | DoD |
 | Ports | `port_coords_cache.npz` | 7,747 | OpenStreetMap |
-| Earthquakes | `earthquakes_*.csv` | 72,189 | USGS |
-| Kp index | `kp_index.txt` | daily 1990-2015 | GFZ Potsdam |
-| Magnetic anomaly | `EMAG2v3.tif` | global grid | NOAA EMAG2 |
-| ESI shoreline | `esi/` | coastal segments | NOAA ESI |
-| Norway bathymetry | `srtm30_norway.nc` | 30 arc-sec grid | SRTM30 |
-| Chlorophyll-a (upwelling) | `modis_chla_westcoast.nc` | 4 km grid | NASA MODIS Aqua L3 (2003-2020 clim., CoastWatch ERDDAP) |
-| Military OPAREAs | `oparea_polygons.json` | 35 polygons | NOAA MarineCadastre (Navy Common Operating Picture, Dec 2018) |
 
-See `data/sources.md` for full provenance and download instructions.
+**External (not included — see `data/sources.md` for download instructions):**
+
+| Dataset | Required by | Source |
+|---------|-------------|--------|
+| ETOPO1 bathymetry (`etopo_subset.nc`, 52 MB) | Core pipeline (scoring + evaluation) | NOAA |
+| Post-2014 NUFORC (`nuforc_post2014.csv`) | `phase_e_replication_suite.py` | HuggingFace kcimc/NUFORC |
+| EMAG2v3 magnetic anomaly | `phase_e_magnetic_confound.py` | NOAA |
+| MODIS chlorophyll-a | `phase_e_chla_confound.py` (fetched at runtime) | NASA ERDDAP |
+| ESI shoreline classification | `phase_e_esi_shoretype.py` | NOAA ESI |
+| Navy OPAREA polygons | `phase_e_oparea_confound.py` (fetched at runtime) | NOAA MarineCadastre |
+| SRTM30 Norway bathymetry | `phase_e_norway_*.py` | SRTM30 |
 
 ## Methodology
 
@@ -284,7 +227,7 @@ See `data/sources.md` for full provenance and download instructions.
 3. **Scoring function**: S = mean(rank_G + rank_P + rank_C) for steep cells within 50 km. G = p95 gradient, P = shore proximity (exponential decay), C = coastal complexity
 4. **Primary test**: Spearman correlation between S and log(O_i/E_i) across 0.5-degree cells with 20+ reports
 5. **Confound testing**: Nested F-tests comparing full model (S + confound) vs reduced models
-6. **Replication**: Temporal splits, leave-one-region-out CV, post-2014 independent data, Norway out-of-sample
+6. **Replication**: Temporal splits, leave-one-region-out CV, post-2014 temporally independent data (shared geocoding), Norway out-of-sample
 
 ## Supplementary: Norway Fjord Replication
 

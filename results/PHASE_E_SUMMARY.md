@@ -1,5 +1,7 @@
 # Phase E: Out-of-Sample Evaluation — Summary
 
+> **Note:** This summary was written during Phase E development. Some values (notably the post-2014 replication rho) reflect pre-audit numbers. For corrected final values, see `results/phase_ev2/phase_e_replication_suite.json` (post-2014 rho = 0.35, p = 0.0001 after CRIT-1 fix) and `results/phase_ev2/phase_e_red_v2_evaluation.json` (primary rho = 0.374).
+
 ## Overview
 
 Phase E tested whether the geometric canyon scoring function (S),
@@ -460,14 +462,16 @@ Mean held-out rho = +0.380, 4/5 regions positive.
 
 | Metric | Original (1990-2014) | Post-2014 (2015-2023) |
 |--------|---------------------|----------------------|
-| Spearman(S, logR) | +0.283 | **+0.283** |
-| p-value | 0.006 | **0.008** |
-| n cells | 94 | 88 |
+| Spearman(S, logR) | +0.338 | **+0.350** |
+| p-value | 0.0005 | **0.0001** |
+| n cells | 103 | 119 |
+
+> **Note (post-audit):** Values above updated to match corrected `phase_e_replication_suite.json` (CRIT-1 fix: full IDW population model). Pre-fix values were rho=0.283, p=0.008, n=88.
 
 Data: HuggingFace kcimc/NUFORC (147,890 records through 2023), geocoded via
 NUFORC city/state lookup (76% geocoding rate for post-2014).
 
-**Verdict: REPLICATES.** Identical rho on completely independent temporal data.
+**Verdict: REPLICATES.** Consistent rho on temporally independent data (note: post-2014 data shares city-centroid geocoding structure with primary dataset).
 
 ---
 
@@ -557,9 +561,10 @@ conservative.
 3. **The canyon effect is strongest in Puget** — 9.54x uplift vs 1.76x elsewhere.
    Within Puget, S correlates with logR at rho = 0.77 (p = 0.005).
 
-4. **The finding replicates across time** — post-2014 data (2015-2023, n=5,245
-   independent reports) yields rho = 0.283, p = 0.008, virtually identical to
-   the original. Rolling 5-year windows show 21/21 positive, 15/21 significant.
+4. **The finding replicates across time** — post-2014 data (2015-2023, n=5,946
+   temporally independent reports) yields rho = 0.350, p = 0.0001 (post-CRIT-1 fix;
+   note: shares city-centroid geocoding with primary data). Rolling 5-year windows
+   show 21/21 positive, 18/21 significant.
 
 5. **Not explained by known confounds** — ESI shoreline type (cliff vs beach),
    ocean proximity (distance-to-coast, SST, chlorophyll), magnetic anomaly
@@ -574,8 +579,8 @@ conservative.
 1. **CTH as a universal prediction** — East Coast canyons (Norfolk, Hudson) show
    no effect. The hypothesis that "shelf canyons -> UAP everywhere" is falsified.
 
-2. **Full spatial generalizability** — SoCal forward prediction is null (rho = 0.26,
-   p = 0.41). LOO-CV shows 4/5 regions positive but only 1/5 significant.
+2. **Full spatial generalizability** — LOO-CV shows 4/5 regions positive but only
+   2/5 significant (WA North and SoCal; post-CRIT-2/3 fix with per-fold E_i).
    The effect concentrates in high-gradient locations, not all canyon sites.
 
 3. **Norway replication** — only 40 reports in the fjord region; too few for any
@@ -589,7 +594,7 @@ canyon topography and UAP report density.** The finding:
 
 - Survives every confound test attempted (ocean, magnetic, shoreline, population,
   seasonal, temporal, deduplication, military OPAREAs)
-- Replicates on completely independent post-2014 data with near-identical effect size
+- Replicates on temporally independent post-2014 data with near-identical effect size (shared geocoding structure)
 - Is temporally stable across 21 rolling windows spanning 25 years
 - Is strongest where canyon topography is most extreme (Puget fjords)
 - Does NOT generalize to the East Coast or to moderate canyon sites
@@ -635,8 +640,8 @@ statistical finding (robust) from any CTH interpretation (speculative).
 | 17 | `phase_e_band_sweep.py` | Coastal band sensitivity sweep (10-200 km, WC+EC) |
 | 17b | `phase_e_eastcoast_red.py` | East Coast E-RED check (null result) |
 | 18 | `phase_e_shoretype_proxy.py` | Shoreline type proxy: cliff vs canyon confound |
-| 19 | `phase_e_esi_confound.py` | ESI shoreline classification confound test |
-| 20 | `phase_e_norway.py` | Norway/Hessdalen fjord replication attempt |
+| 19 | `phase_e_esi_shoretype.py` | ESI shoreline classification confound test |
+| 20 | `phase_e_norway_replication.py` / `phase_e_norway_logistic.py` | Norway fjord replication (Spearman + population-controlled logistic) |
 | 21 | `phase_e_ocean_confound.py` | Ocean proximity confound (dist, SST, chlorophyll) |
 | 22 | `phase_e_magnetic_confound.py` | Magnetic anomaly (EMAG2v3) confound test |
 | 23 | `phase_e_replication_suite.py` | Replication suite: temporal, spatial, post-2014 |
@@ -646,21 +651,21 @@ statistical finding (robust) from any CTH interpretation (speculative).
 
 | Directory | Key files |
 |-----------|-----------|
-| `phase_e/` | `phase_e_predictions.json`, `phase_e_grid.json`, `E2b_note.md` |
-| `phase_ev2/` | `phase_ev2_predictions.json`, `phase_ev2_grid.json` |
-| `phase_ev2/` | `phase_e_red_v2_evaluation.json` (primary results) |
-| `phase_ev2/` | `phase_e_puget_interaction.json`, `phase_e_puget_sanity.json` |
-| `phase_ev2/` | `phase_e_puget_confound.json` (confound test) |
-| `phase_ev2/` | `phase_e_band_sweep.json` (band sensitivity) |
-| `phase_ev2/` | `phase_e_eastcoast_check.json` (East Coast null) |
-| `phase_ev2/` | `phase_e_shoretype_proxy.json` (cliff confound test) |
-| `phase_ev2/` | `phase_e_esi_confound.json` (ESI shoreline confound) |
-| `phase_ev2/` | `phase_e_norway_replication.json` (Norway attempt) |
-| `phase_ev2/` | `phase_e_ocean_confound.json` (ocean proximity confound) |
-| `phase_ev2/` | `phase_e_magnetic_confound.json` (magnetic anomaly confound) |
-| `phase_ev2/` | `phase_e_replication_suite.json` (full replication suite) |
-| `phase_ev2/` | `phase_e_oparea_confound.json` (OPAREA polygon confound test) |
-| `phase_ev2/` | `e_red_v2_*.png`, `e_red_band_sweep.png` (plots) |
+| `results/phase_e/` | `phase_e_predictions.json`, `phase_e_grid.json`, `E2b_note.md` |
+| `results/phase_ev2/` | `phase_ev2_predictions.json`, `phase_ev2_grid.json` |
+| `results/phase_ev2/` | `phase_e_red_v2_evaluation.json` (primary results) |
+| `results/phase_ev2/` | `phase_e_puget_interaction.json`, `phase_e_puget_sanity.json` |
+| `results/phase_ev2/` | `phase_e_puget_confound.json` (confound test) |
+| `results/phase_ev2/` | `phase_e_band_sweep.json` (band sensitivity) |
+| `results/phase_ev2/` | `phase_e_eastcoast_check.json` (East Coast null) |
+| `results/phase_ev2/` | `phase_e_shoretype_proxy.json` (cliff confound test) |
+| `results/phase_ev2/` | `phase_e_esi_shoretype.json` (ESI shoreline confound) |
+| `results/phase_ev2/` | `phase_e_norway_replication.json` (Norway attempt) |
+| `results/phase_ev2/` | `phase_e_ocean_confound.json` (ocean proximity confound) |
+| `results/phase_ev2/` | `phase_e_magnetic_confound.json` (magnetic anomaly confound) |
+| `results/phase_ev2/` | `phase_e_replication_suite.json` (full replication suite) |
+| `results/phase_ev2/` | `phase_e_oparea_confound.json` (OPAREA polygon confound test) |
+| `results/phase_ev2/` | `e_red_v2_*.png`, `e_red_band_sweep.png` (plots) |
 
 ### Git Tags
 

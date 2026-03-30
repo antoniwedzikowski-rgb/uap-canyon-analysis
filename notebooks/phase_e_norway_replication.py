@@ -27,9 +27,9 @@ from collections import Counter
 warnings.filterwarnings('ignore')
 t0 = time.time()
 
-BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA_DIR = os.path.join(BASE_DIR, "data")
-OUT_DIR  = os.path.join(BASE_DIR, "phase_ev2")
+OUT_DIR  = os.path.join(BASE_DIR, "results", "phase_ev2")
 
 GRID_DEG = 0.5
 R_EARTH = 6371.0
@@ -528,9 +528,5 @@ with open(out_file, 'w') as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved: {out_file}")
 
-import shutil
-repo_out = os.path.join(BASE_DIR, "uap-canyon-analysis", "results", "phase_ev2")
-shutil.copy2(out_file, repo_out)
-print(f"Copied to repo")
 
 print(f"\nDONE ({elapsed()})")

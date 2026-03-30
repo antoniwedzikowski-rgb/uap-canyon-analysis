@@ -24,12 +24,12 @@ import numpy as np
 from numpy.linalg import lstsq
 from scipy.stats import f as f_dist
 
-BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.environ.get("UAP_BASE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ============================================================
 # LOAD
 # ============================================================
-with open(os.path.join(BASE_DIR, "phase_ev2", "phase_e_red_v2_evaluation.json")) as f:
+with open(os.path.join(BASE_DIR, "results", "phase_ev2", "phase_e_red_v2_evaluation.json")) as f:
     data = json.load(f)
 
 cells = data["primary_200km"]["cell_details"]
@@ -276,12 +276,8 @@ results = {
     },
 }
 
-out_file = os.path.join(BASE_DIR, "phase_ev2", "phase_e_puget_sanity.json")
+out_file = os.path.join(BASE_DIR, "results", "phase_ev2", "phase_e_puget_sanity.json")
 with open(out_file, 'w') as f:
     json.dump(results, f, indent=2)
 print(f"\nSaved: {out_file}")
 
-import shutil
-repo_out = os.path.join(BASE_DIR, "uap-canyon-analysis", "results", "phase_ev2")
-shutil.copy2(out_file, repo_out)
-print(f"Copied to repo")

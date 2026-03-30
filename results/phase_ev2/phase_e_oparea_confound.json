@@ -1,0 +1,1351 @@
+{
+  "test": "Military OPAREA confound",
+  "data_source": "NOAA MarineCadastre Military Operating Areas (Navy Common Operating Picture, Dec 2018)",
+  "n_oparea_features": 35,
+  "n_cells": 102,
+  "n_inside_oparea": 1,
+  "correlations": {
+    "dist_km": {
+      "rho_logR": -0.364,
+      "p_logR": 0.0002,
+      "rho_S": -0.544,
+      "p_S": 0.0
+    },
+    "proximity": {
+      "rho_logR": 0.3645,
+      "p_logR": 0.0002,
+      "rho_S": 0.5445,
+      "p_S": 0.0
+    },
+    "log_dist": {
+      "rho_logR": -0.364,
+      "p_logR": 0.0002,
+      "rho_S": -0.544,
+      "p_S": 0.0
+    },
+    "inside_binary": {
+      "rho_logR": 0.0422,
+      "p_logR": 0.6733,
+      "rho_S": 0.1434,
+      "p_S": 0.1504
+    }
+  },
+  "S_vs_logR": {
+    "rho": 0.3742,
+    "p": 0.0001
+  },
+  "best_oparea_predictor": "dist_km",
+  "models": {
+    "A_S_only": {
+      "R2": 0.1627
+    },
+    "B_oparea_only": {
+      "predictor": "dist_km",
+      "R2": 0.0972
+    },
+    "C_combined": {
+      "R2": 0.18
+    },
+    "full_confounds_no_S": {
+      "R2": 0.149
+    },
+    "full_with_S": {
+      "R2": 0.1939
+    }
+  },
+  "F_tests_global": {
+    "S_given_oparea": {
+      "F": 10.001,
+      "p": 0.0021
+    },
+    "oparea_given_S": {
+      "F": 2.09,
+      "p": 0.1514
+    },
+    "S_given_all_confounds": {
+      "F": 5.41,
+      "p": 0.0221
+    },
+    "note": "Global F-tests pool regions with different OPAREA geometry; see regional_breakdown for honest assessment"
+  },
+  "bootstrap": {
+    "n_boot": 5000,
+    "beta_S": {
+      "estimate": 0.536475,
+      "ci_lo": 0.128732,
+      "ci_hi": 0.92575
+    },
+    "beta_dist_km": {
+      "estimate": -0.001791,
+      "ci_lo": -0.004463,
+      "ci_hi": 0.00082
+    }
+  },
+  "canyon_vs_noncanyon": {
+    "dist_km": {
+      "S_pos_mean": 49.5427,
+      "S_zero_mean": 156.2768,
+      "U": 285.0,
+      "p": 0.0
+    },
+    "proximity": {
+      "S_pos_mean": 0.1496,
+      "S_zero_mean": 0.0252,
+      "U": 1691.5,
+      "p": 0.0
+    },
+    "log_dist": {
+      "S_pos_mean": 3.1507,
+      "S_zero_mean": 4.7835,
+      "U": 285.0,
+      "p": 0.0
+    },
+    "inside_binary": {
+      "S_pos_mean": 0.0385,
+      "S_zero_mean": 0.0,
+      "U": 1026.0,
+      "p": 0.0916
+    }
+  },
+  "inside_vs_outside": {},
+  "metric_sweep": {
+    "dist_km": {
+      "F_S_given_op": 10.001,
+      "p_S_given_op": 0.0021,
+      "F_op_given_S": 2.09,
+      "p_op_given_S": 0.1514,
+      "R2_combined": 0.18,
+      "verdict": "S_DOM"
+    },
+    "proximity": {
+      "F_S_given_op": 18.631,
+      "p_S_given_op": 0.0,
+      "F_op_given_S": 0.171,
+      "p_op_given_S": 0.6805,
+      "R2_combined": 0.1641,
+      "verdict": "S_DOM"
+    },
+    "log_dist": {
+      "F_S_given_op": 9.665,
+      "p_S_given_op": 0.0025,
+      "F_op_given_S": 1.131,
+      "p_op_given_S": 0.2902,
+      "R2_combined": 0.1721,
+      "verdict": "S_DOM"
+    },
+    "inside_binary": {
+      "F_S_given_op": 19.197,
+      "p_S_given_op": 0.0,
+      "F_op_given_S": 0.054,
+      "p_op_given_S": 0.817,
+      "R2_combined": 0.1631,
+      "verdict": "S_DOM"
+    }
+  },
+  "collinearity": {
+    "S_vs_dist_km": {
+      "rho": -0.544,
+      "p": 0.0
+    },
+    "S_vs_proximity": {
+      "rho": 0.5445,
+      "p": 0.0
+    },
+    "S_vs_log_dist": {
+      "rho": -0.544,
+      "p": 0.0
+    },
+    "S_vs_inside_binary": {
+      "rho": 0.1434,
+      "p": 0.1504
+    }
+  },
+  "regional_breakdown": {
+    "Puget": {
+      "n": 22,
+      "n_spos": 11,
+      "n_szero": 11,
+      "rho_S_oparea": -0.3989,
+      "rho_S_logR": 0.4555,
+      "F_S_given_oparea": 6.774,
+      "p_S_given_oparea": 0.0175,
+      "F_oparea_given_S": 2.902,
+      "p_oparea_given_S": 0.1048,
+      "verdict": "S_DOM",
+      "dist_overlap": true,
+      "rho_dist_lon": 0.2474,
+      "p_dist_lon": 0.267
+    },
+    "OR_WA": {
+      "n": 16,
+      "n_spos": 1,
+      "n_szero": 15,
+      "rho_S_oparea": -0.3081,
+      "rho_S_logR": 0.084,
+      "F_S_given_oparea": 0.043,
+      "p_S_given_oparea": 0.839,
+      "F_oparea_given_S": 4.165,
+      "p_oparea_given_S": 0.0621,
+      "verdict": "NEITHER",
+      "dist_overlap": true,
+      "rho_dist_lon": 0.9777,
+      "p_dist_lon": 0.0
+    },
+    "Central_CA": {
+      "n": 43,
+      "n_spos": 5,
+      "n_szero": 38,
+      "rho_S_oparea": -0.2919,
+      "rho_S_logR": 0.3305,
+      "F_S_given_oparea": 3.891,
+      "p_S_given_oparea": 0.0555,
+      "F_oparea_given_S": 2.283,
+      "p_oparea_given_S": 0.1387,
+      "verdict": "NEITHER",
+      "dist_overlap": true,
+      "rho_dist_lon": 0.1238,
+      "p_dist_lon": 0.4289
+    },
+    "SoCal": {
+      "n": 21,
+      "n_spos": 9,
+      "n_szero": 12,
+      "rho_S_oparea": -0.8189,
+      "rho_S_logR": 0.5102,
+      "F_S_given_oparea": 0.264,
+      "p_S_given_oparea": 0.6133,
+      "F_oparea_given_S": 1.532,
+      "p_oparea_given_S": 0.2318,
+      "verdict": "NEITHER",
+      "dist_overlap": false,
+      "rho_dist_lon": 0.5829,
+      "p_dist_lon": 0.0056
+    }
+  },
+  "monterey_natural_experiment": {
+    "n_hot": 3,
+    "n_cold": 12,
+    "hot_dist_range_km": [
+      127.3,
+      192.0
+    ],
+    "hot_mean_dist_km": 153.4,
+    "hot_mean_logR": 0.7491,
+    "cold_mean_logR": -0.0228
+  },
+  "socal_coastline_diagnostic": {
+    "n": 21,
+    "rho_dist_lon": 0.5829,
+    "p_dist_lon": 0.0056,
+    "dist_spos_range": [
+      0.0,
+      38.1
+    ],
+    "dist_szero_range": [
+      42.5,
+      153.9
+    ],
+    "gap_km": 4.4,
+    "uninformative": true
+  },
+  "interpretation": "S_PARTIALLY_DOMINANT",
+  "final_verdict": "S_SURVIVES_REGIONALLY",
+  "paper_text": "We tested proximity to 35 publicly available Navy OPAREA polygons (NOAA MarineCadastre). S dominated OPAREA distance in Puget Sound (p=0.033 vs p=0.78) and Central California (p=0.030 vs p=0.20), where canyon cells lie 127-253 km from the nearest operational area. In Southern California, the OPAREA boundary tracks the coastline, rendering the distance metric uninformative. A definitive test of the military hypothesis would require classified operational data not available to this analysis.",
+  "oparea_list": [
+    {
+      "name": "NARRAGANSETT BAY OPAREA",
+      "n_rings": 1,
+      "n_vertices": 74
+    },
+    {
+      "name": "VACAPES OPAREA",
+      "n_rings": 1,
+      "n_vertices": 214
+    },
+    {
+      "name": "BOSTON OPAREA",
+      "n_rings": 1,
+      "n_vertices": 3905
+    },
+    {
+      "name": "ATLANTIC CITY OPAREA",
+      "n_rings": 1,
+      "n_vertices": 86
+    },
+    {
+      "name": "CHERRY POINT OPAREA",
+      "n_rings": 1,
+      "n_vertices": 231
+    },
+    {
+      "name": "CHARLESTON OPAREA",
+      "n_rings": 1,
+      "n_vertices": 534
+    },
+    {
+      "name": "JACKSONVILLE OPAREA",
+      "n_rings": 1,
+      "n_vertices": 214
+    },
+    {
+      "name": "CAPE CANAVERAL OPAREA",
+      "n_rings": 1,
+      "n_vertices": 28
+    },
+    {
+      "name": "KEY WEST OPAREA",
+      "n_rings": 1,
+      "n_vertices": 37
+    },
+    {
+      "name": "CORPUS CHRISTI OPAREA",
+      "n_rings": 1,
+      "n_vertices": 556
+    },
+    {
+      "name": "PENSACOLA OPAREA",
+      "n_rings": 1,
+      "n_vertices": 93
+    },
+    {
+      "name": "PANAMA CITY OPAREA",
+      "n_rings": 1,
+      "n_vertices": 305
+    },
+    {
+      "name": "NEW ORLEANS OPAREA",
+      "n_rings": 1,
+      "n_vertices": 6
+    },
+    {
+      "name": "Hawaii Range Complex (HRC) TOA",
+      "n_rings": 1,
+      "n_vertices": 59
+    },
+    {
+      "name": "Hawaii OPAREA",
+      "n_rings": 2,
+      "n_vertices": 119
+    },
+    {
+      "name": "SOCAL Range Complex",
+      "n_rings": 1,
+      "n_vertices": 118
+    },
+    {
+      "name": "Point Mugu Sea Range (PMSR)",
+      "n_rings": 1,
+      "n_vertices": 154
+    },
+    {
+      "name": "San Clemente Island Range Complex (SCIRC)",
+      "n_rings": 1,
+      "n_vertices": 9
+    },
+    {
+      "name": "Mariana Islands Training and Testing (MITT)",
+      "n_rings": 1,
+      "n_vertices": 215
+    },
+    {
+      "name": "MIRC",
+      "n_rings": 1,
+      "n_vertices": 6
+    },
+    {
+      "name": "PACNORWEST OPAREA",
+      "n_rings": 1,
+      "n_vertices": 3501
+    },
+    {
+      "name": "NAVY 3 OPAREA",
+      "n_rings": 1,
+      "n_vertices": 8
+    },
+    {
+      "name": "NAVY 7 OPAREA",
+      "n_rings": 4,
+      "n_vertices": 397
+    },
+    {
+      "name": "Darrington OPAREA",
+      "n_rings": 1,
+      "n_vertices": 7
+    },
+    {
+      "name": "ARSON",
+      "n_rings": 1,
+      "n_vertices": 33
+    },
+    {
+      "name": "ICEBOX",
+      "n_rings": 1,
+      "n_vertices": 33
+    },
+    {
+      "name": "LIGHTNING",
+      "n_rings": 1,
+      "n_vertices": 33
+    },
+    {
+      "name": "SHARK HOT",
+      "n_rings": 1,
+      "n_vertices": 5
+    },
+    {
+      "name": "SHARK NW",
+      "n_rings": 1,
+      "n_vertices": 11
+    },
+    {
+      "name": "SHARK SE",
+      "n_rings": 1,
+      "n_vertices": 11
+    },
+    {
+      "name": "SHARK SW",
+      "n_rings": 1,
+      "n_vertices": 7
+    },
+    {
+      "name": "THUNDER",
+      "n_rings": 1,
+      "n_vertices": 5
+    },
+    {
+      "name": "Crescent Harbor OPAREA",
+      "n_rings": 1,
+      "n_vertices": 128
+    },
+    {
+      "name": "Carr Inlet Operations Area",
+      "n_rings": 2,
+      "n_vertices": 112
+    },
+    {
+      "name": "HRC",
+      "n_rings": 1,
+      "n_vertices": 117
+    }
+  ],
+  "cell_oparea_details": [
+    {
+      "lat": 49.25,
+      "lon": -123.25,
+      "S": 2.2364,
+      "logR": 4.2758,
+      "oparea_dist_km": 96.07666630911628,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.75,
+      "lon": -122.25,
+      "S": 2.0178,
+      "logR": 2.9302,
+      "oparea_dist_km": 43.55150976183717,
+      "oparea_nearest": "NAVY 7 OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.25,
+      "lon": -122.25,
+      "S": 2.0115,
+      "logR": 1.0169,
+      "oparea_dist_km": 26.6780824188172,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.25,
+      "lon": -123.25,
+      "S": 2.0108,
+      "logR": 2.6868,
+      "oparea_dist_km": 22.21144354793407,
+      "oparea_nearest": "NAVY 3 OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.25,
+      "lon": -122.25,
+      "S": 1.9984,
+      "logR": 1.5756,
+      "oparea_dist_km": 2.644440399990368e-08,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.75,
+      "lon": -122.75,
+      "S": 1.9976,
+      "logR": 2.2093,
+      "oparea_dist_km": 33.992410749456006,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.75,
+      "lon": -122.75,
+      "S": 1.9833,
+      "logR": 0.9947,
+      "oparea_dist_km": 39.2817493022032,
+      "oparea_nearest": "NAVY 7 OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.25,
+      "lon": -122.75,
+      "S": 1.9793,
+      "logR": 1.6565,
+      "oparea_dist_km": 2.017356561044255,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.25,
+      "lon": -122.75,
+      "S": 1.9395,
+      "logR": 1.4164,
+      "oparea_dist_km": 4.931684005408313,
+      "oparea_nearest": "NAVY 3 OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 46.75,
+      "lon": -122.75,
+      "S": 1.8512,
+      "logR": -0.3631,
+      "oparea_dist_km": 50.43879879530462,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.25,
+      "lon": -123.25,
+      "S": 1.851,
+      "logR": 0.1347,
+      "oparea_dist_km": 38.81584337494399,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.75,
+      "lon": -118.25,
+      "S": 1.6423,
+      "logR": 1.2832,
+      "oparea_dist_km": 22.725994084198714,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.75,
+      "lon": -121.75,
+      "S": 1.6095,
+      "logR": 1.013,
+      "oparea_dist_km": 127.25239619742375,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -119.75,
+      "S": 1.5015,
+      "logR": 1.7443,
+      "oparea_dist_km": 12.950037819514817,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -119.25,
+      "S": 1.4743,
+      "logR": -0.0401,
+      "oparea_dist_km": 15.687631078287543,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -118.75,
+      "S": 1.4139,
+      "logR": 0.4554,
+      "oparea_dist_km": 33.923129464337094,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.75,
+      "lon": -117.75,
+      "S": 1.3864,
+      "logR": 0.0979,
+      "oparea_dist_km": 22.74934838964,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.75,
+      "lon": -122.25,
+      "S": 1.3523,
+      "logR": 1.5691,
+      "oparea_dist_km": 140.98156786490773,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.25,
+      "lon": -117.75,
+      "S": 1.289,
+      "logR": 0.8972,
+      "oparea_dist_km": 0.0,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": true
+    },
+    {
+      "lat": 32.75,
+      "lon": -117.25,
+      "S": 1.2738,
+      "logR": 2.6007,
+      "oparea_dist_km": 0.3402662732477994,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.25,
+      "lon": -117.25,
+      "S": 1.2303,
+      "logR": 1.16,
+      "oparea_dist_km": 13.793533976027554,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.25,
+      "lon": -122.25,
+      "S": 0.9557,
+      "logR": -0.3347,
+      "oparea_dist_km": 192.00762695419797,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.75,
+      "lon": -120.25,
+      "S": 0.9534,
+      "logR": -0.4571,
+      "oparea_dist_km": 38.07717322376507,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 40.75,
+      "lon": -124.25,
+      "S": 0.931,
+      "logR": 2.4856,
+      "oparea_dist_km": 22.032975433073766,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -122.75,
+      "S": 0.6123,
+      "logR": 1.0807,
+      "oparea_dist_km": 252.56346290911867,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 42.25,
+      "lon": -124.25,
+      "S": 0.3753,
+      "logR": 1.3192,
+      "oparea_dist_km": 35.028834364556076,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 32.75,
+      "lon": -116.75,
+      "S": 0.0,
+      "logR": -0.6268,
+      "oparea_dist_km": 42.46719118663899,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 32.75,
+      "lon": -115.75,
+      "S": 0.0,
+      "logR": 0.3415,
+      "oparea_dist_km": 133.84193043044974,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.75,
+      "lon": -117.25,
+      "S": 0.0,
+      "logR": 0.7687,
+      "oparea_dist_km": 50.21449137162323,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.75,
+      "lon": -116.75,
+      "S": 0.0,
+      "logR": 0.6098,
+      "oparea_dist_km": 83.48591455462052,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 33.75,
+      "lon": -116.25,
+      "S": 0.0,
+      "logR": -1.3075,
+      "oparea_dist_km": 121.16971993952403,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -118.25,
+      "S": 0.0,
+      "logR": -0.6162,
+      "oparea_dist_km": 77.10593040050327,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -117.75,
+      "S": 0.0,
+      "logR": 0.3229,
+      "oparea_dist_km": 77.8698743508653,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -117.25,
+      "S": 0.0,
+      "logR": 1.1321,
+      "oparea_dist_km": 92.81215688745188,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -116.75,
+      "S": 0.0,
+      "logR": -0.7532,
+      "oparea_dist_km": 121.8050939313682,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.25,
+      "lon": -116.25,
+      "S": 0.0,
+      "logR": -0.8106,
+      "oparea_dist_km": 153.8655728684325,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.75,
+      "lon": -118.25,
+      "S": 0.0,
+      "logR": -0.3755,
+      "oparea_dist_km": 103.09090090052626,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 34.75,
+      "lon": -117.25,
+      "S": 0.0,
+      "logR": 0.3637,
+      "oparea_dist_km": 142.44426588707788,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 35.25,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": 1.4299,
+      "oparea_dist_km": 22.38127732210044,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 35.25,
+      "lon": -119.25,
+      "S": 0.0,
+      "logR": 1.0519,
+      "oparea_dist_km": 123.41979609426541,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 35.25,
+      "lon": -118.25,
+      "S": 0.0,
+      "logR": -0.7228,
+      "oparea_dist_km": 145.24799415478475,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 35.75,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": 0.4726,
+      "oparea_dist_km": 60.99090343119103,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 35.75,
+      "lon": -117.75,
+      "S": 0.0,
+      "logR": 0.5321,
+      "oparea_dist_km": 216.12194581430782,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.25,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.5147,
+      "oparea_dist_km": 131.54151249857824,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.25,
+      "lon": -119.75,
+      "S": 0.0,
+      "logR": -0.4986,
+      "oparea_dist_km": 163.73663509313195,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.25,
+      "lon": -119.25,
+      "S": 0.0,
+      "logR": 1.0896,
+      "oparea_dist_km": 195.93175768768558,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.25,
+      "lon": -115.75,
+      "S": 0.0,
+      "logR": 0.0597,
+      "oparea_dist_km": 351.571836996085,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.25,
+      "lon": -115.25,
+      "S": 0.0,
+      "logR": 0.3762,
+      "oparea_dist_km": 376.9036138096717,
+      "oparea_nearest": "SOCAL Range Complex",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.75,
+      "lon": -121.25,
+      "S": 0.0,
+      "logR": -0.618,
+      "oparea_dist_km": 128.31847280827841,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.75,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.3004,
+      "oparea_dist_km": 169.9288424963438,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 36.75,
+      "lon": -119.75,
+      "S": 0.0,
+      "logR": -0.1294,
+      "oparea_dist_km": 201.61440074227477,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.25,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -0.3792,
+      "oparea_dist_km": 182.2976027915263,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.25,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": -0.4997,
+      "oparea_dist_km": 194.0969431938368,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.25,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.1626,
+      "oparea_dist_km": 213.89096183778148,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.25,
+      "lon": -119.75,
+      "S": 0.0,
+      "logR": -0.6516,
+      "oparea_dist_km": 240.26750667226338,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": 1.3551,
+      "oparea_dist_km": 244.986322819557,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -1.1545,
+      "oparea_dist_km": 237.55449128118912,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -121.25,
+      "S": 0.0,
+      "logR": -0.9686,
+      "oparea_dist_km": 238.11227875640853,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": 0.3349,
+      "oparea_dist_km": 246.60547696424618,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 37.75,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.9459,
+      "oparea_dist_km": 262.264271776477,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.25,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 0.6243,
+      "oparea_dist_km": 240.99775737369066,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.25,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": 0.6748,
+      "oparea_dist_km": 269.1012801108076,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.25,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -0.2828,
+      "oparea_dist_km": 292.9032858144386,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.25,
+      "lon": -121.25,
+      "S": 0.0,
+      "logR": -1.6811,
+      "oparea_dist_km": 293.34972713114684,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.25,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": -0.7956,
+      "oparea_dist_km": 300.1917887900318,
+      "oparea_nearest": "Point Mugu Sea Range (PMSR)",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.75,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": -0.0449,
+      "oparea_dist_km": 198.29134006832123,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.75,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -0.2717,
+      "oparea_dist_km": 267.09971665064865,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.75,
+      "lon": -121.25,
+      "S": 0.0,
+      "logR": 1.5419,
+      "oparea_dist_km": 304.91649243766585,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 38.75,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": -0.2994,
+      "oparea_dist_km": 344.0244383862204,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 39.25,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": 0.4133,
+      "oparea_dist_km": 128.34811422008949,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 39.25,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": 0.0651,
+      "oparea_dist_km": 241.43693763610406,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 39.25,
+      "lon": -121.25,
+      "S": 0.0,
+      "logR": 0.2827,
+      "oparea_dist_km": 282.1701965578448,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 39.25,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.6548,
+      "oparea_dist_km": 365.1842398108714,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 39.75,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": 0.5934,
+      "oparea_dist_km": 226.71398346810827,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 40.25,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": 0.6923,
+      "oparea_dist_km": 183.12704857704102,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 40.75,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": 1.0377,
+      "oparea_dist_km": 182.4457692432978,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 42.25,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": 1.8208,
+      "oparea_dist_km": 112.83619319014026,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 42.25,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 0.6946,
+      "oparea_dist_km": 152.78125907241053,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 43.25,
+      "lon": -124.25,
+      "S": 0.0,
+      "logR": 0.7739,
+      "oparea_dist_km": 34.41943304344653,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 43.25,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": 0.2144,
+      "oparea_dist_km": 108.44142939104832,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 44.25,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": 1.7734,
+      "oparea_dist_km": 90.59824319962962,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 44.75,
+      "lon": -124.25,
+      "S": 0.0,
+      "logR": 3.2953,
+      "oparea_dist_km": 8.57005931848489,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 44.75,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": 1.6647,
+      "oparea_dist_km": 86.16225251237432,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.25,
+      "lon": -123.75,
+      "S": 0.0,
+      "logR": 0.5272,
+      "oparea_dist_km": 40.404615015943925,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.25,
+      "lon": -123.25,
+      "S": 0.0,
+      "logR": -0.5581,
+      "oparea_dist_km": 79.47717353315082,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.25,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 1.386,
+      "oparea_dist_km": 118.54990257305838,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.25,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": -1.0532,
+      "oparea_dist_km": 157.62267532425602,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.75,
+      "lon": -123.75,
+      "S": 0.0,
+      "logR": 0.9372,
+      "oparea_dist_km": 39.09379935693497,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.75,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 1.6456,
+      "oparea_dist_km": 115.50870556594626,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.75,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": -1.6024,
+      "oparea_dist_km": 154.10599177404671,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 45.75,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": 0.6329,
+      "oparea_dist_km": 175.08922341632933,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 46.25,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 0.3547,
+      "oparea_dist_km": 105.60766284556433,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 46.75,
+      "lon": -123.75,
+      "S": 0.0,
+      "logR": 1.1769,
+      "oparea_dist_km": 48.45204404320712,
+      "oparea_nearest": "PACNORWEST OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 46.75,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": 1.684,
+      "oparea_dist_km": 150.11079073720526,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.25,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -2.2333,
+      "oparea_dist_km": 64.22208959139454,
+      "oparea_nearest": "Carr Inlet Operations Area",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.25,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 2.0373,
+      "oparea_dist_km": 116.0630149258049,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.75,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -1.293,
+      "oparea_dist_km": 55.500000026444404,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.75,
+      "lon": -120.75,
+      "S": 0.0,
+      "logR": 0.0158,
+      "oparea_dist_km": 55.500000026444404,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 47.75,
+      "lon": -120.25,
+      "S": 0.0,
+      "logR": 0.7441,
+      "oparea_dist_km": 64.87051375387847,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.25,
+      "lon": -121.75,
+      "S": 0.0,
+      "logR": -1.8729,
+      "oparea_dist_km": 2.6444403999903443e-08,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 48.75,
+      "lon": -122.25,
+      "S": 0.0,
+      "logR": 1.9658,
+      "oparea_dist_km": 5.7403706821125295,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    },
+    {
+      "lat": 49.25,
+      "lon": -122.75,
+      "S": 0.0,
+      "logR": 3.0908,
+      "oparea_dist_km": 69.05283270673692,
+      "oparea_nearest": "Darrington OPAREA",
+      "oparea_inside": false
+    }
+  ]
+}
